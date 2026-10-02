@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Gatuskolan – Inom tullarna</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
 <style>
 :root{--pn:#101820;--fg:#f4f4ee;--mut:#9aa5b1;--hi:#ffb400;--ok:#1fa35c;--bad:#e0245e;--bd:#2c3846;--sw:132px}
@@ -57,7 +58,7 @@ label{display:flex;gap:5px;align-items:center}
 .tkr{display:flex;justify-content:space-between;align-items:baseline;gap:8px;margin-top:6px}
 .tkr b{font-size:1.1rem;font-variant-numeric:tabular-nums}.tkr b.warn{color:#ffb400}.tkr b.late{color:#ff6b93;animation:blink 1s infinite}
 .tkr small{color:var(--mut)}@keyframes blink{50%{opacity:.4}}
-#mm{position:fixed;inset:0;z-index:2500;display:flex;align-items:center;justify-content:center;background:#000b;backdrop-filter:blur(3px);padding:12px}
+#mm,#nm,#lb{position:fixed;inset:0;z-index:2500;display:flex;align-items:center;justify-content:center;background:#000b;backdrop-filter:blur(3px);padding:12px}
 .mmc{width:min(560px,100%);max-height:94vh;overflow:auto;box-sizing:border-box;text-align:center;padding:20px;border-radius:18px;background:linear-gradient(160deg,#1b2a4a,#101820 70%);border:3px solid var(--hi);color:#fff;box-shadow:0 0 50px #ffb40088}
 .mgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:14px 0}
 .mcard{display:flex;flex-direction:column;align-items:center;gap:4px;padding:14px 8px;border-radius:12px;background:#1d2935;border:2px solid var(--bd);color:#fff;text-align:center}
@@ -100,13 +101,55 @@ label{display:flex;gap:5px;align-items:center}
 #opts button.bad{background:var(--bad);border-color:var(--bad)}
 .row{display:flex;gap:6px}
 .row button{flex:1}
+/* ---- 8-bit theme ---- */
+html{font-size:20px}
+html,body{font-family:"VT323",ui-monospace,Menlo,Consolas,monospace}
+button,select,input{font-family:inherit;font-size:1rem}
+*{border-radius:0!important}
+.panel,#sb,.mmc,#lvm .card,#ld .card{border:3px solid #fff;box-shadow:4px 4px 0 #000}
+#sb{border-color:var(--hi)}
+button,select{background:#2b3a67;border:2px solid #fff;box-shadow:0 3px 0 #000;padding:4px 10px}
+button:active{transform:translateY(3px);box-shadow:none}
+button.pri{background:var(--hi);color:#101820}
+.bar{border:2px solid #fff;height:12px;background:#000}
+.ttl,#score,#lv,#ldt,#pn,#sb .lab{font-family:"Press Start 2P",ui-monospace,monospace}
+.ttl{font-size:.85rem;line-height:1.6}
+#score{font-size:.8rem;text-shadow:2px 2px 0 #000}
+#lv{font-size:.5rem;line-height:1.7}#lv small{font-size:.5rem}
+#pn{font-size:.45rem;cursor:pointer;margin-bottom:6px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#sb .lab{font-size:.45rem}
+#sb .lab button{font-size:.8rem;padding:0 3px;margin-left:2px}
+#q{font-size:1.5rem;letter-spacing:0}
+#nxt,#mt,#sess,.mcard small,.dvh small,.dvr small,.sub{font-size:.85rem}
+.rl{font-size:.9rem}.rl.m{font-size:1.1rem}.rl.s{font-size:.8rem}.lbl{font-size:.9rem}
+.bike{filter:drop-shadow(2px 2px 0 #000)}
+#scan{position:fixed;inset:0;z-index:4000;pointer-events:none;background:repeating-linear-gradient(0deg,#0000 0 2px,#0000001c 2px 3px)}
+#map.px .leaflet-tile-pane{filter:url(#q4) contrast(1.1) saturate(1.3)}
+#map.px .leaflet-tile{image-rendering:pixelated;image-rendering:crisp-edges}
+#ld{position:fixed;inset:0;z-index:3500;display:flex;align-items:center;justify-content:center;background:#000c}
+#ld .card{min-width:260px;max-width:90vw;padding:20px 24px;background:#101820;color:#fff;text-align:center}
+.pxbar{display:flex;gap:4px;justify-content:center;margin:14px 0}
+.pxbar i{width:20px;height:20px;background:#333;border:2px solid #fff;animation:blk 1.2s steps(1) infinite}
+.pxbar i:nth-child(2){animation-delay:.2s}.pxbar i:nth-child(3){animation-delay:.4s}.pxbar i:nth-child(4){animation-delay:.6s}.pxbar i:nth-child(5){animation-delay:.8s}.pxbar i:nth-child(6){animation-delay:1s}
+@keyframes blk{0%{background:#ffb400}20%,100%{background:#333}}
+#ldl{text-align:left;line-height:1.5}#ldl .ok{color:#5fdc95}#ldl .fail{color:#ff6b93}#ldl .run{color:var(--hi)}
+#nmi{width:80%;margin:10px 0 14px;padding:8px;font-size:1.3rem;text-align:center;background:#000;color:#fff;border:3px solid #fff}
+#lbl{margin:10px 0;text-align:left;font-size:1.1rem}
+.lr{display:flex;gap:8px;align-items:baseline;padding:1px 6px}.lr span{width:2.2em;color:var(--mut)}
+.lr b{flex:1;font-weight:400;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.lr em{font-style:normal;color:var(--hi)}
+.lr.me{background:#ffb40033}
+.tabs{display:flex;gap:6px;justify-content:center;margin:6px 0}.tabs button.on{background:var(--hi);color:#101820}
+#lbn{font-size:.85rem;color:var(--mut)}
 </style>
 </head>
 <body>
-<div id="map"></div>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><filter id="q4"><feComponentTransfer><feFuncR type="discrete" tableValues="0 .25 .5 .75 1"/><feFuncG type="discrete" tableValues="0 .25 .5 .75 1"/><feFuncB type="discrete" tableValues="0 .25 .5 .75 1"/></feComponentTransfer></filter></svg>
+<audio id="bgm" src="musik.mp3" loop preload="none"></audio>
+<div id="map" class="px"></div>
+<div id="scan"></div>
 
 <div id="top" class="panel">
-  <div id="cfgrow"><button id="cfg" aria-expanded="false">⚙ Inställningar</button><button id="modes">🎮 Spellägen</button></div>
+  <div id="cfgrow"><button id="cfg" aria-expanded="false">⚙ Inställningar</button><button id="modes">🎮 Spellägen</button><button id="lbb">🏆 Topplista</button></div>
   <div class="bar" title="Grönt = inlärd, gult = övas, rött = svag"><i id="mg"></i><i id="ma"></i><i id="mr"></i></div>
   <div id="st"></div>
   <div id="ctl" hidden>
@@ -137,11 +180,15 @@ label{display:flex;gap:5px;align-items:center}
     <button id="exp">⬇ Exportera data</button>
     <button id="imp">⬆ Importera data</button><input type="file" id="impf" accept=".json,application/json" hidden>
     <button id="reset">Nollställ framsteg</button>
+    <label><input type="checkbox" id="pxc" checked> 8-bit-grafik</label>
+    <button id="chn">Byt namn</button>
+    <button id="songb">🎵 Välj egen låt</button><input type="file" id="songf" accept="audio/*" hidden>
   </div>
 </div>
 
 <aside id="sb" aria-label="Poäng">
-  <div class="lab"><span>POÄNG</span><button id="mute" aria-label="Ljud på/av">🔊</button></div>
+  <div id="pn" title="Byt namn"></div>
+  <div class="lab"><span>POÄNG</span><span><button id="mus" aria-label="Musik på/av">🎵</button><button id="mute" aria-label="Ljud på/av">🔊</button></span></div>
   <div id="score">0</div>
   <div id="pop"></div>
   <div id="lv"></div>
@@ -152,6 +199,19 @@ label{display:flex;gap:5px;align-items:center}
   <div id="mt"></div>
   <div id="sess"></div>
 </aside>
+
+<div id="ld"><div class="card"><div id="ldt" class="ttl">LADDAR…</div><div class="pxbar"><i></i><i></i><i></i><i></i><i></i><i></i></div><div id="ldl"></div></div></div>
+
+<div id="nm" hidden role="dialog" aria-modal="true" aria-labelledby="nmt">
+  <div class="mmc"><div id="nmt" class="ttl">NY SPELARE</div><div class="sub">Vad ska du heta i spelet? (högst 14 tecken)</div>
+  <input id="nmi" maxlength="14" placeholder="DITT NAMN" autocomplete="off"><br><button id="nmok" class="pri">Starta</button></div>
+</div>
+
+<div id="lb" hidden role="dialog" aria-modal="true" aria-labelledby="lbt">
+  <div class="mmc"><div id="lbt" class="ttl">🏆 TOPPLISTA</div>
+  <div class="tabs"><button id="lbA">Alla</button><button id="lbR">📦 Leveranser</button><button id="lbO">📍 Omgångar</button></div>
+  <div id="lbl"></div><div id="lbn"></div><br><button id="lbx" class="pri">Stäng</button></div>
+</div>
 
 <div id="mm" hidden role="dialog" aria-modal="true" aria-labelledby="mmt">
   <div class="mmc">
@@ -164,7 +224,7 @@ label{display:flex;gap:5px;align-items:center}
       <button id="mc4" class="mcard"><span class="mi">🚲</span><b>Leverans · skriv själv</b><small>Samma rutt, men du skriver namnen. Svårare, fler poäng.</small></button>
     </div>
     <label><input type="checkbox" id="tmc" checked> ⏱ Tidtagning i leveranser</label><br>
-    <button id="mmx" class="pri" hidden>Titta på kartan</button>
+    <button id="mmlb">🏆 Topplista</button> <button id="mmx" class="pri" hidden>Titta på kartan</button>
   </div>
 </div>
 
@@ -219,18 +279,31 @@ const map=L.map('map',{zoomControl:false,preferCanvas:true}).fitBounds(L.polygon
 const CARTO_KEY='cb1_4502_1_09093ac5da06e9a2ef1ac588';
 let plain,labeled;
 if(CARTO_KEY){
-  const c=v=>L.tileLayer(`https://basemaps.cartocdn.com/rastertiles/${v}/{z}/{x}/{y}.png?key=${CARTO_KEY}`,{attribution:'&copy; OpenStreetMap contributors &copy; CARTO',maxZoom:19});
+  const c=v=>L.tileLayer(`https://basemaps.cartocdn.com/rastertiles/${v}/{z}/{x}/{y}.png?key=${CARTO_KEY}`,{attribution:'&copy; OpenStreetMap contributors &copy; CARTO',maxZoom:19,tileSize:512,zoomOffset:-1});
   plain=c('light_nolabels');labeled=c('voyager');
 }else{
-  plain=L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}',{attribution:'Tiles &copy; Esri',maxNativeZoom:16,maxZoom:19});
-  labeled=L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'&copy; OpenStreetMap contributors',maxZoom:19});
+  plain=L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}',{attribution:'Tiles &copy; Esri',maxNativeZoom:17,maxZoom:19,tileSize:512,zoomOffset:-1});
+  labeled=L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'&copy; OpenStreetMap contributors',maxZoom:19,tileSize:512,zoomOffset:-1});
 }
 plain.addTo(map);
+let mapOK=false;plain.on('load',()=>{mapOK=true;step('map','Karta','ok')});
 const zone=L.polygon(POLY,{color:'#555',weight:1,dashArray:'4 4',fill:false,interactive:false}).addTo(map);
 const layers=L.layerGroup().addTo(map);
 
 // ---------- data ----------
 let streets=[];
+// ---------- loading box in the middle of the screen, with what is loading and for how long ----------
+const LD={};let ldTimer=0;
+function renderLd(){
+  const now=Date.now();
+  $('ldl').innerHTML=Object.values(LD).map(x=>`<div class="${x.st}">${x.st=='ok'?'■':x.st=='fail'?'✖':'▶'} ${esc(x.label)}${x.st=='run'?' '+Math.floor((now-x.t0)/1000)+' s':''}</div>`).join('');
+}
+function step(id,label,st){LD[id]=Object.assign(LD[id]||{t0:Date.now()},{label,st});renderLd()}
+function ldReset(){for(const k in LD)delete LD[k]}
+function ldShow(on,title){
+  $('ld').hidden=!on;if(title)$('ldt').textContent=title;
+  clearInterval(ldTimer);if(on)ldTimer=setInterval(renderLd,500);
+}
 // Tunnels that bicycles can't use (e.g. Klaratunneln, Pampaslänken) are left out.
 function carTunnel(t){
   if(!t.tunnel||t.tunnel==='no'||t.tunnel==='building_passage')return false;
@@ -238,10 +311,14 @@ function carTunnel(t){
   return bc==='no'||t.motorroad==='yes'||t.foot==='no'||(!ok&&['trunk','primary','secondary'].includes(t.highway));
 }
 async function loadData(force){
+  step('streets','Gator','run');
+  try{await loadData0(force);step('streets',`Gator (${streets.length} st)`,'ok')}catch(e){step('streets','Gator','fail');throw e}
+}
+async function loadData0(force){
   try{localStorage.removeItem('gs_streets_v1')}catch(e){}
   if(!force&&preOK(PRE)&&lsg(KEY+'stamp')!==String(PRE.stamp||'')){takePre(PRE);return}   // new embedded data beats an older cache
   if(!force){try{const c=localStorage.getItem(KEY);if(c&&localStorage.getItem(KEY+'sig')===JSON.stringify(POLY)){streets=JSON.parse(c);return}}catch(e){}}
-  $('q').textContent='Hämtar gator…';
+  $('q').textContent='Hämtar gator…';step('streets','Gator – hämtar från OpenStreetMap (kan ta en minut)','run');
   $('fb').textContent='Engångsnedladdning från OpenStreetMap (kan ta upp till en minut).';
   const poly=POLY.map(p=>p.join(' ')).join(' ');
   const q=`[out:json][timeout:90];way["highway"~"^(trunk|primary|secondary|tertiary|unclassified|residential|living_street|pedestrian)$"]["name"](poly:"${poly}");out tags geom;`;
@@ -275,6 +352,10 @@ function buildIdx(){
   }
 }
 async function loadPlaces(force){
+  step('places','Områdesnamn','run');
+  try{await loadPlaces0(force);step('places',`Områdesnamn (${places.length})`,'ok')}catch(e){step('places','Områdesnamn (hoppas över)','fail');throw e}
+}
+async function loadPlaces0(force){
   if(!force&&preOK(PRE)&&PRE.places&&PRE.places.length){places=PRE.places;return}
   if(!force){try{const c=localStorage.getItem(PLKEY);if(c&&localStorage.getItem(PLKEY+'sig')===JSON.stringify(POLY)){places=JSON.parse(c);return}}catch(e){}}
   const la=POLY.map(p=>p[0]),lo=POLY.map(p=>p[1]),pad=.01;
@@ -582,7 +663,7 @@ function fit(st,extra){
 }
 function setFb(t,c){$('fb').textContent=t;$('fb').className=c||''}
 function finish(){info(cur);
-  if(rnd.n>=ROUND){const r=rnd;rnd={n:0,ok:0,pts:0};setTimeout(()=>showModes('Omgång klar!',`${r.ok} av ${r.n} rätt · +${r.pts} poäng`,true),1500)}
+  if(rnd.n>=ROUND){const r=rnd;rnd={n:0,ok:0,pts:0};const pl=postScore('round',r.pts,r.ok,r.n);setTimeout(()=>showModes('Omgång klar!',`${r.ok} av ${r.n} rätt · ${r.pts} poäng · plats ${pl} på topplistan`,true),1500)}
   $('nx').hidden=false;$('sh').hidden=true;$('nx').focus()}
 
 // ---------- look-ahead: pick the next 10 questions early and download their house numbers in the background ----------
@@ -829,7 +910,9 @@ async function rideStart(){
   answered=true;
   $('q').textContent='📦 Planerar leverans…';setFb('Hämtar adresser…');
   const f=legs[legs.length-1],sPt=legs[0].ch.pts[0],ePt=f.ch.pts[f.ch.pts.length-1];
+  ldReset();ldShow(true,'PLANERAR LEVERANS');step('route','Snabbaste vägen','ok');step('adr','Adresser (max 5 s)','run');
   const [r1,r2]=await Promise.all([legs[0].st,f.st].map(st=>withTimeout(getNumbers(st),5000)));
+  ldShow(false);
   if(ride!==R)return;
   const J=pickOf(JOBS),a=r1&&nearAddr(r1,sPt),a2=r2&&nearAddr(r2,ePt);
   R.job={i:J.i,t:J.t,d:pickOf(J.d),fromName:pickOf(J.f),toName:pickOf(J.r),sNo:a?a[0]:null};
@@ -1020,7 +1103,8 @@ function rideDone(){
   $('q').textContent=late?'📦 Levererat – men för sent':'📦 Leverans framme!';
   setFb(`${R.job.t} levererad! ${sum} · +${pts} poäng`,late?'bad':'ok');
   $('opts').innerHTML='';$('typed').hidden=true;$('sh').hidden=true;$('nx').hidden=false;$('nx').textContent='Ny leverans';
-  setTimeout(()=>{if(ride===R)showModes('Leverans klar!',`${sum} · +${pts} poäng`,true)},1500);
+  const total=rnd.pts+pts,pl=postScore('ride',total,R.okc,R.total);
+  setTimeout(()=>{if(ride===R)showModes('Leverans klar!',`${sum} · ${fmt(total)} poäng · plats ${pl} på topplistan`,true)},1500);
 }
 
 // ---------- game-mode box ----------
@@ -1123,19 +1207,78 @@ $('area').onclick=()=>{
   resetQueue();next();
 };
 $('reload').onclick=async()=>{
+  ldReset();ldShow(true,'LADDAR OM');
   try{localStorage.removeItem(KEY)}catch(e){}
-  try{await loadData(true);queue.length=0;buildIdx();fillNames();try{await loadPlaces(true)}catch(e){}next()}catch(e){fail(e)}
+  try{await loadData(true);queue.length=0;buildIdx();fillNames();try{await loadPlaces(true)}catch(e){}ldShow(false);next()}catch(e){ldShow(false);fail(e)}
 };
 $('reset').onclick=()=>{
   if(confirm('Nollställa alla framsteg och poäng?')){prog={};save();game={score:0,streak:0,best:0,total:0,right:0};gsave();queue.length=0;seen.clear();sOk=sTot=0;stats()}
 };
+// ---------- player name ----------
+let pname=lsg('gs_name')||'',nameThen=null;
+function setName(n){pname=n.trim().slice(0,14);try{localStorage.setItem('gs_name',pname)}catch(e){}$('pn').textContent=pname?'👤 '+pname:''}
+function askName(then){nameThen=then||null;$('nmi').value=pname;$('nm').hidden=false;$('nmi').focus()}
+$('nmok').onclick=()=>{
+  const v=$('nmi').value.trim();if(!v){$('nmi').focus();return}
+  setName(v);$('nm').hidden=true;const f=nameThen;nameThen=null;if(f)f();
+};
+$('nmi').addEventListener('keydown',e=>{if(e.key=='Enter'){e.stopPropagation();$('nmok').onclick()}});
+$('pn').onclick=()=>askName();$('chn').onclick=()=>askName();setName(pname);
+
+// ---------- leaderboard ----------
+// Optional shared online list: put the URL of a Firebase Realtime Database here (see the instructions), e.g.
+// 'https://mitt-projekt-default-rtdb.europe-west1.firebasedatabase.app'. Empty = list on this device only.
+const BOARD_URL='https://sthlmess-default-rtdb.europe-west1.firebasedatabase.app',BKEY='gs_board_v1';
+let board=[],lbk='all';try{board=JSON.parse(localStorage.getItem(BKEY))||[]}catch(e){}
+// One entry per finished game: a delivery ('ride') or a round of 10 ('round').
+function postScore(kind,score,ok,n){
+  const e={name:pname||'GÄST',score,kind,ok,n,t:Date.now()};
+  board.push(e);board.sort((a,b)=>b.score-a.score);board=board.slice(0,100);
+  try{localStorage.setItem(BKEY,JSON.stringify(board))}catch(x){}
+  if(BOARD_URL)fetch(BOARD_URL+'/scores.json',{method:'POST',body:JSON.stringify(e)}).catch(()=>{});
+  return board.filter(b=>b.kind==kind&&b.score>score).length+1;   // place on this device's list
+}
+async function showBoard(k){
+  lbk=k||lbk;$('lb').hidden=false;$('lbl').textContent='Hämtar…';
+  [['lbA','all'],['lbR','ride'],['lbO','round']].forEach(([id,v])=>{const c=$(id).classList;v==lbk?c.add('on'):c.remove('on')});
+  let list=board.slice(),online=false;
+  if(BOARD_URL){try{const r=await fetch(BOARD_URL+'/scores.json?orderBy=%22score%22&limitToLast=100');if(r.ok){list=Object.values(await r.json()||{});online=true}}catch(e){}}
+  list=list.filter(e=>e&&typeof e.score=='number'&&(lbk=='all'||e.kind==lbk)).sort((a,b)=>b.score-a.score).slice(0,15);
+  $('lbn').textContent=BOARD_URL?(online?'Delad lista – alla spelare':'Kunde inte nå den delade listan – visar bara dina egna'):'Lista på den här enheten (delas inte med andra)';
+  $('lbl').innerHTML=list.length?list.map((e,i)=>`<div class="lr${e.name===pname?' me':''}"><span>${i+1}.</span><b>${esc(String(e.name).slice(0,14))}</b><i>${e.kind=='ride'?'📦':'📍'}</i><em>${fmt(e.score)}</em></div>`).join(''):'Inga resultat ännu – spela en omgång!';
+}
+$('lbb').onclick=()=>showBoard();$('mmlb').onclick=()=>showBoard();$('lbx').onclick=()=>{$('lb').hidden=true};
+$('lbA').onclick=()=>showBoard('all');$('lbR').onclick=()=>showBoard('ride');$('lbO').onclick=()=>showBoard('round');
+
+// ---------- background music: put your song next to this file as musik.mp3 (or pick a song on this device) ----------
+const bgm=$('bgm');bgm.volume=.35;
+let musicOn=lsg('gs_music')!=='0';
+function musicUi(){$('mus').style.opacity=musicOn?1:.4}
+function startMusic(){if(musicOn&&bgm.paused&&bgm.play)bgm.play().catch(()=>{})}
+musicUi();
+bgm.addEventListener('error',()=>{$('mus').hidden=true});   // no musik.mp3 -> no button
+document.addEventListener('pointerdown',startMusic,{once:true});
+document.addEventListener('keydown',startMusic,{once:true});
+$('mus').onclick=()=>{musicOn=!musicOn;try{localStorage.setItem('gs_music',musicOn?'1':'0')}catch(e){}musicUi();musicOn?startMusic():bgm.pause()};
+$('songb').onclick=()=>$('songf').click();
+$('songf').onchange=e=>{const f=e.target.files[0];if(!f)return;bgm.src=URL.createObjectURL(f);$('mus').hidden=false;musicOn=true;musicUi();startMusic()};
+
+// ---------- 8-bit graphics on/off ----------
+function pxUi(on){const c=$('map').classList;on?c.add('px'):c.remove('px');$('scan').hidden=!on}
+$('pxc').checked=lsg('gs_px')!=='0';pxUi($('pxc').checked);
+$('pxc').onchange=e=>{pxUi(e.target.checked);try{localStorage.setItem('gs_px',e.target.checked?'1':'0')}catch(x){}};
+
 function fail(e){$('q').textContent='Kunde inte ladda gator';setFb(e.message+' Kontrollera anslutningen och tryck på "Ladda om data".','bad')}
 
 (async()=>{
-  try{await loadData()}catch(e){return fail(e)}
+  ldShow(true,'LADDAR…');step('map','Karta','run');
+  try{await loadData()}catch(e){ldShow(false);return fail(e)}
   buildIdx();fillNames();
   try{await loadPlaces()}catch(e){}
-  stats();showModes('Välj spelläge','Vad vill du träna?',false);
+  const t0=Date.now();while(!mapOK&&Date.now()-t0<6000)await new Promise(r=>setTimeout(r,200));   // wait (max 6 s) for the map pictures
+  ldShow(false);stats();
+  const go=()=>showModes(`Hej ${pname}!`,'Vad vill du träna?',false);
+  pname?go():askName(go);
 })();
 </script>
 </body>
