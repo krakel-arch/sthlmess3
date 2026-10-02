@@ -229,6 +229,29 @@ button.pri,#mx,.tabs button.on{background:var(--hi);color:#fff}
 .bike .bk{display:block}.bike.fall .bk{transform:rotate(75deg) translate(2px,8px)}
 .bike.fall::after{content:'💥';position:absolute;left:26px;top:-10px;font-size:26px}
 .bike.boost{filter:drop-shadow(-8px 0 0 #3f6fd8) drop-shadow(-16px 0 0 #9db8e8)}
+#abort{position:absolute;right:6px;top:4px;padding:0 9px;font-size:1rem;z-index:2}#tp{padding-right:46px}
+.qopt{overflow:visible}
+.qo{position:absolute;display:flex;flex-direction:column;gap:4px;width:165px}
+.qo.r{left:18px}.qo.l{right:18px}.qo.b{top:14px}.qo.a{bottom:14px}
+.qo button{padding:6px 8px;text-align:left;font-size:.95rem;line-height:1.1;background:#fff;color:var(--ink);border:2px solid var(--ink);box-shadow:2px 2px 0 var(--ink)}
+.qo button:active{transform:translate(2px,2px);box-shadow:none}
+#ab{position:fixed;inset:0;z-index:2600;display:flex;align-items:center;justify-content:center;background:#1f2a4499;padding:12px}
+#ab .mmc button{margin:4px}
+.qo{width:142px;gap:3px}
+.qo button{font-family:"VT323",ui-monospace,Menlo,Consolas,monospace;font-size:.82rem;font-weight:400;line-height:1;letter-spacing:0;padding:3px 6px;text-align:left;white-space:normal;word-break:break-word;background:#fff;color:var(--ink);border:2px solid var(--ink);box-shadow:2px 2px 0 var(--ink);min-height:26px}
+@media(max-width:600px){.qo{width:122px}.qo button{font-size:.76rem;padding:2px 5px;min-height:24px}}
+#brow{display:flex;gap:0}#bot #brow button{box-shadow:none}
+#dv.phone{background:#1f2a44;border:2px solid #0e1426;border-left:2px solid #0e1426;border-radius:18px!important;padding:5px 5px 7px;margin:0 0 6px;box-shadow:inset 0 0 0 2px #3a4a72,3px 3px 0 #0e1426}
+.phone::before{content:'';display:block;width:36px;height:4px;background:#0e1426;border-radius:3px!important;margin:1px auto 4px}
+#brow+#dv.phone{margin-top:-2px}
+.phone .scr{background:#f2f6fc;color:var(--ink);border-radius:10px!important;padding:5px 8px}
+#dv.phone.mini{padding:3px 4px 4px;border-radius:14px!important;margin-bottom:4px}.phone.mini::before{display:none}
+.phone.mini .scr{padding:2px 7px}
+.sbar{display:flex;justify-content:space-between;font-size:.7rem;color:var(--mut);margin-bottom:3px}
+.dvm2{display:flex;justify-content:space-between;font-size:.9rem}.hrt{color:var(--bad);letter-spacing:1px}
+.dmsg{margin-top:4px;padding:3px 8px;border-radius:10px 10px 10px 2px!important;font-size:.9rem;line-height:1.1;background:#dbe6fa;color:var(--ink)}
+.dmsg.hurry{background:#f7d9db}.dmsg.good{background:#d3efdd}
+.bike.pkg{filter:none}
 </style>
 </head>
 <body>
@@ -292,6 +315,12 @@ button.pri,#mx,.tabs button.on{background:var(--hi);color:#fff}
 
 <div id="ld"><div class="card"><div id="ldt" class="ttl">LADDAR…</div><div class="pxbar"><i></i><i></i><i></i><i></i><i></i><i></i></div><div id="ldl"></div></div></div>
 
+<div id="ab" hidden role="dialog" aria-modal="true" aria-labelledby="abt">
+  <div class="mmc"><div id="abt" class="ttl">AVBRYTA LEVERANSEN?</div>
+  <div class="sub">Poängen du redan fått behålls, men leveransen hamnar inte på topplistan.</div>
+  <button id="abNo" class="pri">Fortsätt leverera</button> <button id="abYes">Avbryt – till menyn</button></div>
+</div>
+
 <div id="nm" hidden role="dialog" aria-modal="true" aria-labelledby="nmt">
   <div class="mmc"><div id="nmt" class="ttl">NY SPELARE</div><div class="sub">Vad ska du heta i spelet? (högst 14 tecken)</div>
   <input id="nmi" maxlength="14" placeholder="DITT NAMN" autocomplete="off"><br><button id="nmok" class="pri">Starta</button></div>
@@ -338,6 +367,7 @@ button.pri,#mx,.tabs button.on{background:var(--hi);color:#fff}
 </div>
 
 <div id="tp" class="panel">
+  <button id="abort" aria-label="Avbryt och gå till menyn">⏹</button>
   <div id="dv" hidden></div>
   <div id="qbar" hidden><i id="qbi"></i></div>
   <div id="q">Laddar…</div>
@@ -350,7 +380,7 @@ button.pri,#mx,.tabs button.on{background:var(--hi);color:#fff}
   <div id="typed" hidden><input id="ans" list="names" placeholder="Skriv gatans namn…" autocomplete="off" autocapitalize="words"><button id="go" class="pri">Svara</button></div>
   <datalist id="names"></datalist>
   <div id="info" hidden></div>
-  <div class="row">
+  <div class="row" id="brow">
     <button id="ib" hidden>ℹ️ Mer</button>
     <button id="sh" hidden>Visa mig</button>
     <button id="nx" class="pri" hidden>Nästa</button>
@@ -675,7 +705,7 @@ function sfx(k){
   if(muted)return;
   try{
     AC=AC||new (window.AudioContext||window.webkitAudioContext)();if(AC.state=='suspended')AC.resume();
-    const S={ok:[[660,0,.1],[880,.09,.16]],good:[[660,0,.08],[880,.07,.08],[1100,.14,.2]],mult:[[784,0,.08],[988,.08,.08],[1175,.16,.22]],
+    const S={ping:[[988,0,.07],[1319,.09,.12]],ok:[[660,0,.1],[880,.09,.16]],good:[[660,0,.08],[880,.07,.08],[1100,.14,.2]],mult:[[784,0,.08],[988,.08,.08],[1175,.16,.22]],
       fanfare:[[523,0,.12],[659,.12,.12],[784,.24,.12],[1047,.36,.2],[784,.58,.1],[1047,.7,.1],[1319,.82,.8],[1047,.82,.8,'triangle'],[784,.82,.8,'triangle'],[523,.82,.8,'triangle']],
       up:[[523,0,.12],[659,.11,.12],[784,.22,.12],[1047,.33,.45]],bad:[[220,0,.18,'sawtooth'],[165,.14,.3,'sawtooth']]};
     for(const [f,t,d,ty] of S[k]||[]){
@@ -754,13 +784,16 @@ function stats(){
 
 // ---------- game ----------
 const shuffle=a=>{for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
-function show(st,color){for(const l of st.s)L.polyline(l,{color,weight:7,opacity:.9}).addTo(layers)}
+function show(st,color){const out=[];for(const l of st.s)out.push(L.polyline(l,{color,weight:7,opacity:.9}).addTo(layers));return out}
+let bl=[],blOn=true;   // the street being asked about blinks
+const blink=a=>{for(const l of bl)l.setStyle({opacity:.9});bl=a||[];blOn=true};
+setInterval(()=>{if(!bl.length)return;blOn=!blOn;for(const l of bl)l.setStyle({opacity:blOn?.95:.12})},330);
 function fit(st,extra){
   const b=L.latLngBounds(st.s.flat());if(extra)b.extend(extra);
   map.fitBounds(b.pad(.4),{maxZoom:16});
 }
 function setFb(t,c){$('fb').textContent=t;$('fb').className=c||''}
-function finish(){info(cur);
+function finish(){blink([]);info(cur);
   if(rnd.n>=ROUND){const r=rnd;rnd={n:0,ok:0,pts:0};const pl=postScore('round',r.pts,r.ok,r.n);setTimeout(()=>showModes('Omgång klar!',`${r.ok} av ${r.n} rätt · ${r.pts} poäng · plats ${pl} på topplistan`,true),1500)}
   $('nx').hidden=false;$('sh').hidden=true;$('nx').focus()}
 
@@ -781,6 +814,7 @@ function prefetch(){
 function resetQueue(){for(const s of queue)seen.delete(s.n);queue.length=0}
 let infoOpen=false;
 function next(){
+  blink([]);if($('bot').appendChild)$('bot').appendChild($('brow'));
   $('ib').hidden=true;$('qbar').hidden=true;$('lastr').textContent='';
   layers.clearLayers();answered=false;tg=null;$('opts').innerHTML='';$('info').hidden=true;$('typed').hidden=true;$('dv').hidden=true;$('nx').textContent='Nästa';
   if(ride&&ride.timer)clearInterval(ride.timer);
@@ -789,7 +823,7 @@ function next(){
   if(!cur){$('q').textContent='Inga gator här';setFb('Zooma ut eller välj "Alla gator".');return}
   last=cur.n;$('nx').hidden=true;$('sh').hidden=mode!='locate';
   if(mode=='locate'){$('q').textContent=cur.n;setFb('Tryck på kartan');if(+$('nr').value)prepareNumber(cur)}
-  else{$('q').textContent='Vilken gata är blå?';setFb('');show(cur,'#2563eb');fit(cur);options()}
+  else{$('q').textContent='Vilken gata är blå?';setFb('');blink(show(cur,'#2563eb'));fit(cur);options()}
   stats();fill();
 }
 // House-number points are separate from the street points and slide: full close to the house, less in the
@@ -859,7 +893,7 @@ map.on('click',e=>{
 });
 map.on('dblclick',()=>{clearTimeout(clickT);clickT=0});
 $('sh').onclick=()=>{
-  if(mode=='ride')return ride&&ride.stage=='final'&&!ride.answered?finalAnswer(null):rideAnswer(null);
+  if(mode=='ride')return rideAnswer(null);
   if(answered||!cur)return;answered=true;
   show(cur,'#2563eb');fit(cur);grade(cur,false);setFb('Här är den. Räknas som missad.','bad');finish();
 };
@@ -950,16 +984,25 @@ function pathToLegs(path){
     const len=cum[cum.length-1];
     return {st:streets[g.si],ch:{pts:lp,cum,len},start:0,dir:1,ev:[],endPos:len,keys:g.idx.map(i=>nodes[i][0])};
   });
+  const DUP=200;   // m
   legs.forEach((l,li)=>{
-    const nxt=legs[li+1];
+    const nxt=legs[li+1],res=[];
     l.keys.forEach((k,j)=>{
       if(j==0)return;
-      const ev=o=>l.ev.push({o,p:l.ch.pts[j],pos:l.ch.cum[j],pt:l.ch.pts[j]});
-      if(j==l.keys.length-1){if(nxt)ev(nxt.st);return}   // the junction where you turn: the street you turn into
-      (vidx.get(k)||[]).filter(o=>o!==l.st).sort((a,b)=>imp(b)-imp(a)).forEach(ev);
+      const mk=o=>({o,p:l.ch.pts[j],pos:l.ch.cum[j],pt:l.ch.pts[j]});
+      if(j==l.keys.length-1){   // the junction where you turn: the street you turn into
+        if(nxt){const t=mk(nxt.st);for(let q=res.length-1;q>=0;q--)if(res[q].o===t.o&&t.pos-res[q].pos<DUP)res.splice(q,1);res.push(t)}
+        return;
+      }
+      for(const o of (vidx.get(k)||[]).filter(o=>o!==l.st).sort((a,b)=>imp(b)-imp(a))){
+        const e=mk(o);
+        if(res.some(r=>r.o===o&&e.pos-r.pos<DUP))continue;   // e.g. Karlavägen crossing both carriageways of Valhallavägen
+        res.push(e);
+      }
     });
+    l.ev=res;
   });
-  const n=legs.reduce((a,l)=>a+l.ev.length,0);
+    const n=legs.reduce((a,l)=>a+l.ev.length,0);
   return legs.length<2||n<6||n>45||legs.some(l=>!l.ev.length)?null:legs;
 }
 function planRoute(){
@@ -1060,21 +1103,51 @@ function drawResult(){
   map.fitBounds(L.latLngBounds(all).pad(.3));
 }
 // Delivery ticket: what, from where, to where, the clock, and the route (streets still ahead stay hidden during the ride).
+const MAXERR=5,LOSTCR=2.6;
+const HURRY=['Skynda på – kunden väntar!','Du ligger efter! Trampa på!','Fortare nu, maten kallnar!','Maxa farten – tiden rinner!'];
+const LATE=['Du är sen! Leverera NU!','Kunden ringer – kom igen!','Sent sent sent! Gasa!'];
+const CHEER=['Grymt! Du ligger före!','Snabbt och snyggt – fortsätt så!','Kunden blir glad – bra tempo!','Du flyger fram!'];
+// A shout from Dispatch, shown as a message on the phone.
+function say(kind,text,ms){
+  const R=ride;if(!R)return;
+  R.msg={kind,text,until:ms===Infinity?Infinity:Date.now()+(ms||6000)};R.msgAt=Date.now();
+  sfx('ping');renderCard();
+}
+// Behind schedule -> hurry up; clearly ahead -> cheer. (Not more often than every 15 s.)
+function dispatch(R,left){
+  const now=Date.now();
+  if(R.msg&&now>R.msg.until){R.msg=null;renderCard()}
+  if(!R.timed||R.msg||now-(R.msgAt||0)<15000||paused())return;
+  const trav=R.legs.slice(0,R.li).reduce((a,l)=>a+l.ch.len,0)+R.pos,fr=trav/R.km,tf=1-(R.deadline-now)/(R.secs*1000);
+  if(left<0)say('hurry',pickOf(LATE));
+  else if(tf-fr>.1)say('hurry',pickOf(HURRY));
+  else if(fr-tf>.12)say('good',pickOf(CHEER));
+}
 function renderCard(){
   const R=ride,j=R.job;if(!j)return;
-  const f=R.legs[R.legs.length-1],show=i=>R.briefing||R.done||i<=R.li;
-  const chips=R.legs.map((l,i)=>`<span class="dc ${i<R.li||R.done?'done':i==R.li&&!R.briefing?'now':''}">${show(i)?esc(l.st.n):'•••'}</span>`).join('<i>›</i>');
-  const tk=R.timed?`<div class="tkr"><b id="tk" class="${R.tkC||''}">${R.tkT||'Tid: '+mmss(R.secs)}</b><small id="tkd">${R.briefing?'klockan startar när du trycker Starta':R.tkD||''}</small></div>`:'';
-  if(!R.briefing&&!R.done){
-    $('dv').className='mini';
-    $('dv').innerHTML=`<div class="dvm"><span>${j.i} → <b>${esc(f.st.n)}${R.dest?' '+R.dest.n:''}</b></span>${R.timed?`<b id="tk" class="${R.tkC||''}">${R.tkT||''}</b>`:''}<span>${R.total}/${R.nEv}</span></div>`;
-    $('dv').hidden=false;return;
+  const big=R.briefing||R.done,bot=$('bot'),tp=$('tp'),dvEl=$('dv'),row=$('brow');
+  if(bot.insertBefore&&tp.insertBefore){   // before start / at the end: Start button + phone at the bottom, joined; while riding: phone at the top
+    if(big){bot.insertBefore(row,bot.firstChild);bot.insertBefore(dvEl,row.nextSibling)}
+    else{tp.insertBefore(dvEl,tp.firstChild);bot.appendChild(row)}
   }
-  $('dv').className='';
-  $('dv').innerHTML=`<div class="dvh"><span class="dvi">${j.i}</span><div><b>${esc(j.t)}</b><small>${esc(j.d)} · ${(R.km/1000).toFixed(1).replace('.',',')} km</small></div></div>
-    <div class="dvr"><div><small>${j.i} FRÅN · ${esc(j.fromName)}</small><b>${esc(R.legs[0].st.n)}${j.sNo?' '+j.sNo:''}</b></div><span>➜</span><div><small>TILL · ${esc(j.toName)}</small><b>${esc(f.st.n)}${R.dest?' '+R.dest.n:''}</b></div></div>
-    ${tk}<div class="dvc">${chips}</div>`;
-  $('dv').hidden=false;
+  const f=R.legs[R.legs.length-1],show=i=>big||i<=R.li;
+  const chips=R.legs.map((l,i)=>`<span class="dc ${i<R.li||R.done?'done':i==R.li&&!R.briefing?'now':''}">${show(i)?esc(l.st.n):'•••'}</span>`).join('<i>›</i>');
+  const hearts='❤'.repeat(Math.max(0,MAXERR-R.errs))+'♡'.repeat(Math.min(MAXERR,R.errs));
+  const msg=R.msg?`<div class="dmsg ${R.msg.kind}">📻 Dispatch: ${esc(R.msg.text)}</div>`:'';
+  const dest=esc(f.st.n)+(R.dest?' '+R.dest.n:'');
+  dvEl.className=big?'phone':'phone mini';
+  if(!big){
+    dvEl.innerHTML=`<div class="scr"><div class="dvm"><span>${j.i} → <b>${dest}</b></span>${R.timed?`<b id="tk" class="${R.tkC||''}">${R.tkT||''}</b>`:''}</div>
+      <div class="dvm2"><span class="hrt" title="Fem fel och du tappar leveransen">${hearts}</span><span>${R.total}/${R.nEv}</span></div>${msg}</div>`;
+    dvEl.hidden=false;return;
+  }
+  const tk=R.timed?`<div class="tkr"><b id="tk" class="${R.tkC||''}">${R.tkT||'Tid: '+mmss(R.secs)}</b><small id="tkd">${R.briefing?'':R.tkD||''}</small></div>`:'';
+  const hhmm=new Date().toLocaleTimeString('sv-SE',{hour:'2-digit',minute:'2-digit'});
+  dvEl.innerHTML=`<div class="scr"><div class="sbar"><span>${hhmm}</span><span>BUDAPPEN</span><span>▂▄▆ ▮</span></div>
+    <div class="dvh"><span class="dvi">${j.i}</span><div><b>${esc(j.t)}</b><small>${esc(j.d)} · ${(R.km/1000).toFixed(1).replace('.',',')} km</small></div></div>
+    <div class="dvr"><div><small>FRÅN · ${esc(j.fromName)}</small><b>${esc(R.legs[0].st.n)}${j.sNo?' '+j.sNo:''}</b></div><span>➜</span><div><small>TILL · ${esc(j.toName)}</small><b>${dest}</b></div></div>
+    ${tk}<div class="dvc">${chips}</div>${msg}</div>`;
+  dvEl.hidden=false;
 }
 // Clock: counts down to the latest delivery time; turns amber near the end and red + "SEN" when late. Paused while the level-up box is open.
 function tick(){
@@ -1086,30 +1159,48 @@ function tick(){
   R.tkT=late?`SEN +${mmss(left)}`:`${mmss(left)} kvar`;R.tkC=late?'late':left<R.secs*.25?'warn':'';
   R.tkD='senast '+new Date(R.deadline).toLocaleTimeString('sv-SE',{hour:'2-digit',minute:'2-digit',second:'2-digit'});
   const a=$('tk'),b=$('tkd');if(a){a.textContent=R.tkT;a.className=R.tkC}if(b)b.textContent=R.tkD;
+  if(R.stage=='cross'||R.stage=='tail')dispatch(R,left);
 }
-const V0=7,MINW=5,BOOST=90,CRASHV=26,CRASH=1.3,ARROW=['↑','↗','→','↘','↓','↙','←','↖'];   // m/s, s, m/s
-const paused=()=>!$('lvm').hidden||!$('top').hidden||!$('mm').hidden||!$('lb').hidden;
+const V0=7,MINW=5,QT=5,BOOST=90,CRASHV=150,CRASH=2.4,ARROW=['↑','↗','→','↘','↓','↙','←','↖'];   // m/s, s, m/s
+const paused=()=>!$('ab').hidden||!$('lvm').hidden||!$('top').hidden||!$('mm').hidden||!$('lb').hidden;
 const dirIdx=(ch,pos)=>{const a=ptAt(ch,pos),b=ptAt(ch,pos+60);return Math.round(((Math.atan2(X(b)-X(a),Y(b)-Y(a))*180/Math.PI+360)%360)/45)%8};
 // A new crossing: the bike heads for it. On time: it gets there after max(distance/V0, MINW) seconds, answered or not.
 function startQ(){
-  const R=ride,leg=R.legs[R.li],e=leg.ev[R.ei],type=$('rd').value=='type';
-  R.stage='cross';R.answered=answered=false;R.ok=false;R.tok++;
-  R.p0=R.pos;R.el=0;R.win=Math.max((e.pos-R.pos)/V0,MINW);
-  $('nx').hidden=true;$('sh').hidden=false;$('opts').innerHTML='';$('qbar').hidden=!R.timed;$('qbar').className='';$('qbi').style.width='100%';
+  const R=ride,leg=R.legs[R.li],e=leg.ev[R.ei];
+  R.stage='cross';R.answered=answered=false;R.ok=false;R.qShown=false;R.tok++;
+  R.p0=R.pos;R.el=0;R.win=Math.max((e.pos-R.pos)/V0,MINW);R.qt=R.win;
+  blink([]);$('nx').hidden=true;$('sh').hidden=true;$('opts').innerHTML='';$('typed').hidden=true;$('qbar').hidden=true;$('qbar').className='';
   drawScene();renderCard();
   $('q').textContent=`🚲 ${leg.st.n} ${ARROW[dirIdx(leg.ch,R.pos)]}`;
-  setFb(R.ei==0&&R.from?`Svängde in från ${R.from}`:type?'Skriv namnet på den blå gatan':'Vilken är den blå gatan?');
-  if(type){$('typed').hidden=false;$('ans').value='';$('ans').disabled=false;$('go').disabled=false;$('ans').focus()}
-  else{
-    $('typed').hidden=true;
-    const adj=new Set(leg.ev.filter(x=>Math.abs(x.pos-e.pos)<40).map(x=>x.o));
-    const near=streets.filter(s=>!adj.has(s)&&s!==leg.st&&inLevel(s)).map(s=>[dist(cent(s),e.pt),s]).sort((a,b)=>a[0]-b[0]).slice(0,12).map(x=>x[1]);
-    shuffle([e.o,...shuffle(near).slice(0,3)]).forEach(s=>{
-      const b=document.createElement('button');b.textContent=s.n;b.onclick=()=>rideAnswer(s);$('opts').appendChild(b);
-    });
-  }
+  setFb(R.ei==0&&R.from?`Svängde in från ${R.from}`:'');
+  showQ();
 }
-function follow(p){const now=Date.now();if(now-(follow.t||0)<700)return;follow.t=now;if(!map.getBounds().pad(-.25).contains(p))map.panTo(p,{animate:true,duration:.6})}
+const inView=p=>{const s=map.getSize(),c=map.latLngToContainerPoint(p);return c.x>40&&c.x<s.x-40&&c.y>150&&c.y<s.y-70};
+function focusBoth(a,b,anim){if(inView(a)&&inView(b))return;map.fitBounds(L.latLngBounds([a,b]),{paddingTopLeft:[40,160],paddingBottomRight:[40,70],maxZoom:17,animate:!!anim})}
+// The question: the junction street blinks, and the answers hang right at the junction (typing mode: input at the bottom).
+function showQ(){
+  const R=ride,leg=R.legs[R.li],e=leg.ev[R.ei],type=$('rd').value=='type';
+  R.qShown=true;$('qbar').hidden=!R.timed;$('qbi').style.width='100%';
+  setFb(type?'Skriv namnet på den blinkande gatan':'Vilken gata blinkar?');
+  focusBoth(ptAt(leg.ch,R.pos),e.pt,false);
+  blink(hint(e));
+  if(type){$('typed').hidden=false;$('ans').value='';$('ans').disabled=false;$('go').disabled=false;$('ans').focus();return}
+  $('typed').hidden=true;
+  const adj=new Set(leg.ev.filter(x=>Math.abs(x.pos-e.pos)<40).map(x=>x.o));
+  const near=streets.filter(s=>!adj.has(s)&&s!==leg.st&&inLevel(s)).map(s=>[dist(cent(s),e.pt),s]).sort((a,b)=>a[0]-b[0]).slice(0,12).map(x=>x[1]);
+  const sz=map.getSize(),pt=map.latLngToContainerPoint(e.pt),right=pt.x<sz.x/2,below=pt.y<sz.y/2;   // open towards the side with most room
+  const box=document.createElement('div');box.className='qo '+(right?'r ':'l ')+(below?'b':'a');
+  shuffle([e.o,...shuffle(near).slice(0,3)]).forEach(st=>{
+    const b=document.createElement('button');b.textContent=st.n;b.onclick=()=>rideAnswer(st);box.appendChild(b);
+  });
+  L.DomEvent.disableClickPropagation(box);
+  L.marker(e.pt,{icon:L.divIcon({className:'qopt',html:box,iconSize:[0,0]}),keyboard:false,zIndexOffset:2000}).addTo(layers);
+}
+function follow(p){
+  const now=Date.now();if(now-(follow.t||0)<700)return;follow.t=now;
+  const R=ride,j=R&&R.qShown&&!R.answered&&R.legs[R.li].ev[R.ei];
+  if(j)focusBoth(p,j.pt,true);else if(!map.getBounds().pad(-.25).contains(p))map.panTo(p,{animate:true,duration:.6});
+}
 function moveBike(){const R=ride,p=ptAt(R.legs[R.li].ch,R.pos);if(R.bike)R.bike.setLatLng(p);follow(p)}
 function rideLoop(R,ts){
   if(ride!==R||mode!='ride'||R.done||!(R.stage=='cross'||R.stage=='tail'))return;
@@ -1130,11 +1221,11 @@ function rideStep(R,dt){
     R.el+=dt;
     if(R.timed){
       const f=Math.min(1,R.el/R.win);R.pos=R.p0+(e.pos-R.p0)*f;
-      $('qbi').style.width=(100-f*100)+'%';$('qbar').className=f>.7?'low':'';
+      const q=Math.max(0,R.win-R.el)/R.qt;$('qbi').style.width=(q*100)+'%';$('qbar').className=q<.3?'low':'';
       if(f>=1)rideAnswer(null,true);      // reached the junction without an answer
-    }else R.pos=Math.min(Math.max(R.p0,e.pos-25),R.pos+V0*dt);   // training: ride up to the junction and wait
+    }else R.pos=Math.min(Math.max(R.p0,e.pos-25),R.pos+V0*dt);   // training: ride up to the junction and wait there
   }else if(!R.ok&&R.crash>0){            // fell off the bike: lie still for a moment
-    R.crash-=dt;if(R.crash<=0)bikeCls('fall',false);
+    R.crash-=dt;if(R.crash<=0){bikeCls('fall',false);if(R.lost)rideLost()}
     return;
   }else{
     R.pos=Math.min(e.pos,R.pos+(R.ok?BOOST:CRASHV)*dt);
@@ -1150,7 +1241,7 @@ function passQ(){
   R.ei=leg.ev.length-1;R.stage='tail';R.tailV=V0;
   $('qbar').hidden=true;$('opts').innerHTML='';$('typed').hidden=true;$('sh').hidden=true;
   if(R.dest){R.answered=answered=false;$('q').textContent=`📍 Var ligger nummer ${R.dest.n}?`;setFb('Tryck på kartan – träff ger boost!')}
-  else{$('q').textContent='🚲 Snart framme…';setFb('')}
+  else{$('q').textContent='🚲 Snart framme…';setFb('');R.tailV=BOOST;bikeCls('boost',true)}   // nothing to guess: boost to the goal
 }
 // Streets already crossed stay on the map in green (right) / red (wrong) with their names.
 function drawLog(){
@@ -1162,15 +1253,17 @@ function drawLog(){
 }
 // The street being asked about: whole line in blue (options mode), or just a short piece of it at the junction (typing mode).
 function hint(e){
-  if($('rd').value!='type'){for(const l of e.o.s)L.polyline(l,{color:'#2563eb',weight:6,opacity:.8}).addTo(layers);return}
+  const out=[];
+  if($('rd').value!='type'){for(const l of e.o.s)out.push(L.polyline(l,{color:'#2563eb',weight:7,opacity:.95}).addTo(layers));return out}
   for(const l of e.o.s){
     const i=l.findIndex(q=>q[0]===e.p[0]&&q[1]===e.p[1]);if(i<0)continue;
     for(const d of [1,-1]){
       const seg=[l[i]];let acc=0;
       for(let j=i+d;j>=0&&j<l.length&&acc<70;j+=d){acc+=dist(seg[seg.length-1],l[j]);seg.push(l[j])}
-      if(seg.length>1)L.polyline(seg,{color:'#2563eb',weight:7,opacity:.9}).addTo(layers);
+      if(seg.length>1)out.push(L.polyline(seg,{color:'#2563eb',weight:8,opacity:.95}).addTo(layers));
     }
   }
+  return out;
 }
 function drawScene(noX){
   const R=ride,leg=R.legs[R.li],e=leg.ev[Math.min(R.ei,leg.ev.length-1)];
@@ -1179,13 +1272,13 @@ function drawScene(noX){
   L.polyline(sub(leg.ch,leg.start,legEnd(leg)),{color:'#9aa7bf',weight:7,opacity:.75}).addTo(layers);
   if(R.pos>0)L.polyline(sub(leg.ch,leg.start,R.pos),{color:'#2f9e63',weight:7,opacity:.9}).addTo(layers);
   drawLog();
-  if(!noX&&!R.answered)hint(e);
   L.circleMarker(e.pt,{radius:8,color:'#1f2a44',fillColor:'#fff',fillOpacity:1,weight:3}).addTo(layers);
   R.bike=mark('🚲',ptAt(leg.ch,R.pos));
 }
 function rideAnswer(x,late){
   const R=ride;if(!R||R.answered||R.done||R.stage!='cross')return;
   if(typeof x=='string'&&!x.trim())return;
+  blink([]);
   const leg=R.legs[R.li];
   let ok;
   if(typeof x=='string'){
@@ -1195,13 +1288,22 @@ function rideAnswer(x,late){
   }else ok=!!x&&x===leg.ev[R.ei].o;
   const e=leg.ev[R.ei];
   R.answered=answered=true;R.ok=ok;R.total++;ok?R.okc++:R.errs++;
+  R.run=ok?(R.run||0)+1:0;
   R.log.push({o:e.o,p:e.p,ok});
   const g=grade(e.o,ok);reward(g);
   $('lastr').textContent=(ok?'✔ ':'✖ ')+e.o.n+(late?' (för sent)':typeof x=='string'&&!ok?` – du skrev "${x.trim()}"`:'')+(g.pts?'  +'+g.pts:'');
   $('lastr').className=ok?'ok':'bad';
   setFb(ok?'💨 BOOST!':late?'💥 För sent – du trillade!':'💥 Fel – du trillade!',ok?'ok':'bad');
   drawScene();
-  if(ok)bikeCls('boost',true);else{R.crash=CRASH;bikeCls('fall',true)}
+  if(ok){bikeCls('boost',true);if(R.run==5||R.run==10||R.run==15)say('good',`${R.run} rätt i rad – grymt jobbat!`)}
+  else{
+    R.crash=CRASH;bikeCls('fall',true);
+    if(R.errs>=MAXERR){   // fifth mistake: the package is dropped and the delivery is lost
+      R.lost=true;R.crash=LOSTCR;
+      L.marker(ptAt(leg.ch,R.pos),{interactive:false,keyboard:false,icon:L.divIcon({className:'bike',html:'<span class="bk">📦</span>',iconSize:[46,46],iconAnchor:[-6,38]})}).addTo(layers);
+      setFb('💥 Fem fel – du tappade paketet!','bad');
+    }else renderCard();
+  }
   $('ans').disabled=$('go').disabled=true;$('qbar').hidden=true;
   [...$('opts').children].forEach(b=>{if(b.textContent===e.o.n)b.classList.add('ok');else if(x&&b.textContent===x.n)b.classList.add('bad')});
   $('sh').hidden=true;
@@ -1244,11 +1346,21 @@ function addScore(p){
   const r1=rank(game.score);
   if(r1>r0)setTimeout(()=>{sfx('fanfare');showLevel(r1)},700);else sfx('mult');
 }
+function rideLost(){
+  const R=ride;tick();clearInterval(R.timer);R.timer=0;
+  R.done=true;R.stage='done';R.lost=true;answered=true;sfx('bad');
+  R.msg={kind:'hurry',text:'Du tappade leveransen… Kunden får vänta.',until:Infinity};
+  drawResult();renderCard();
+  $('q').textContent='📦💥 Leveransen tappades';setFb('Fem fel – leveransen är förlorad','bad');
+  $('opts').innerHTML='';$('typed').hidden=true;$('sh').hidden=true;$('qbar').hidden=true;$('nx').hidden=false;$('nx').textContent='Ny leverans';
+  setTimeout(()=>{if(ride===R)showModes('Leveransen förlorad',`${R.okc} av ${R.total} rätt innan du tappade paketet`,true)},1800);
+}
 function rideDone(){
   const R=ride;tick();clearInterval(R.timer);R.timer=0;
   const perfect=R.errs==0,late=R.timed&&Date.now()>R.deadline,ontime=R.timed&&!late;
   const pts=100+(perfect?100:0)+(ontime?100:0)+(R.finalPts||0);
   R.done=true;R.stage='done';answered=true;addScore(pts);
+  R.msg=R.timed?{kind:late?'hurry':'good',text:late?'Framme, men sent… kunden fick vänta.':'Leveransen i tid – kunden är jättenöjd! 🎉',until:Infinity}:{kind:'good',text:'Bra träning – leveransen är framme!',until:Infinity};
   drawResult();renderCard();
   const sum=`${R.okc} av ${R.total} korsningar rätt${perfect?' – perfekt':''}${R.timed?(late?' · för sent':' · i tid'):''}${R.finalMsg?' · '+R.finalMsg:''}`;
   $('q').textContent=late?'📦 Levererat – men för sent':'📦 Leverans framme!';
@@ -1425,8 +1537,24 @@ $('pxc').checked=lsg('gs_px')!=='0';pxUi($('pxc').checked);
 $('pxc').onchange=e=>{pxUi(e.target.checked);try{localStorage.setItem('gs_px',e.target.checked?'1':'0')}catch(x){}};
 
 // the bottom panel only exists while there is something to answer with
-function botSync(){$('bot').hidden=editing||!($('opts').children.length>0||!$('typed').hidden||!$('info').hidden||!$('ib').hidden||!$('sh').hidden||!$('nx').hidden)}
+function botSync(){$('bot').hidden=editing||!(($('dv').parentNode===$('bot')&&!$('dv').hidden)||$('opts').children.length>0||!$('typed').hidden||!$('info').hidden||!$('ib').hidden||!$('sh').hidden||!$('nx').hidden)}
 setInterval(botSync,200);
+function abortGame(){
+  const R=ride;
+  if(mode=='ride'&&R&&!R.done&&!R.briefing&&R.total>0){$('ab').hidden=false;return}   // ask first, in the game's own box
+  doAbort();
+}
+function doAbort(){
+  const R=ride;
+  if(R){clearInterval(R.timer);R.timer=0;R.done=true}
+  ride=null;blink([]);layers.clearLayers();cur=null;answered=true;
+  ['dv','qbar','typed','info','ib','sh','nx'].forEach(id=>{$(id).hidden=true});$('opts').innerHTML='';
+  $('q').textContent='';setFb('');$('lastr').textContent='';
+  showModes('Välj spelläge','Spelet avbröts',false);
+}
+$('abNo').onclick=()=>{$('ab').hidden=true};
+$('abYes').onclick=()=>{$('ab').hidden=true;doAbort()};
+$('abort').onclick=abortGame;
 function fail(e){$('q').textContent='Kunde inte ladda gator';setFb(e.message+' Kontrollera anslutningen och tryck på "Ladda om data".','bad')}
 
 (async()=>{
