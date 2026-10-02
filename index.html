@@ -143,27 +143,27 @@ button.pri{background:var(--hi);color:#101820}
 /* ---- light, high-contrast theme and compact layout (map first) ---- */
 :root{--pn:#fff8e7;--fg:#1a1c2c;--mut:#5f574f;--hi:#ffcc00;--ok:#00a83a;--bad:#e0003c;--bd:#1a1c2c;--ink:#1a1c2c}
 body{background:#c2c3c7}
-.panel,.mmc,#lvm .card,#ld .card{background:var(--pn);color:var(--ink);border:3px solid var(--ink);box-shadow:4px 4px 0 var(--ink)}
-button,select{background:#fff;color:var(--ink);border:2px solid var(--ink);box-shadow:0 3px 0 var(--ink)}
+.panel,.mmc,#lvm .card,#ld .card{background:var(--pn);color:var(--ink);border:3px solid var(--line);box-shadow:4px 4px 0 var(--sh)}
+button,select{background:#fff;color:var(--ink);border:2px solid var(--line);box-shadow:0 3px 0 var(--sh)}
 button.pri{background:var(--hi);color:var(--ink)}
 .ttl{color:var(--ink);text-shadow:2px 2px 0 var(--hi)}
 .sub,#lbn,.num{color:var(--mut)}
-.mcard{background:#fff;color:var(--ink);border:3px solid var(--ink)}
-.mcard:hover,.mcard.cur{background:#fff3b0;border-color:var(--ink);box-shadow:4px 4px 0 var(--ink)}
+.mcard{background:#fff;color:var(--ink);border:3px solid var(--line)}
+.mcard:hover,.mcard.cur{background:#fff3b0;border-color:var(--ink);box-shadow:4px 4px 0 var(--sh)}
 .mcard.cur::after{color:#a34f00}.mcard small{color:var(--mut)}.mmc label{color:var(--ink)}
 #fb{color:var(--mut);margin:2px 0 4px}#fb.ok{color:var(--ok)}#fb.bad{color:var(--bad)}
 #lastr{min-height:0;font-size:.95rem}#lastr.ok{color:var(--ok)}#lastr.bad{color:var(--bad)}
 #opts{gap:5px;margin-bottom:5px}#opts button{background:#fff;padding:8px 6px;font-weight:400}
 #opts button.ok{background:var(--ok);color:#fff}#opts button.bad{background:var(--bad);color:#fff}
 #info b{color:#a34f00}
-.cc{background:#fff;color:var(--ink);border:2px solid var(--ink);border-left-width:6px}
-#dv{background:#fff;color:var(--ink);border:2px solid var(--ink);border-left:6px solid var(--hi);padding:6px 8px;margin-bottom:6px}
+.cc{background:#fff;color:var(--ink);border:2px solid var(--line);border-left-width:6px}
+#dv{background:#fff;color:var(--ink);border:2px solid var(--line);border-left:6px solid var(--hi);padding:6px 8px;margin-bottom:6px}
 .dc{background:#e8e3d6;color:var(--ink)}.dc.done{background:#a8e6b8}.dc.now{background:var(--hi)}
 .dvm{display:flex;align-items:center;gap:10px;justify-content:space-between;font-size:1.05rem}
 .dvm span:first-child{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .tkr b.warn,#tk.warn{color:#a34f00}.tkr b.late,#tk.late{color:var(--bad);animation:blink 1s infinite}
-#typed input,#nmi{background:#fff;color:var(--ink);border:2px solid var(--ink)}
-.bar{background:#e8e3d6;border:2px solid var(--ink)}
+#typed input,#nmi{background:#fff;color:var(--ink);border:2px solid var(--line)}
+.bar{background:#e8e3d6;border:2px solid var(--line)}
 #ldl .ok{color:var(--ok)}#ldl .fail{color:var(--bad)}#ldl .run{color:#a34f00}
 .pxbar i{border-color:var(--ink);background:#e8e3d6}
 @keyframes blk{0%{background:var(--hi)}20%,100%{background:#e8e3d6}}
@@ -172,17 +172,17 @@ button.pri{background:var(--hi);color:var(--ink)}
 #scan{background:repeating-linear-gradient(0deg,#0000 0 2px,#00000010 2px 3px)}
 /* top bar */
 #sb{position:fixed;z-index:1100;top:calc(6px + env(safe-area-inset-top,0px));left:6px;right:6px;width:auto;max-width:760px;margin:0 auto;
-  display:flex;align-items:center;gap:8px;padding:4px 8px;background:var(--pn);color:var(--ink);border:3px solid var(--ink);box-shadow:3px 3px 0 var(--ink);text-align:left}
+  display:flex;align-items:center;gap:8px;padding:4px 8px;background:var(--pn);color:var(--ink);border:3px solid var(--line);box-shadow:3px 3px 0 var(--sh);text-align:left}
 #sb #cfg{padding:2px 10px;font-size:1.15rem}
 #hs{min-width:0}#score{font-size:.7rem;color:var(--ink);text-shadow:none;white-space:nowrap}
 #sb .bar{height:6px;margin-top:3px;width:84px}
 #lv{font-size:.42rem;margin:0}#lv small{display:none}
 #pn{display:none;font-size:.4rem;max-width:150px;margin:0}@media(min-width:620px){#pn{display:block}}
 #streak{margin-left:auto;white-space:nowrap;font-size:1.05rem}
-#mx{background:var(--hi);color:var(--ink);padding:0 6px;border:2px solid var(--ink);font-size:1rem}
+#mx{background:var(--hi);color:var(--ink);padding:0 6px;border:2px solid var(--line);font-size:1rem}
 #sb #mus,#sb #mute{padding:0 6px;font-size:1rem;box-shadow:none;background:#fff}
 #pop{top:calc(100% + 8px);left:auto;right:14px;color:var(--ink);text-shadow:2px 2px 0 var(--hi)}
-@keyframes glow{0%,100%{box-shadow:3px 3px 0 var(--ink)}40%{box-shadow:0 0 0 6px var(--hi),3px 3px 0 var(--ink)}}
+@keyframes glow{0%,100%{box-shadow:3px 3px 0 var(--sh)}40%{box-shadow:0 0 0 6px var(--hi),3px 3px 0 var(--sh)}}
 /* menu drawer */
 #top{position:fixed;z-index:1200;top:calc(56px + env(safe-area-inset-top,0px));left:6px;right:auto;width:min(440px,calc(100% - 12px));max-width:none;max-height:calc(100% - 72px);overflow:auto;margin:0;font-size:1rem}
 #cfgrow{flex-wrap:wrap}#cfx{margin-left:auto}
@@ -191,7 +191,7 @@ button.pri{background:var(--hi);color:var(--ink)}
 /* bottom panel: small, so the map stays visible */
 #bot{max-height:42vh;overflow:auto;padding:7px 9px}
 #q{font-size:1.3rem;line-height:1.15}
-#qbar{height:9px;border:2px solid var(--ink);background:#e8e3d6;margin-bottom:5px}
+#qbar{height:9px;border:2px solid var(--line);background:#e8e3d6;margin-bottom:5px}
 #qbi{display:block;height:100%;width:100%;background:var(--ok)}#qbar.low #qbi{background:var(--bad)}
 #info{max-height:24vh}
 .row button{padding:6px}
@@ -200,9 +200,9 @@ button.pri{background:var(--hi);color:var(--ink)}
 /* ---- v17: calm blue/grey theme, small pixel road labels, info on top / answers at the bottom ---- */
 :root{--pn:#eaf0f8;--fg:#1f2a44;--mut:#55627f;--hi:#3f6fd8;--ok:#2f9e63;--bad:#d0505a;--bd:#1f2a44;--ink:#1f2a44}
 body{background:#cfd8e6}
-.panel,.mmc,#lvm .card,#ld .card{background:var(--pn);color:var(--ink);border:3px solid var(--ink);box-shadow:3px 3px 0 var(--ink)}
+.panel,.mmc,#lvm .card,#ld .card{background:var(--pn);color:var(--ink);border:3px solid var(--line);box-shadow:3px 3px 0 var(--sh)}
 #sb,#tp{background:#eaf0f8f2}
-button,select{background:#fff;color:var(--ink);border:2px solid var(--ink);box-shadow:0 3px 0 var(--ink)}
+button,select{background:#fff;color:var(--ink);border:2px solid var(--line);box-shadow:0 3px 0 var(--sh)}
 button.pri,#mx,.tabs button.on{background:var(--hi);color:#fff}
 .ttl{color:var(--ink);text-shadow:2px 2px 0 #b9c9ea}
 .dc{background:#dde5f1;color:var(--ink)}.dc.done{background:#bfe3cd}.dc.now{background:var(--hi);color:#fff}
@@ -216,13 +216,13 @@ button.pri,#mx,.tabs button.on{background:var(--hi);color:#fff}
 .rl{font-family:"VT323",monospace;font-size:.62rem;font-weight:400;padding:0 4px;border-width:2px;background:#f4f7fc;color:var(--ink);box-shadow:none;line-height:1.1}
 .rl.m{background:#2563eb;color:#fff;border-color:var(--ink);font-size:.7rem}
 .rl.s{font-size:.55rem;padding:0 3px;border-width:1px}
-.lbl{font-family:"VT323",monospace;font-size:.65rem;font-weight:400;padding:0 4px;box-shadow:none;border:2px solid var(--ink);background:#f4f7fc;color:var(--ink)}
+.lbl{font-family:"VT323",monospace;font-size:.65rem;font-weight:400;padding:0 4px;box-shadow:none;border:2px solid var(--line);background:#f4f7fc;color:var(--ink)}
 .lbl.n{background:var(--hi);color:#fff}
 #sb,#tp,#bot{max-width:620px}
 #tp{position:fixed;z-index:1000;top:calc(54px + env(safe-area-inset-top,0px));left:6px;right:6px;margin:0 auto;padding:4px 8px}
 #bot{max-height:30vh;padding:6px 8px}
 #q{font-size:1.15rem}#fb{font-size:.9rem;margin:0}#fb:empty,#lastr:empty{display:none}
-.bigbtn{width:100%;display:flex;flex-direction:column;align-items:center;gap:4px;padding:16px 10px;background:var(--hi);color:#fff;border:3px solid var(--ink);box-shadow:5px 5px 0 var(--ink);margin:12px 0 8px}
+.bigbtn{width:100%;display:flex;flex-direction:column;align-items:center;gap:4px;padding:16px 10px;background:var(--hi);color:#fff;border:3px solid var(--line);box-shadow:5px 5px 0 var(--sh);margin:12px 0 8px}
 .bigbtn b{font-family:"Press Start 2P",monospace;font-size:.8rem}.bigbtn small{color:#e6eeff;font-size:.9rem}.bigbtn .mi{font-size:2.6rem}
 .bigbtn.cur::after{content:'↻ Spela igen';font-size:.8rem}
 #mmmore{font-size:.85rem;padding:2px 10px;margin:4px 0}
@@ -233,12 +233,12 @@ button.pri,#mx,.tabs button.on{background:var(--hi);color:#fff}
 .qopt{overflow:visible}
 .qo{position:absolute;display:flex;flex-direction:column;gap:4px;width:165px}
 .qo.r{left:18px}.qo.l{right:18px}.qo.b{top:14px}.qo.a{bottom:14px}
-.qo button{padding:6px 8px;text-align:left;font-size:.95rem;line-height:1.1;background:#fff;color:var(--ink);border:2px solid var(--ink);box-shadow:2px 2px 0 var(--ink)}
+.qo button{padding:6px 8px;text-align:left;font-size:.95rem;line-height:1.1;background:#fff;color:var(--ink);border:2px solid var(--line);box-shadow:2px 2px 0 var(--sh)}
 .qo button:active{transform:translate(2px,2px);box-shadow:none}
 #ab{position:fixed;inset:0;z-index:2600;display:flex;align-items:center;justify-content:center;background:#1f2a4499;padding:12px}
 #ab .mmc button{margin:4px}
 .qo{width:142px;gap:3px}
-.qo button{font-family:"VT323",ui-monospace,Menlo,Consolas,monospace;font-size:.82rem;font-weight:400;line-height:1;letter-spacing:0;padding:3px 6px;text-align:left;white-space:normal;word-break:break-word;background:#fff;color:var(--ink);border:2px solid var(--ink);box-shadow:2px 2px 0 var(--ink);min-height:26px}
+.qo button{font-family:"VT323",ui-monospace,Menlo,Consolas,monospace;font-size:.82rem;font-weight:400;line-height:1;letter-spacing:0;padding:3px 6px;text-align:left;white-space:normal;word-break:break-word;background:#fff;color:var(--ink);border:2px solid var(--line);box-shadow:2px 2px 0 var(--sh);min-height:26px}
 @media(max-width:600px){.qo{width:122px}.qo button{font-size:.76rem;padding:2px 5px;min-height:24px}}
 #brow{display:flex;gap:0}#bot #brow button{box-shadow:none}
 #dv.phone{background:#1f2a44;border:2px solid #0e1426;border-left:2px solid #0e1426;border-radius:18px!important;padding:5px 5px 7px;margin:0 0 6px;box-shadow:inset 0 0 0 2px #3a4a72,3px 3px 0 #0e1426}
@@ -252,6 +252,80 @@ button.pri,#mx,.tabs button.on{background:var(--hi);color:#fff}
 .dmsg{margin-top:4px;padding:3px 8px;border-radius:10px 10px 10px 2px!important;font-size:.9rem;line-height:1.1;background:#dbe6fa;color:var(--ink)}
 .dmsg.hurry{background:#f7d9db}.dmsg.good{background:#d3efdd}
 .bike.pkg{filter:none}
+/* ---- v21: colour themes, all built from the pixel-art city picture ---- */
+:root,[data-theme=t1]{--pn:#f1e2c6;--pn2:#fbf3e2;--pn3:#e4d0aa;--ink:#192134;--fg:#192134;--mut:#5f4e4d;--line:#192134;--bd:#192134;--sh:#192134;--hi:#1d7580;--hif:#f6ead3;--hot:#e54168;--ok:#2ba58f;--warm:#b0600f}
+[data-theme=t2]{--pn:#243250;--pn2:#32466e;--pn3:#1a2540;--ink:#f1e2c6;--fg:#f1e2c6;--mut:#b9c6da;--line:#0b1020;--bd:#0b1020;--sh:#0b1020;--hi:#1ea4b0;--hif:#0b1020;--hot:#ff6b8a;--ok:#4fd1b5;--warm:#ed9a64}
+[data-theme=t3]{--pn:#f4d6bd;--pn2:#fff0e0;--pn3:#e7bb9b;--ink:#3b1f2b;--fg:#3b1f2b;--mut:#7a4a50;--line:#3b1f2b;--bd:#3b1f2b;--sh:#3b1f2b;--hi:#7a3b57;--hif:#fff0e0;--hot:#d9304f;--ok:#2b8f86;--warm:#b4561c}
+body{background:#192134}
+.panel,.mmc,#lvm .card,#ld .card,#qcol,#sb{background:var(--pn);color:var(--ink);border:3px solid var(--line);box-shadow:3px 3px 0 var(--sh)}
+button,select{background:var(--pn2);color:var(--ink);border:2px solid var(--line);box-shadow:0 3px 0 var(--sh)}
+button.pri,#mx,.tabs button.on,.bigbtn{background:var(--hi);color:var(--hif)}
+.bigbtn small{color:var(--hif)}
+.ttl{color:var(--ink);text-shadow:2px 2px 0 var(--pn3)}
+.sub,#lbn,.num,.sec{color:var(--mut)}
+.mcard{background:var(--pn2);color:var(--ink);border:3px solid var(--line)}
+.mcard:hover,.mcard.cur{background:var(--pn3);border-color:var(--line);box-shadow:4px 4px 0 var(--sh)}
+.mcard.cur::after,.bigbtn.cur::after{color:var(--hi)}.bigbtn.cur::after{color:var(--hif)}.mcard small{color:var(--mut)}.mmc label{color:var(--ink)}
+.dc,.cc{background:var(--pn2);color:var(--ink)}.dc.done{background:var(--pn3)}.dc.now{background:var(--hi);color:var(--hif)}
+.bar,#qbar,.pxbar i{background:var(--pn3);border-color:var(--line)}
+@keyframes blk{0%{background:var(--hot)}20%,100%{background:var(--pn3)}}
+#opts button{background:var(--pn2);color:var(--ink)}#opts button.ok{background:var(--ok);color:#fff}#opts button.bad{background:var(--hot);color:#fff}
+#typed input,#nmi{background:var(--pn2);color:var(--ink);border:2px solid var(--line)}
+#info b,.lr em,#ldl .run{color:var(--hi)}.lr.me{background:var(--pn3)}.lr span{color:var(--mut)}
+#fb{color:var(--mut)}#fb.ok,#lastr.ok{color:var(--ok)}#fb.bad,#lastr.bad{color:var(--hot)}
+.tkr b.warn,#tk.warn{color:var(--warm)}.tkr b.late,#tk.late{color:var(--hot)}
+#ldl .ok{color:var(--ok)}#ldl .fail{color:var(--hot)}
+#mm,#nm,#lb,#lvm,#ab{background:#0b102099}#ld{background:#0b102077}
+#sb{gap:5px}
+#sb #mus,#sb #mute,#sb #abort{background:var(--pn2);box-shadow:none;padding:0 4px;font-size:1rem}
+/* on the map the labels keep one look in every theme */
+.rl{background:#f6ead3;color:#192134}.rl.m{background:#1d7580;color:#f6ead3;border-color:#192134}
+.lbl{background:#f6ead3;color:#192134;border-color:#192134}.lbl.n{background:#1d7580;color:#f6ead3}
+.qo{width:132px;gap:3px}
+.qo button{font-size:.76rem;padding:2px 5px;min-height:24px;background:#fbf3e2;color:#192134;border-color:#192134;box-shadow:2px 2px 0 #192134}
+@media(max-width:600px){.qo{width:114px}.qo button{font-size:.72rem;padding:2px 4px;min-height:22px}}
+.qo.qtxt{width:128px;padding:4px 6px;background:#fbf3e2;color:#192134;border:2px solid #192134;box-shadow:2px 2px 0 #192134;font-size:.85rem;line-height:1.05;pointer-events:none}
+.qo.qtxt b{color:#a43b4d}
+/* top: question box on the left, small phone on the right */
+#tp{display:flex;align-items:flex-start;gap:8px;background:none;border:0;box-shadow:none;padding:0 2px;pointer-events:none}
+#qcol,#dv{pointer-events:auto}#qcol{flex:1;min-width:0;padding:4px 8px}
+#abort{position:static}
+/* the phone: only the top third, real proportions (visible height = 0.72 x width) */
+#dv.phone{--pw:300px;position:relative;flex:none;width:min(var(--pw),88vw);height:calc(min(var(--pw),88vw)*.72);box-sizing:border-box;margin:0 auto;padding:8px 7px 0;overflow:hidden;background:#192134;border:3px solid #0b1020;border-bottom:0;border-radius:28px 28px 0 0!important;box-shadow:inset 0 0 0 2px #35747f;-webkit-mask-image:linear-gradient(#000 93%,transparent);mask-image:linear-gradient(#000 93%,transparent)}
+#dv.phone::before{content:'';display:block;width:40px;height:5px;margin:0 auto 5px;background:#0b1020;border-radius:3px!important;box-shadow:16px 0 0 -1px #35747f}
+#dv.phone .scr{--ink:#192134;--mut:#5f4e4d;--pn2:#fbf3e2;--pn3:#e4d0aa;--line:#192134;--sh:#192134;display:flex;flex-direction:column;gap:3px;background:#f6ead3;color:#192134;border-radius:15px 15px 0 0!important;height:100%;box-sizing:border-box;padding:5px 8px 9px;overflow:hidden}
+.sbar{display:flex;justify-content:space-between;font-size:.62rem;color:#5f4e4d;line-height:1}
+.dvt{font-size:1rem;line-height:1.05;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.dvr{display:flex;align-items:center;gap:6px;padding-top:3px;border-top:1px dashed #192134}.dvr>div{flex:1;min-width:0}
+.dvr small{display:block;font-size:.7rem;color:#5f4e4d;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.dvr b{display:block;font-size:1rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tkr{display:flex;justify-content:space-between;align-items:baseline;margin:0}.tkr b{font-size:1rem}
+.dvres{font-size:1.05rem}.dvhint{font-size:.85rem;line-height:1.05}
+#phbtn{margin-top:auto}
+#phbtn button{width:100%;font-size:1.05rem;padding:4px;margin:0;background:#1d7580;color:#f6ead3;border-color:#192134;box-shadow:0 3px 0 #192134}
+#dv.phone.mini{--pw:176px;margin:0;padding:6px 5px 0;border-radius:22px 22px 0 0!important;-webkit-mask-image:linear-gradient(#000 88%,transparent);mask-image:linear-gradient(#000 88%,transparent)}
+#dv.phone.mini::before{width:30px;height:4px;margin-bottom:3px}
+#dv.phone.mini .scr{padding:3px 6px;gap:1px;font-size:.92rem;line-height:1.02}
+@media(max-width:420px){#dv.phone.mini{--pw:162px}}
+.dmsg{background:#e4d0aa;color:#192134}.dmsg.hurry{background:#f6b7a6}.dmsg.good{background:#b9e0d5}
+/* "new delivery" phone: separate, top centre */
+#phc{position:fixed;left:0;right:0;top:calc(58px + env(safe-area-inset-top,0px));z-index:1050;display:flex;justify-content:center;pointer-events:none}
+#phc #dv{pointer-events:auto}
+/* ---- v22: phone fixed at the bottom (3/4 visible before start, 2/5 while riding); hearts in the top bar ---- */
+#sb{flex-wrap:wrap}
+#hrow{flex-basis:100%;display:flex;justify-content:center;gap:8px;margin-top:-2px;line-height:1}
+#hrow i{font-style:normal;font-size:1.05rem;color:var(--hot);text-shadow:1px 1px 0 var(--sh);transition:color .3s}
+#hrow i.off{color:#9b9b9b;opacity:.6;text-shadow:none}
+#bot{bottom:calc(var(--phv,0px) + 8px)}
+#tp{display:block}
+#dv.phone{--pw:min(230px,66vw);--vis:.75;position:fixed;z-index:1050;left:calc(50% - var(--pw)/2);bottom:0;flex:none;width:var(--pw);height:calc(var(--pw)*2.17);box-sizing:border-box;margin:0;padding:10px 8px;overflow:hidden;background:#192134;border:3px solid #0b1020;border-radius:36px!important;box-shadow:inset 0 0 0 2px #35747f;-webkit-mask-image:none;mask-image:none;transform:translateY(calc(100% * (1 - var(--vis))));transition:transform .9s cubic-bezier(.3,.9,.3,1)}
+#dv.phone.v75{--vis:.75}#dv.phone.v40{--vis:.4}
+#dv.phone::before{content:'';display:block;width:44px;height:5px;margin:0 auto 6px;background:#0b1020;border-radius:3px!important;box-shadow:18px 0 0 -1px #35747f}
+#dv.phone .scr{height:calc(100% - 11px);padding:6px 9px;gap:4px;border-radius:24px!important;font-size:1rem;line-height:1.1}
+.dvd{font-size:.95rem;color:#5f4e4d}
+.dvr{display:block;border-top:1px dashed #192134;padding-top:3px}
+#dv.phone .dmsg{font-size:.9rem}
+#phbtn{margin-top:8px}
+#phbtn button{font-size:1.15rem;padding:7px}
 </style>
 </head>
 <body>
@@ -266,8 +340,9 @@ button.pri,#mx,.tabs button.on{background:var(--hi);color:#fff}
   <div id="lv"></div>
   <div id="pn" title="Byt namn"></div>
   <span id="streak">🔥 0</span><span id="mx">×1</span>
-  <button id="mus" aria-label="Musik på/av">🎵</button><button id="mute" aria-label="Ljud på/av">🔊</button>
+  <button id="mus" aria-label="Musik på/av">🎵</button><button id="mute" aria-label="Ljud på/av">🔊</button><button id="abort" aria-label="Avbryt och gå till menyn">⏹</button>
   <div id="pop"></div>
+  <div id="hrow" hidden><i id="h0">❤</i><i id="h1">❤</i><i id="h2">❤</i><i id="h3">❤</i><i id="h4">❤</i></div>
 </aside>
 
 <div id="top" class="panel" hidden>
@@ -299,6 +374,11 @@ button.pri,#mx,.tabs button.on{background:var(--hi);color:#fff}
       <option value="1">Husnummer: lätt (200 m)</option>
       <option value="2">Husnummer: medel (100 m)</option>
       <option value="3">Husnummer: svår (50 m)</option>
+    </select>
+    <select id="theme" aria-label="Färgtema">
+      <option value="t1">Färgtema: Skymning</option>
+      <option value="t2">Färgtema: Natt</option>
+      <option value="t3">Färgtema: Solnedgång</option>
     </select>
     <label><input type="checkbox" id="lab"> Visa namn</label>
     <label><input type="checkbox" id="pxc" checked> 8-bit-grafik</label>
@@ -366,14 +446,16 @@ button.pri,#mx,.tabs button.on{background:var(--hi);color:#fff}
   <div class="row"><button id="edok" class="pri">Spara och ladda om</button><button id="edd">Standard</button><button id="edx">Avbryt</button></div>
 </div>
 
-<div id="tp" class="panel">
-  <button id="abort" aria-label="Avbryt och gå till menyn">⏹</button>
-  <div id="dv" hidden></div>
-  <div id="qbar" hidden><i id="qbi"></i></div>
-  <div id="q">Laddar…</div>
-  <div id="fb"></div>
-  <div id="lastr"></div>
+<div id="tp">
+  <div id="qcol">
+    <div id="qbar" hidden><i id="qbi"></i></div>
+    <div id="q">Laddar…</div>
+    <div id="fb"></div>
+    <div id="lastr"></div>
+  </div>
 </div>
+
+<div id="dv" hidden></div>
 
 <div id="bot" class="panel" hidden>
   <div id="opts"></div>
@@ -521,7 +603,21 @@ function crossings(st){
   }
   return [...m];
 }
-const PAL=['#3b6fd0','#4aa3b5','#7a7fb8','#4aa37f','#8a97ad','#6a8fd8'];
+const PAL=['#298981','#e54168','#ed9a64','#8a6fb0','#84958b','#1ea4b0'];
+// Three colour themes from the picture: UI colours come from CSS ([data-theme]), the map colours from here.
+const THEMES={
+  t1:{route:'#35747f',ask:'#ed9a64',trav:'#1ea4b0',pal:['#298981','#e54168','#ed9a64','#8a6fb0','#84958b','#1ea4b0']},   // Skymning: cream, teal, coral
+  t2:{route:'#2d5f73',ask:'#ff6b8a',trav:'#1ea4b0',pal:['#1ea4b0','#ff6b8a','#ed9a64','#8a6fb0','#84958b','#4fd1b5']},   // Natt: navy, cyan, pink
+  t3:{route:'#8a4a5e',ask:'#e8872f',trav:'#2b8f86',pal:['#7a3b57','#e8872f','#2b8f86','#d9304f','#8a7a6a','#d9a441']}    // Solnedgång: peach, plum, orange
+};
+let TH=THEMES.t1;
+function applyTheme(k){
+  if(!THEMES[k])k='t1';
+  TH=THEMES[k];PAL.splice(0,PAL.length,...TH.pal);
+  const r=document.documentElement;if(r&&r.setAttribute)r.setAttribute('data-theme',k);
+  try{localStorage.setItem('gs_theme',k)}catch(e){}
+  return k;
+}
 function info(st){
   const a=areas(st);let h='';
   if(a.d.length)h+=`<b>Område:</b> ${a.d.map(esc).join(', ')}`+(a.n.length?` (${a.n.map(esc).join(', ')})`:'')+'<br>';
@@ -721,7 +817,7 @@ function showLevel(i){
   const c=$('conf');c.innerHTML='';
   for(let k=0;k<48;k++){
     const e=document.createElement('i');
-    e.style.cssText=`left:${Math.random()*100}%;background:${['#5b8def','#2f9e63','#9aa7bf','#d0505a','#fff'][k%5]};animation-delay:${Math.random()*.9}s;animation-duration:${1.8+Math.random()*1.5}s`;
+    e.style.cssText=`left:${Math.random()*100}%;background:${['#1ea4b0','#ed9a64','#e54168','#f1e2c6','#fff'][k%5]};animation-delay:${Math.random()*.9}s;animation-duration:${1.8+Math.random()*1.5}s`;
     c.appendChild(e);
   }
   $('lvm').hidden=false;$('lvok').focus();
@@ -814,7 +910,7 @@ function prefetch(){
 function resetQueue(){for(const s of queue)seen.delete(s.n);queue.length=0}
 let infoOpen=false;
 function next(){
-  blink([]);if($('bot').appendChild)$('bot').appendChild($('brow'));
+  blink([]);heartsUi(null);setPh(0);stopMusic();$('dv').hidden=true;if($('bot').appendChild){$('brow').appendChild($('nx'));$('bot').appendChild($('brow'))}
   $('ib').hidden=true;$('qbar').hidden=true;$('lastr').textContent='';
   layers.clearLayers();answered=false;tg=null;$('opts').innerHTML='';$('info').hidden=true;$('typed').hidden=true;$('dv').hidden=true;$('nx').textContent='Nästa';
   if(ride&&ride.timer)clearInterval(ride.timer);
@@ -823,7 +919,7 @@ function next(){
   if(!cur){$('q').textContent='Inga gator här';setFb('Zooma ut eller välj "Alla gator".');return}
   last=cur.n;$('nx').hidden=true;$('sh').hidden=mode!='locate';
   if(mode=='locate'){$('q').textContent=cur.n;setFb('Tryck på kartan');if(+$('nr').value)prepareNumber(cur)}
-  else{$('q').textContent='Vilken gata är blå?';setFb('');blink(show(cur,'#2563eb'));fit(cur);options()}
+  else{$('q').textContent='Vilken gata blinkar?';setFb('');blink(show(cur,TH.ask));fit(cur);options()}
   stats();fill();
 }
 // House-number points are separate from the street points and slide: full close to the house, less in the
@@ -868,16 +964,16 @@ function place(e){
   if(mode!='locate'||answered||!cur)return;
   answered=true;
   const n=nearest(cur,e.latlng),ok=n.d<=TOL,cl=[e.latlng.lat,e.latlng.lng];
-  show(cur,ok?'#2f9e63':'#d0505a');
+  show(cur,ok?'#2ba58f':'#e54168');
   let bonus=0,td=0,frac=0;
   if(tg){
     td=dist(cl,[tg.la,tg.lo]);
     if(ok){frac=numFrac(td,cur);bonus=Math.round(BONUS*frac)}
-    L.circleMarker([tg.la,tg.lo],{radius:7,color:'#1f2a44',fillColor:'#2563eb',fillOpacity:1,weight:3}).addTo(layers);
+    L.circleMarker([tg.la,tg.lo],{radius:7,color:'#192134',fillColor:'#e54168',fillOpacity:1,weight:3}).addTo(layers);
     tip([tg.la,tg.lo],'nr '+tg.n,'n');
   }
-  L.polyline([cl,tg?[tg.la,tg.lo]:n.pt],{color:'#1f2a44',weight:2,dashArray:'5 5'}).addTo(layers);
-  L.circleMarker(e.latlng,{radius:7,color:'#1f2a44',fillColor:'#fff',fillOpacity:1,weight:3}).addTo(layers);
+  L.polyline([cl,tg?[tg.la,tg.lo]:n.pt],{color:'#192134',weight:2,dashArray:'5 5'}).addTo(layers);
+  L.circleMarker(e.latlng,{radius:7,color:'#192134',fillColor:'#fff',fillOpacity:1,weight:3}).addTo(layers);
   const g=grade(cur,ok,bonus);
   let t=ok?'Rätt gata!':'Fel gata. Där är den, i rött.';
   if(tg)t+=ok?` Husnummer ${tg.n}: ${Math.round(td)} m från rätt ställe – ${numWord(frac)}.`:` Nr ${tg.n} låg vid den gula markeringen.`;
@@ -895,7 +991,7 @@ map.on('dblclick',()=>{clearTimeout(clickT);clickT=0});
 $('sh').onclick=()=>{
   if(mode=='ride')return rideAnswer(null);
   if(answered||!cur)return;answered=true;
-  show(cur,'#2563eb');fit(cur);grade(cur,false);setFb('Här är den. Räknas som missad.','bad');finish();
+  show(cur,'#e54168');fit(cur);grade(cur,false);setFb('Här är den. Räknas som missad.','bad');finish();
 };
 $('nx').onclick=()=>mode=='ride'?rideNext():next();
 $('go').onclick=()=>rideAnswer($('ans').value);
@@ -1002,13 +1098,25 @@ function pathToLegs(path){
     });
     l.ev=res;
   });
-    const n=legs.reduce((a,l)=>a+l.ev.length,0);
-  return legs.length<2||n<6||n>45||legs.some(l=>!l.ev.length)?null:legs;
+  // every street is asked only once per delivery (also when the route crosses it again later); a street you already
+  // answered, or have ridden on, is not asked again - if it is the street you turn into, you just pass the junction
+  const seen=new Set();
+  legs.forEach((l,li)=>{
+    seen.add(l.st);const nxt=legs[li+1];
+    l.ev=l.ev.filter((e,k)=>{
+      const turn=nxt&&k==l.ev.length-1&&e.o===nxt.st;
+      if(seen.has(e.o)){if(turn){e.skip=true;return true}return false}
+      seen.add(e.o);return true;
+    });
+  });
+  const asked=l=>l.ev.filter(e=>!e.skip).length,n=legs.reduce((a,l)=>a+asked(l),0);
+  // the first road must be long enough to see where you are and where you're heading
+  return legs.length<2||n<6||n>45||legs.some(l=>!l.ev.length)||legs[0].ch.len<250||asked(legs[0])<2?null:legs;
 }
 function planRoute(){
   const {adj}=getGraph(),cands=pool().filter(s=>slen(s)>=150);
   if(!cands.length)return null;
-  for(let t=0;t<15;t++){
+  for(let t=0;t<30;t++){
     let r=Math.random()*cands.reduce((a,s)=>a+imp(s),0),st=cands[0];
     for(const s of cands){r-=imp(s);if(r<=0){st=s;break}}
     const sp=pickOf(pickOf(st.s)),sk=sp[0]+','+sp[1];
@@ -1058,16 +1166,17 @@ async function rideStart(){
   ldShow(false);
   if(ride!==R)return;
   const J=pickOf(JOBS),a=r1&&nearAddr(r1,sPt),a2=r2&&nearAddr(r2,ePt);
-  R.job={i:J.i,t:J.t,d:pickOf(J.d),fromName:pickOf(J.f),toName:pickOf(J.r),sNo:a?a[0]:null};
+  R.job={i:J.i,t:J.t,d:pickOf(J.d),fromName:pickOf(J.f),toName:pickOf(J.r),sNo:a?a[0]:null};heartsUi(R);
   R.dest=a2?{n:a2[0],la:a2[1],lo:a2[2]}:null;
   R.km=legs.reduce((s,l)=>s+l.ch.len,0);
-  const n=legs.reduce((s,l)=>s+l.ev.length,0);
+  const n=legs.reduce((s,l)=>s+l.ev.filter(e=>!e.skip).length,0);
   // normal riding time: every crossing gets at least MINW seconds; you must beat 90 % of it (= some boosts) to be on time
-  let norm=0;for(const l of legs){let p=0;for(const e of l.ev){norm+=Math.max((e.pos-p)/V0,MINW);p=e.pos}norm+=(l.ch.len-p)/V0}
+  let norm=0;for(const l of legs){let p=0;for(const e of l.ev){norm+=Math.max((e.pos-p)/V0,e.skip?0:MINW);p=e.pos}norm+=(l.ch.len-p)/V0}
   R.nEv=n;R.secs=Math.round(norm*.9+(R.dest?10:0));
   drawRoute();renderCard();
   $('q').textContent='📦 Ny leverans!';
-  setFb(R.timed?'Svara innan cykeln når korsningen. Rätt svar = boost!':'Träning: cykeln väntar vid varje korsning.');
+  R.chat=[{kind:'info',text:'Ny order! Tryck Starta när du är redo.'}];
+  R.hint=R.timed?'Namnge korsningen innan cykeln når den – rätt svar ger boost!':'Träning: cykeln väntar vid varje korsning.';
   $('nx').textContent='Starta 🚲';$('nx').hidden=false;
 }
 const mark=(h,x)=>L.marker(x,{interactive:false,keyboard:false,icon:L.divIcon({className:'bike',html:`<span class="bk">${h}</span>`,iconSize:[46,46],iconAnchor:[23,23]})}).addTo(layers);
@@ -1084,12 +1193,12 @@ function drawRoute(){
   });
   const f=R.legs[R.legs.length-1];
   mark('📦',ptAt(R.legs[0].ch,R.legs[0].start));mark('🏁',ptAt(f.ch,legEnd(f)));
-  map.fitBounds(L.latLngBounds(all).pad(.25));
+  map.fitBounds(L.latLngBounds(all),{paddingTopLeft:[30,hudH()+12],paddingBottomRight:[30,phVis(.75)+16]});
 }
 // Result screen: the whole route, every crossing in green (right) or red (wrong) with its name, and the house number.
 function drawResult(){
   const R=ride,all=[];layers.clearLayers();
-  R.legs.forEach(l=>{const seg=sub(l.ch,l.start,legEnd(l));all.push(...seg);L.polyline(seg,{color:'#2563eb',weight:9,opacity:.4}).addTo(layers)});
+  R.legs.forEach(l=>{const seg=sub(l.ch,l.start,legEnd(l));all.push(...seg);L.polyline(seg,{color:'#e54168',weight:9,opacity:.4}).addTo(layers)});
   drawLog();
   R.legs.forEach(l=>lblStreet(sub(l.ch,l.start,legEnd(l)),l.st.n,'m'));
   const f=R.legs[R.legs.length-1];
@@ -1097,27 +1206,36 @@ function drawResult(){
   const d=R.dest;
   if(d&&R.finalDone){
     const t=[d.la,d.lo];
-    if(R.finalCl){L.polyline([R.finalCl,t],{color:'#1f2a44',weight:2,dashArray:'5 5'}).addTo(layers);L.circleMarker(R.finalCl,{radius:7,color:'#1f2a44',fillColor:'#fff',fillOpacity:1,weight:3}).addTo(layers)}
-    L.circleMarker(t,{radius:8,color:'#1f2a44',fillColor:'#2563eb',fillOpacity:1,weight:3}).addTo(layers);tip(t,'nr '+d.n,'n');
+    if(R.finalCl){L.polyline([R.finalCl,t],{color:'#192134',weight:2,dashArray:'5 5'}).addTo(layers);L.circleMarker(R.finalCl,{radius:7,color:'#192134',fillColor:'#fff',fillOpacity:1,weight:3}).addTo(layers)}
+    L.circleMarker(t,{radius:8,color:'#192134',fillColor:'#e54168',fillOpacity:1,weight:3}).addTo(layers);tip(t,'nr '+d.n,'n');
   }
-  map.fitBounds(L.latLngBounds(all).pad(.3));
+  map.fitBounds(L.latLngBounds(all),{paddingTopLeft:[30,hudH()+12],paddingBottomRight:[30,phVis(.75)+16]});
 }
 // Delivery ticket: what, from where, to where, the clock, and the route (streets still ahead stay hidden during the ride).
 const MAXERR=5,LOSTCR=2.6;
+// The phone sits at the bottom of the screen: 3/4 of it before the start, 2/5 while riding (it slides down when you press Start).
+const phW=()=>Math.min(230,.66*((typeof window!='undefined'&&window.innerWidth)||400));
+const phVis=f=>Math.round(f*phW()*2.17);
+const hudH=()=>$('sb').offsetHeight||56;
+function setPh(f){const st=$('bot').style;if(st&&st.setProperty)st.setProperty('--phv',(f?phVis(f):0)+'px')}
+// Hearts in the top bar: lit = left, grey = lost. Five grey and the delivery is lost.
+function heartsUi(R){
+  const h=$('hrow');h.hidden=!R;if(!R)return;
+  for(let i=0;i<MAXERR;i++){const c=$('h'+i).classList;i<R.errs?c.add('off'):c.remove('off')}
+}
 const HURRY=['Skynda på – kunden väntar!','Du ligger efter! Trampa på!','Fortare nu, maten kallnar!','Maxa farten – tiden rinner!'];
 const LATE=['Du är sen! Leverera NU!','Kunden ringer – kom igen!','Sent sent sent! Gasa!'];
 const CHEER=['Grymt! Du ligger före!','Snabbt och snyggt – fortsätt så!','Kunden blir glad – bra tempo!','Du flyger fram!'];
-// A shout from Dispatch, shown as a message on the phone.
-function say(kind,text,ms){
+// A shout from Dispatch: a new message in the phone's chat.
+function say(kind,text){
   const R=ride;if(!R)return;
-  R.msg={kind,text,until:ms===Infinity?Infinity:Date.now()+(ms||6000)};R.msgAt=Date.now();
+  (R.chat=R.chat||[]).push({kind,text});R.msgAt=Date.now();
   sfx('ping');renderCard();
 }
 // Behind schedule -> hurry up; clearly ahead -> cheer. (Not more often than every 15 s.)
 function dispatch(R,left){
   const now=Date.now();
-  if(R.msg&&now>R.msg.until){R.msg=null;renderCard()}
-  if(!R.timed||R.msg||now-(R.msgAt||0)<15000||paused())return;
+  if(!R.timed||now-(R.msgAt||0)<15000||paused())return;
   const trav=R.legs.slice(0,R.li).reduce((a,l)=>a+l.ch.len,0)+R.pos,fr=trav/R.km,tf=1-(R.deadline-now)/(R.secs*1000);
   if(left<0)say('hurry',pickOf(LATE));
   else if(tf-fr>.1)say('hurry',pickOf(HURRY));
@@ -1125,29 +1243,24 @@ function dispatch(R,left){
 }
 function renderCard(){
   const R=ride,j=R.job;if(!j)return;
-  const big=R.briefing||R.done,bot=$('bot'),tp=$('tp'),dvEl=$('dv'),row=$('brow');
-  if(bot.insertBefore&&tp.insertBefore){   // before start / at the end: Start button + phone at the bottom, joined; while riding: phone at the top
-    if(big){bot.insertBefore(row,bot.firstChild);bot.insertBefore(dvEl,row.nextSibling)}
-    else{tp.insertBefore(dvEl,tp.firstChild);bot.appendChild(row)}
-  }
-  const f=R.legs[R.legs.length-1],show=i=>big||i<=R.li;
-  const chips=R.legs.map((l,i)=>`<span class="dc ${i<R.li||R.done?'done':i==R.li&&!R.briefing?'now':''}">${show(i)?esc(l.st.n):'•••'}</span>`).join('<i>›</i>');
-  const hearts='❤'.repeat(Math.max(0,MAXERR-R.errs))+'♡'.repeat(Math.min(MAXERR,R.errs));
-  const msg=R.msg?`<div class="dmsg ${R.msg.kind}">📻 Dispatch: ${esc(R.msg.text)}</div>`:'';
-  const dest=esc(f.st.n)+(R.dest?' '+R.dest.n:'');
-  dvEl.className=big?'phone':'phone mini';
-  if(!big){
-    dvEl.innerHTML=`<div class="scr"><div class="dvm"><span>${j.i} → <b>${dest}</b></span>${R.timed?`<b id="tk" class="${R.tkC||''}">${R.tkT||''}</b>`:''}</div>
-      <div class="dvm2"><span class="hrt" title="Fem fel och du tappar leveransen">${hearts}</span><span>${R.total}/${R.nEv}</span></div>${msg}</div>`;
-    dvEl.hidden=false;return;
-  }
-  const tk=R.timed?`<div class="tkr"><b id="tk" class="${R.tkC||''}">${R.tkT||'Tid: '+mmss(R.secs)}</b><small id="tkd">${R.briefing?'':R.tkD||''}</small></div>`:'';
-  const hhmm=new Date().toLocaleTimeString('sv-SE',{hour:'2-digit',minute:'2-digit'});
-  dvEl.innerHTML=`<div class="scr"><div class="sbar"><span>${hhmm}</span><span>BUDAPPEN</span><span>▂▄▆ ▮</span></div>
-    <div class="dvh"><span class="dvi">${j.i}</span><div><b>${esc(j.t)}</b><small>${esc(j.d)} · ${(R.km/1000).toFixed(1).replace('.',',')} km</small></div></div>
-    <div class="dvr"><div><small>FRÅN · ${esc(j.fromName)}</small><b>${esc(R.legs[0].st.n)}${j.sNo?' '+j.sNo:''}</b></div><span>➜</span><div><small>TILL · ${esc(j.toName)}</small><b>${dest}</b></div></div>
-    ${tk}<div class="dvc">${chips}</div>${msg}</div>`;
-  dvEl.hidden=false;
+  const brief=R.briefing,done=R.done,dvEl=$('dv'),row=$('brow'),nx=$('nx'),big=brief||done;
+  if(!big&&nx.parentNode!==row&&row.appendChild)row.appendChild(nx);   // the button goes back before the screen is rebuilt
+  const f=R.legs[R.legs.length-1],dest=esc(f.st.n)+(R.dest?' '+R.dest.n:'');
+  const hhmm=new Date().toLocaleTimeString('sv-SE',{hour:'2-digit',minute:'2-digit'}),km=(R.km/1000).toFixed(1).replace('.',',')+' km';
+  const chat=(R.chat||[]).slice(big?-3:-2).map(m=>`<div class="dmsg ${m.kind}">📻 ${esc(m.text)}</div>`).join('');
+  let body;
+  if(brief)body=`<div class="dvt">${j.i} <b>${esc(j.t)}</b></div><div class="dvd">${esc(j.d)} · ${km}</div>
+    <div class="dvr"><small>FRÅN · ${esc(j.fromName)}</small><b>${esc(R.legs[0].st.n)}${j.sNo?' '+j.sNo:''}</b></div>
+    <div class="dvr"><small>TILL · ${esc(j.toName)}</small><b>${dest}</b></div>
+    ${R.timed?`<div class="tkr"><b id="tk">⏱ ${mmss(R.secs)}</b></div>`:''}
+    <div class="dvhint">${esc(R.hint||'')}</div>${chat}`;
+  else if(done)body=`<div class="dvt"><b>${esc(R.res.title)}</b></div><div class="dvres">${esc(R.res.line)}</div>${chat}`;
+  else body=`<div class="dvt">${j.i} <b>${esc(j.t)}</b> → <b>${dest}</b></div>
+    <div class="tkr">${R.timed?`<b id="tk" class="${R.tkC||''}">${R.tkT||''}</b>`:'<span></span>'}<span>${R.total}/${R.nEv}</span></div>${chat}`;
+  dvEl.className='phone '+(big?'v75':'v40');
+  dvEl.innerHTML=`<div class="scr"><div class="sbar"><span>${hhmm}</span><span>BUDAPPEN</span><span>▂▄▆ ▮</span></div>${body}<div id="phbtn"></div></div>`;
+  const hb=$('phbtn');if(big&&hb&&hb.appendChild)hb.appendChild(nx);
+  dvEl.hidden=false;setPh(big?.75:.4);
 }
 // Clock: counts down to the latest delivery time; turns amber near the end and red + "SEN" when late. Paused while the level-up box is open.
 function tick(){
@@ -1167,34 +1280,41 @@ const dirIdx=(ch,pos)=>{const a=ptAt(ch,pos),b=ptAt(ch,pos+60);return Math.round
 // A new crossing: the bike heads for it. On time: it gets there after max(distance/V0, MINW) seconds, answered or not.
 function startQ(){
   const R=ride,leg=R.legs[R.li],e=leg.ev[R.ei];
-  R.stage='cross';R.answered=answered=false;R.ok=false;R.qShown=false;R.tok++;
+  R.stage='cross';R.answered=answered=false;R.ok=false;R.qShown=false;R.free=false;R.tok++;
   R.p0=R.pos;R.el=0;R.win=Math.max((e.pos-R.pos)/V0,MINW);R.qt=R.win;
+  if(e.skip){   // junction already asked about earlier: just ride through it
+    R.answered=answered=true;R.free=true;R.qShown=true;blink([]);$('nx').hidden=true;$('sh').hidden=true;$('opts').innerHTML='';$('typed').hidden=true;$('qbar').hidden=true;
+    drawScene();renderCard();$('q').textContent=`🚲 ${leg.st.n} ${ARROW[dirIdx(leg.ch,R.pos)]}`;setFb('');return;
+  }
   blink([]);$('nx').hidden=true;$('sh').hidden=true;$('opts').innerHTML='';$('typed').hidden=true;$('qbar').hidden=true;$('qbar').className='';
   drawScene();renderCard();
   $('q').textContent=`🚲 ${leg.st.n} ${ARROW[dirIdx(leg.ch,R.pos)]}`;
   setFb(R.ei==0&&R.from?`Svängde in från ${R.from}`:'');
   showQ();
 }
-const inView=p=>{const s=map.getSize(),c=map.latLngToContainerPoint(p);return c.x>40&&c.x<s.x-40&&c.y>150&&c.y<s.y-70};
-function focusBoth(a,b,anim){if(inView(a)&&inView(b))return;map.fitBounds(L.latLngBounds([a,b]),{paddingTopLeft:[40,160],paddingBottomRight:[40,70],maxZoom:17,animate:!!anim})}
+const inView=p=>{const s=map.getSize(),c=map.latLngToContainerPoint(p);return c.x>40&&c.x<s.x-40&&c.y>hudH()+80&&c.y<s.y-phVis(.4)-24};
+function focusBoth(a,b,anim){if(inView(a)&&inView(b))return;map.fitBounds(L.latLngBounds([a,b]),{paddingTopLeft:[40,hudH()+90],paddingBottomRight:[40,phVis(.4)+30],maxZoom:17,animate:!!anim})}
 // The question: the junction street blinks, and the answers hang right at the junction (typing mode: input at the bottom).
+// A box hung on the map at a point (answers at a junction, the house-number question at the end of the road).
+function anchorBox(pt,fill,interactive){
+  const sz=map.getSize(),c=map.latLngToContainerPoint(pt),right=c.x<sz.x/2,below=c.y<sz.y/2;   // open towards the side with most room
+  const box=document.createElement('div');box.className='qo '+(right?'r ':'l ')+(below?'b':'a');
+  fill(box);if(interactive)L.DomEvent.disableClickPropagation(box);
+  return L.marker(pt,{icon:L.divIcon({className:'qopt',html:box,iconSize:[0,0]}),keyboard:false,interactive:!!interactive,zIndexOffset:2000}).addTo(layers);
+}
 function showQ(){
   const R=ride,leg=R.legs[R.li],e=leg.ev[R.ei],type=$('rd').value=='type';
   R.qShown=true;$('qbar').hidden=!R.timed;$('qbi').style.width='100%';
-  setFb(type?'Skriv namnet på den blinkande gatan':'Vilken gata blinkar?');
+  setFb(type?(R.timed?'Skriv korsningens namn innan cykeln når den':'Skriv korsningens namn (gatan som blinkar)'):(R.timed?'Namnge korsningen innan cykeln når den':'Namnge korsningen (gatan som blinkar)'));
   focusBoth(ptAt(leg.ch,R.pos),e.pt,false);
   blink(hint(e));
   if(type){$('typed').hidden=false;$('ans').value='';$('ans').disabled=false;$('go').disabled=false;$('ans').focus();return}
   $('typed').hidden=true;
   const adj=new Set(leg.ev.filter(x=>Math.abs(x.pos-e.pos)<40).map(x=>x.o));
   const near=streets.filter(s=>!adj.has(s)&&s!==leg.st&&inLevel(s)).map(s=>[dist(cent(s),e.pt),s]).sort((a,b)=>a[0]-b[0]).slice(0,12).map(x=>x[1]);
-  const sz=map.getSize(),pt=map.latLngToContainerPoint(e.pt),right=pt.x<sz.x/2,below=pt.y<sz.y/2;   // open towards the side with most room
-  const box=document.createElement('div');box.className='qo '+(right?'r ':'l ')+(below?'b':'a');
-  shuffle([e.o,...shuffle(near).slice(0,3)]).forEach(st=>{
+  anchorBox(e.pt,box=>shuffle([e.o,...shuffle(near).slice(0,3)]).forEach(st=>{
     const b=document.createElement('button');b.textContent=st.n;b.onclick=()=>rideAnswer(st);box.appendChild(b);
-  });
-  L.DomEvent.disableClickPropagation(box);
-  L.marker(e.pt,{icon:L.divIcon({className:'qopt',html:box,iconSize:[0,0]}),keyboard:false,zIndexOffset:2000}).addTo(layers);
+  }),true);
 }
 function follow(p){
   const now=Date.now();if(now-(follow.t||0)<700)return;follow.t=now;
@@ -1228,7 +1348,7 @@ function rideStep(R,dt){
     R.crash-=dt;if(R.crash<=0){bikeCls('fall',false);if(R.lost)rideLost()}
     return;
   }else{
-    R.pos=Math.min(e.pos,R.pos+(R.ok?BOOST:CRASHV)*dt);
+    R.pos=Math.min(e.pos,R.pos+(R.free?V0:R.ok?BOOST:CRASHV)*dt);
     if(R.pos>=e.pos-.01){moveBike();return passQ()}
   }
   moveBike();
@@ -1240,13 +1360,16 @@ function passQ(){
   if(R.li+1<R.legs.length){R.from=leg.st.n;R.li++;R.ei=0;R.pos=0;return startQ()}
   R.ei=leg.ev.length-1;R.stage='tail';R.tailV=V0;
   $('qbar').hidden=true;$('opts').innerHTML='';$('typed').hidden=true;$('sh').hidden=true;
-  if(R.dest){R.answered=answered=false;$('q').textContent=`📍 Var ligger nummer ${R.dest.n}?`;setFb('Tryck på kartan – träff ger boost!')}
+  if(R.dest){
+    R.answered=answered=false;$('q').textContent=`📍 Var ligger nummer ${R.dest.n}?`;setFb('Tryck på kartan – träff ger boost!');
+    R.tailBox=anchorBox(leg.ev[leg.ev.length-1].pt,box=>{box.classList.add('qtxt');box.innerHTML=`📍 Var ligger<br><b>nummer ${R.dest.n}</b>?<br><small>Tryck på kartan</small>`},false);   // same spot as the answers
+  }
   else{$('q').textContent='🚲 Snart framme…';setFb('');R.tailV=BOOST;bikeCls('boost',true)}   // nothing to guess: boost to the goal
 }
 // Streets already crossed stay on the map in green (right) / red (wrong) with their names.
 function drawLog(){
   for(const a of ride.log){
-    const c=a.ok?'#2f9e63':'#d0505a';
+    const c=a.ok?'#2ba58f':'#e54168';
     for(const l of a.o.s)L.polyline(l,{color:c,weight:5,opacity:.6,interactive:false}).addTo(layers);
     const o=along(a.o,a.p,45);rlabel(o.pt,a.o.n,'x',o.deg,c);
   }
@@ -1254,13 +1377,13 @@ function drawLog(){
 // The street being asked about: whole line in blue (options mode), or just a short piece of it at the junction (typing mode).
 function hint(e){
   const out=[];
-  if($('rd').value!='type'){for(const l of e.o.s)out.push(L.polyline(l,{color:'#2563eb',weight:7,opacity:.95}).addTo(layers));return out}
+  if($('rd').value!='type'){for(const l of e.o.s)out.push(L.polyline(l,{color:TH.ask,weight:8,opacity:.95}).addTo(layers));return out}
   for(const l of e.o.s){
     const i=l.findIndex(q=>q[0]===e.p[0]&&q[1]===e.p[1]);if(i<0)continue;
     for(const d of [1,-1]){
       const seg=[l[i]];let acc=0;
       for(let j=i+d;j>=0&&j<l.length&&acc<70;j+=d){acc+=dist(seg[seg.length-1],l[j]);seg.push(l[j])}
-      if(seg.length>1)out.push(L.polyline(seg,{color:'#2563eb',weight:8,opacity:.95}).addTo(layers));
+      if(seg.length>1)out.push(L.polyline(seg,{color:TH.ask,weight:9,opacity:.95}).addTo(layers));
     }
   }
   return out;
@@ -1269,10 +1392,10 @@ function drawScene(noX){
   const R=ride,leg=R.legs[R.li],e=leg.ev[Math.min(R.ei,leg.ev.length-1)];
   layers.clearLayers();
   R.legs.forEach((l,i)=>{if(i!=R.li)L.polyline(sub(l.ch,l.start,legEnd(l)),{color:PAL[i%PAL.length],weight:5,opacity:.45}).addTo(layers)});
-  L.polyline(sub(leg.ch,leg.start,legEnd(leg)),{color:'#9aa7bf',weight:7,opacity:.75}).addTo(layers);
-  if(R.pos>0)L.polyline(sub(leg.ch,leg.start,R.pos),{color:'#2f9e63',weight:7,opacity:.9}).addTo(layers);
+  L.polyline(sub(leg.ch,leg.start,legEnd(leg)),{color:TH.route,weight:7,opacity:.75}).addTo(layers);
+  if(R.pos>0)L.polyline(sub(leg.ch,leg.start,R.pos),{color:TH.trav,weight:7,opacity:.9}).addTo(layers);
   drawLog();
-  L.circleMarker(e.pt,{radius:8,color:'#1f2a44',fillColor:'#fff',fillOpacity:1,weight:3}).addTo(layers);
+  L.circleMarker(e.pt,{radius:8,color:'#192134',fillColor:'#fff',fillOpacity:1,weight:3}).addTo(layers);
   R.bike=mark('🚲',ptAt(leg.ch,R.pos));
 }
 function rideAnswer(x,late){
@@ -1283,12 +1406,12 @@ function rideAnswer(x,late){
   let ok;
   if(typeof x=='string'){
     // typed: any street meeting the route at this junction (within 40 m) counts, and the one you named gets the credit
-    const e0=leg.ev[R.ei],j=leg.ev.findIndex((v,i)=>i>=R.ei&&Math.abs(v.pos-e0.pos)<40&&sameName(v.o.n,x));
+    const e0=leg.ev[R.ei],j=leg.ev.findIndex((v,i)=>i>=R.ei&&Math.abs(v.pos-e0.pos)<40&&!v.skip&&sameName(v.o.n,x));
     ok=j>=0;if(ok&&j!=R.ei)[leg.ev[R.ei],leg.ev[j]]=[leg.ev[j],leg.ev[R.ei]];
   }else ok=!!x&&x===leg.ev[R.ei].o;
   const e=leg.ev[R.ei];
   R.answered=answered=true;R.ok=ok;R.total++;ok?R.okc++:R.errs++;
-  R.run=ok?(R.run||0)+1:0;
+  R.run=ok?(R.run||0)+1:0;heartsUi(R);
   R.log.push({o:e.o,p:e.p,ok});
   const g=grade(e.o,ok);reward(g);
   $('lastr').textContent=(ok?'✔ ':'✖ ')+e.o.n+(late?' (för sent)':typeof x=='string'&&!ok?` – du skrev "${x.trim()}"`:'')+(g.pts?'  +'+g.pts:'');
@@ -1311,7 +1434,8 @@ function rideAnswer(x,late){
 function rideNext(){
   const R=ride;if(!R)return;
   if(R.briefing){
-    R.briefing=false;R.stage='zoom';$('nx').hidden=true;
+    R.briefing=false;R.stage='zoom';$('nx').hidden=true;startMusic();
+    (R.chat=R.chat||[]).push({kind:'info',text:'Kör! Kunden väntar.'});sfx('ping');
     $('q').textContent='🚲 Gör dig redo…';setFb('');renderCard();
     map.flyTo(R.legs[0].ch.pts[0],17,{duration:1.8});   // from the whole route to where the ride starts
     setTimeout(()=>{
@@ -1328,6 +1452,7 @@ function rideFinalClick(e){const R=ride;if(R&&R.stage=='tail'&&R.dest&&!R.finalD
 function finalAnswer(cl){
   const R=ride,d=R.dest,leg=R.legs[R.legs.length-1],t=[d.la,d.lo];
   if(R.finalDone)return;
+  if(R.tailBox){layers.removeLayer(R.tailBox);R.tailBox=null}
   R.answered=answered=true;R.finalDone=true;R.finalCl=cl;
   let frac=0,td=0;
   if(cl){td=dist(cl,t);frac=numFrac(td,leg.st,Math.max(1,+$('nr').value))}
@@ -1335,8 +1460,8 @@ function finalAnswer(cl){
   R.finalMsg=cl?`nummer ${d.n}: ${Math.round(td)} m från rätt ställe – ${numWord(frac)}`:`nummer ${d.n}: för sent`;
   if(!cl)return rideDone();
   const hit=frac>=.3;R.tailV=hit?BOOST:V0;bikeCls('boost',hit);
-  L.polyline([cl,t],{color:'#1f2a44',weight:2,dashArray:'5 5'}).addTo(layers);
-  L.circleMarker(t,{radius:8,color:'#1f2a44',fillColor:'#2563eb',fillOpacity:1,weight:3}).addTo(layers);tip(t,'nr '+d.n,'n');
+  L.polyline([cl,t],{color:'#192134',weight:2,dashArray:'5 5'}).addTo(layers);
+  L.circleMarker(t,{radius:8,color:'#192134',fillColor:'#e54168',fillOpacity:1,weight:3}).addTo(layers);tip(t,'nr '+d.n,'n');
   $('lastr').textContent=`${hit?'💨':'✖'} ${R.finalMsg}${R.finalPts?'  +'+R.finalPts:''}`;$('lastr').className=hit?'ok':'bad';
   setFb(hit?'💨 BOOST!':'Bom – cyklar vidare',hit?'ok':'bad');
 }
@@ -1349,7 +1474,8 @@ function addScore(p){
 function rideLost(){
   const R=ride;tick();clearInterval(R.timer);R.timer=0;
   R.done=true;R.stage='done';R.lost=true;answered=true;sfx('bad');
-  R.msg={kind:'hurry',text:'Du tappade leveransen… Kunden får vänta.',until:Infinity};
+  (R.chat=R.chat||[]).push({kind:'hurry',text:'Du tappade leveransen… Kunden får vänta.'});heartsUi(R);stopMusic();
+  R.res={title:'📦💥 Leveransen tappades',line:`${R.okc}/${R.total} rätt · fem fel`};
   drawResult();renderCard();
   $('q').textContent='📦💥 Leveransen tappades';setFb('Fem fel – leveransen är förlorad','bad');
   $('opts').innerHTML='';$('typed').hidden=true;$('sh').hidden=true;$('qbar').hidden=true;$('nx').hidden=false;$('nx').textContent='Ny leverans';
@@ -1360,7 +1486,8 @@ function rideDone(){
   const perfect=R.errs==0,late=R.timed&&Date.now()>R.deadline,ontime=R.timed&&!late;
   const pts=100+(perfect?100:0)+(ontime?100:0)+(R.finalPts||0);
   R.done=true;R.stage='done';answered=true;addScore(pts);
-  R.msg=R.timed?{kind:late?'hurry':'good',text:late?'Framme, men sent… kunden fick vänta.':'Leveransen i tid – kunden är jättenöjd! 🎉',until:Infinity}:{kind:'good',text:'Bra träning – leveransen är framme!',until:Infinity};
+  (R.chat=R.chat||[]).push(R.timed?{kind:late?'hurry':'good',text:late?'Framme, men sent… kunden fick vänta.':'Leveransen i tid – kunden är jättenöjd! 🎉'}:{kind:'good',text:'Bra träning – leveransen är framme!'});stopMusic();
+  R.res={title:late?'📦 Levererat – men sent':'📦 Leverans framme!',line:`${R.okc}/${R.total} rätt · +${pts} poäng`};
   drawResult();renderCard();
   const sum=`${R.okc} av ${R.total} korsningar rätt${perfect?' – perfekt':''}${R.timed?(late?' · för sent':' · i tid'):''}${R.finalMsg?' · '+R.finalMsg:''}`;
   $('q').textContent=late?'📦 Levererat – men för sent':'📦 Leverans framme!';
@@ -1412,7 +1539,7 @@ let editing=false,draft=[],dpoly=null;
 const dl=L.layerGroup().addTo(map);
 function drawDraft(){
   dl.clearLayers();
-  dpoly=L.polygon(draft,{color:'#d0505a',weight:3,fillOpacity:.08,interactive:false}).addTo(dl);
+  dpoly=L.polygon(draft,{color:'#e54168',weight:3,fillOpacity:.08,interactive:false}).addTo(dl);
   draft.forEach((p,i)=>{
     const m=L.marker(p,{draggable:true,icon:L.divIcon({className:'',html:'<div class="vtx"></div>',iconSize:[26,26],iconAnchor:[13,13]})}).addTo(dl);
     m.on('drag',e=>{draft[i]=[e.latlng.lat,e.latlng.lng];dpoly.setLatLngs(draft)});
@@ -1523,21 +1650,28 @@ const bgm=$('bgm');bgm.volume=.35;
 let musicOn=lsg('gs_music')!=='0';
 function musicUi(){$('mus').style.opacity=musicOn?1:.4}
 function startMusic(){if(musicOn&&bgm.paused&&bgm.play)bgm.play().catch(()=>{})}
+function stopMusic(){if(bgm.pause)bgm.pause();try{bgm.currentTime=0}catch(e){}}   // plays from Start to the goal
 musicUi();
 bgm.addEventListener('error',()=>{$('mus').hidden=true});   // no musik.mp3 -> no button
-document.addEventListener('pointerdown',startMusic,{once:true});
-document.addEventListener('keydown',startMusic,{once:true});
-$('mus').onclick=()=>{musicOn=!musicOn;try{localStorage.setItem('gs_music',musicOn?'1':'0')}catch(e){}musicUi();musicOn?startMusic():bgm.pause()};
+$('mus').onclick=()=>{musicOn=!musicOn;try{localStorage.setItem('gs_music',musicOn?'1':'0')}catch(e){}musicUi();(musicOn&&ride&&!ride.briefing&&!ride.done)?startMusic():bgm.pause()};
 $('songb').onclick=()=>$('songf').click();
-$('songf').onchange=e=>{const f=e.target.files[0];if(!f)return;bgm.src=URL.createObjectURL(f);$('mus').hidden=false;musicOn=true;musicUi();startMusic()};
+$('songf').onchange=e=>{const f=e.target.files[0];if(!f)return;bgm.src=URL.createObjectURL(f);$('mus').hidden=false;musicOn=true;musicUi()};
 
 // ---------- 8-bit graphics on/off ----------
 function pxUi(on){const c=$('map').classList;on?c.add('px'):c.remove('px');$('scan').hidden=!on}
+$('theme').value=applyTheme(lsg('gs_theme')||'t1');
+$('theme').onchange=e=>{applyTheme(e.target.value)};
 $('pxc').checked=lsg('gs_px')!=='0';pxUi($('pxc').checked);
 $('pxc').onchange=e=>{pxUi(e.target.checked);try{localStorage.setItem('gs_px',e.target.checked?'1':'0')}catch(x){}};
 
 // the bottom panel only exists while there is something to answer with
-function botSync(){$('bot').hidden=editing||!(($('dv').parentNode===$('bot')&&!$('dv').hidden)||$('opts').children.length>0||!$('typed').hidden||!$('info').hidden||!$('ib').hidden||!$('sh').hidden||!$('nx').hidden)}
+function botSync(){
+  const other=$('opts').children.length>0||!$('typed').hidden||!$('info').hidden||!$('ib').hidden||!$('sh').hidden||(!$('nx').hidden&&$('nx').parentNode===$('brow'));
+  $('bot').hidden=editing||!other;
+  const big=mode=='ride'&&ride&&(ride.briefing||ride.done);   // the phone says it all then
+  const hh=$('sb').offsetHeight;if(hh)$('tp').style.top=(hh+8)+'px';
+  $('qcol').hidden=!!big||!($('q').textContent||$('fb').textContent||$('lastr').textContent);
+}
 setInterval(botSync,200);
 function abortGame(){
   const R=ride;
@@ -1547,7 +1681,7 @@ function abortGame(){
 function doAbort(){
   const R=ride;
   if(R){clearInterval(R.timer);R.timer=0;R.done=true}
-  ride=null;blink([]);layers.clearLayers();cur=null;answered=true;
+  ride=null;blink([]);layers.clearLayers();cur=null;answered=true;heartsUi(null);setPh(0);stopMusic();
   ['dv','qbar','typed','info','ib','sh','nx'].forEach(id=>{$(id).hidden=true});$('opts').innerHTML='';
   $('q').textContent='';setFb('');$('lastr').textContent='';
   showModes('Välj spelläge','Spelet avbröts',false);
