@@ -197,6 +197,38 @@ button.pri{background:var(--hi);color:var(--ink)}
 .row button{padding:6px}
 @media(max-width:600px){#bot{left:4px;right:4px;bottom:calc(4px + env(safe-area-inset-bottom,0px))}#opts button{font-size:.95rem;padding:7px 4px}}
 .bike.boost{filter:drop-shadow(-10px 0 0 #ffcc00) drop-shadow(-20px 0 0 #ffcc0088)}
+/* ---- v17: calm blue/grey theme, small pixel road labels, info on top / answers at the bottom ---- */
+:root{--pn:#eaf0f8;--fg:#1f2a44;--mut:#55627f;--hi:#3f6fd8;--ok:#2f9e63;--bad:#d0505a;--bd:#1f2a44;--ink:#1f2a44}
+body{background:#cfd8e6}
+.panel,.mmc,#lvm .card,#ld .card{background:var(--pn);color:var(--ink);border:3px solid var(--ink);box-shadow:3px 3px 0 var(--ink)}
+#sb,#tp{background:#eaf0f8f2}
+button,select{background:#fff;color:var(--ink);border:2px solid var(--ink);box-shadow:0 3px 0 var(--ink)}
+button.pri,#mx,.tabs button.on{background:var(--hi);color:#fff}
+.ttl{color:var(--ink);text-shadow:2px 2px 0 #b9c9ea}
+.dc{background:#dde5f1;color:var(--ink)}.dc.done{background:#bfe3cd}.dc.now{background:var(--hi);color:#fff}
+.mcard:hover,.mcard.cur{background:#dbe6fa;border-color:var(--ink)}.mcard.cur::after{color:var(--hi)}
+#info b,.lr em{color:var(--hi)}.lr.me{background:#dbe6fa}
+.bar,#qbar,.pxbar i{background:#dde5f1}
+@keyframes blk{0%{background:var(--hi)}20%,100%{background:#dde5f1}}
+#ldl .run{color:var(--hi)}.tkr b.warn,#tk.warn{color:#b86e00}
+#map.px .leaflet-tile-pane{filter:url(#q4) contrast(1.02) saturate(.8)}
+.vtx{background:var(--bad)}
+.rl{font-family:"VT323",monospace;font-size:.62rem;font-weight:400;padding:0 4px;border-width:2px;background:#f4f7fc;color:var(--ink);box-shadow:none;line-height:1.1}
+.rl.m{background:#2563eb;color:#fff;border-color:var(--ink);font-size:.7rem}
+.rl.s{font-size:.55rem;padding:0 3px;border-width:1px}
+.lbl{font-family:"VT323",monospace;font-size:.65rem;font-weight:400;padding:0 4px;box-shadow:none;border:2px solid var(--ink);background:#f4f7fc;color:var(--ink)}
+.lbl.n{background:var(--hi);color:#fff}
+#sb,#tp,#bot{max-width:620px}
+#tp{position:fixed;z-index:1000;top:calc(54px + env(safe-area-inset-top,0px));left:6px;right:6px;margin:0 auto;padding:4px 8px}
+#bot{max-height:30vh;padding:6px 8px}
+#q{font-size:1.15rem}#fb{font-size:.9rem;margin:0}#fb:empty,#lastr:empty{display:none}
+.bigbtn{width:100%;display:flex;flex-direction:column;align-items:center;gap:4px;padding:16px 10px;background:var(--hi);color:#fff;border:3px solid var(--ink);box-shadow:5px 5px 0 var(--ink);margin:12px 0 8px}
+.bigbtn b{font-family:"Press Start 2P",monospace;font-size:.8rem}.bigbtn small{color:#e6eeff;font-size:.9rem}.bigbtn .mi{font-size:2.6rem}
+.bigbtn.cur::after{content:'↻ Spela igen';font-size:.8rem}
+#mmmore{font-size:.85rem;padding:2px 10px;margin:4px 0}
+.bike .bk{display:block}.bike.fall .bk{transform:rotate(75deg) translate(2px,8px)}
+.bike.fall::after{content:'💥';position:absolute;left:26px;top:-10px;font-size:26px}
+.bike.boost{filter:drop-shadow(-8px 0 0 #3f6fd8) drop-shadow(-16px 0 0 #9db8e8)}
 </style>
 </head>
 <body>
@@ -275,13 +307,15 @@ button.pri{background:var(--hi);color:var(--ink)}
   <div class="mmc">
     <div id="mmt" class="ttl">VÄLJ SPELLÄGE</div>
     <div id="mms" class="sub"></div>
-    <div class="mgrid">
-      <button id="mc1" class="mcard"><span class="mi">📍</span><b>Hitta gatan</b><small>Du får ett gatunamn – tryck där den ligger. Husnummer som tillval.</small></button>
+    <button id="mc3" class="bigbtn"><span class="mi">📦</span><b>LEVERANS</b><small>Cykla en rutt, namnge korsande gator och pricka husnumret – mot klockan.</small></button>
+    <div class="tabs"><button id="rdA" class="on">Alternativ</button><button id="rdT">Skriv själv</button></div>
+    <label><input type="checkbox" id="tmc" checked> ⏱ På tid (av = träning, cykeln väntar)</label><br>
+    <button id="mmmore">Fler spellägen ▾</button>
+    <div id="more" class="mgrid" hidden>
+      <button id="mc1" class="mcard"><span class="mi">📍</span><b>Hitta gatan</b><small>Du får ett gatunamn – tryck där den ligger.</small></button>
       <button id="mc2" class="mcard"><span class="mi">🔤</span><b>Namnge gatan</b><small>En gata lyser upp – välj rätt namn av fyra.</small></button>
-      <button id="mc3" class="mcard"><span class="mi">📦</span><b>Leverans · alternativ</b><small>Cykla en rutt, namnge korsande gator och pricka husnumret.</small></button>
-      <button id="mc4" class="mcard"><span class="mi">🚲</span><b>Leverans · skriv själv</b><small>Samma rutt, men du skriver namnen. Svårare, fler poäng.</small></button>
     </div>
-    <label><input type="checkbox" id="tmc" checked> ⏱ Leverans på tid (cykeln väntar inte)</label><br>
+    <br>
     <button id="mmlb">🏆 Topplista</button> <button id="mmx" class="pri" hidden>Titta på kartan</button>
   </div>
 </div>
@@ -303,12 +337,15 @@ button.pri{background:var(--hi);color:var(--ink)}
   <div class="row"><button id="edok" class="pri">Spara och ladda om</button><button id="edd">Standard</button><button id="edx">Avbryt</button></div>
 </div>
 
-<div id="bot" class="panel">
+<div id="tp" class="panel">
   <div id="dv" hidden></div>
   <div id="qbar" hidden><i id="qbi"></i></div>
   <div id="q">Laddar…</div>
   <div id="fb"></div>
   <div id="lastr"></div>
+</div>
+
+<div id="bot" class="panel" hidden>
   <div id="opts"></div>
   <div id="typed" hidden><input id="ans" list="names" placeholder="Skriv gatans namn…" autocomplete="off" autocapitalize="words"><button id="go" class="pri">Svara</button></div>
   <datalist id="names"></datalist>
@@ -454,7 +491,7 @@ function crossings(st){
   }
   return [...m];
 }
-const PAL=['#3b82f6','#8b5cf6','#06b6d4','#ec4899','#64748b','#14b8a6'];
+const PAL=['#3b6fd0','#4aa3b5','#7a7fb8','#4aa37f','#8a97ad','#6a8fd8'];
 function info(st){
   const a=areas(st);let h='';
   if(a.d.length)h+=`<b>Område:</b> ${a.d.map(esc).join(', ')}`+(a.n.length?` (${a.n.map(esc).join(', ')})`:'')+'<br>';
@@ -654,7 +691,7 @@ function showLevel(i){
   const c=$('conf');c.innerHTML='';
   for(let k=0;k<48;k++){
     const e=document.createElement('i');
-    e.style.cssText=`left:${Math.random()*100}%;background:${['#ffb400','#1fa35c','#3b82f6','#ec4899','#fff'][k%5]};animation-delay:${Math.random()*.9}s;animation-duration:${1.8+Math.random()*1.5}s`;
+    e.style.cssText=`left:${Math.random()*100}%;background:${['#5b8def','#2f9e63','#9aa7bf','#d0505a','#fff'][k%5]};animation-delay:${Math.random()*.9}s;animation-duration:${1.8+Math.random()*1.5}s`;
     c.appendChild(e);
   }
   $('lvm').hidden=false;$('lvok').focus();
@@ -752,7 +789,7 @@ function next(){
   if(!cur){$('q').textContent='Inga gator här';setFb('Zooma ut eller välj "Alla gator".');return}
   last=cur.n;$('nx').hidden=true;$('sh').hidden=mode!='locate';
   if(mode=='locate'){$('q').textContent=cur.n;setFb('Tryck på kartan');if(+$('nr').value)prepareNumber(cur)}
-  else{$('q').textContent='Vilken gata är gul?';setFb('');show(cur,'#ffb400');fit(cur);options()}
+  else{$('q').textContent='Vilken gata är blå?';setFb('');show(cur,'#2563eb');fit(cur);options()}
   stats();fill();
 }
 // House-number points are separate from the street points and slide: full close to the house, less in the
@@ -797,16 +834,16 @@ function place(e){
   if(mode!='locate'||answered||!cur)return;
   answered=true;
   const n=nearest(cur,e.latlng),ok=n.d<=TOL,cl=[e.latlng.lat,e.latlng.lng];
-  show(cur,ok?'#1fa35c':'#e0245e');
+  show(cur,ok?'#2f9e63':'#d0505a');
   let bonus=0,td=0,frac=0;
   if(tg){
     td=dist(cl,[tg.la,tg.lo]);
     if(ok){frac=numFrac(td,cur);bonus=Math.round(BONUS*frac)}
-    L.circleMarker([tg.la,tg.lo],{radius:7,color:'#101820',fillColor:'#ffb400',fillOpacity:1,weight:3}).addTo(layers);
+    L.circleMarker([tg.la,tg.lo],{radius:7,color:'#1f2a44',fillColor:'#2563eb',fillOpacity:1,weight:3}).addTo(layers);
     tip([tg.la,tg.lo],'nr '+tg.n,'n');
   }
-  L.polyline([cl,tg?[tg.la,tg.lo]:n.pt],{color:'#101820',weight:2,dashArray:'5 5'}).addTo(layers);
-  L.circleMarker(e.latlng,{radius:7,color:'#101820',fillColor:'#fff',fillOpacity:1,weight:3}).addTo(layers);
+  L.polyline([cl,tg?[tg.la,tg.lo]:n.pt],{color:'#1f2a44',weight:2,dashArray:'5 5'}).addTo(layers);
+  L.circleMarker(e.latlng,{radius:7,color:'#1f2a44',fillColor:'#fff',fillOpacity:1,weight:3}).addTo(layers);
   const g=grade(cur,ok,bonus);
   let t=ok?'Rätt gata!':'Fel gata. Där är den, i rött.';
   if(tg)t+=ok?` Husnummer ${tg.n}: ${Math.round(td)} m från rätt ställe – ${numWord(frac)}.`:` Nr ${tg.n} låg vid den gula markeringen.`;
@@ -824,7 +861,7 @@ map.on('dblclick',()=>{clearTimeout(clickT);clickT=0});
 $('sh').onclick=()=>{
   if(mode=='ride')return ride&&ride.stage=='final'&&!ride.answered?finalAnswer(null):rideAnswer(null);
   if(answered||!cur)return;answered=true;
-  show(cur,'#ffb400');fit(cur);grade(cur,false);setFb('Här är den. Räknas som missad.','bad');finish();
+  show(cur,'#2563eb');fit(cur);grade(cur,false);setFb('Här är den. Räknas som missad.','bad');finish();
 };
 $('nx').onclick=()=>mode=='ride'?rideNext():next();
 $('go').onclick=()=>rideAnswer($('ans').value);
@@ -990,7 +1027,7 @@ async function rideStart(){
   setFb(R.timed?'Svara innan cykeln når korsningen. Rätt svar = boost!':'Träning: cykeln väntar vid varje korsning.');
   $('nx').textContent='Starta 🚲';$('nx').hidden=false;
 }
-const mark=(h,x)=>L.marker(x,{interactive:false,keyboard:false,icon:L.divIcon({className:'bike',html:h,iconSize:[46,46],iconAnchor:[23,23]})}).addTo(layers);
+const mark=(h,x)=>L.marker(x,{interactive:false,keyboard:false,icon:L.divIcon({className:'bike',html:`<span class="bk">${h}</span>`,iconSize:[46,46],iconAnchor:[23,23]})}).addTo(layers);
 function lblStreet(seg,name,cls,col){
   const i=Math.floor(seg.length/2),a=seg[Math.max(0,i-1)],b=seg[Math.min(seg.length-1,i+1)];
   rlabel(seg[i],name,cls,rot(X(a),Y(a),X(b),Y(b)),col);
@@ -1009,7 +1046,7 @@ function drawRoute(){
 // Result screen: the whole route, every crossing in green (right) or red (wrong) with its name, and the house number.
 function drawResult(){
   const R=ride,all=[];layers.clearLayers();
-  R.legs.forEach(l=>{const seg=sub(l.ch,l.start,legEnd(l));all.push(...seg);L.polyline(seg,{color:'#ffb400',weight:9,opacity:.4}).addTo(layers)});
+  R.legs.forEach(l=>{const seg=sub(l.ch,l.start,legEnd(l));all.push(...seg);L.polyline(seg,{color:'#2563eb',weight:9,opacity:.4}).addTo(layers)});
   drawLog();
   R.legs.forEach(l=>lblStreet(sub(l.ch,l.start,legEnd(l)),l.st.n,'m'));
   const f=R.legs[R.legs.length-1];
@@ -1017,8 +1054,8 @@ function drawResult(){
   const d=R.dest;
   if(d&&R.finalDone){
     const t=[d.la,d.lo];
-    if(R.finalCl){L.polyline([R.finalCl,t],{color:'#101820',weight:2,dashArray:'5 5'}).addTo(layers);L.circleMarker(R.finalCl,{radius:7,color:'#101820',fillColor:'#fff',fillOpacity:1,weight:3}).addTo(layers)}
-    L.circleMarker(t,{radius:8,color:'#101820',fillColor:'#ffb400',fillOpacity:1,weight:3}).addTo(layers);tip(t,'nr '+d.n,'n');
+    if(R.finalCl){L.polyline([R.finalCl,t],{color:'#1f2a44',weight:2,dashArray:'5 5'}).addTo(layers);L.circleMarker(R.finalCl,{radius:7,color:'#1f2a44',fillColor:'#fff',fillOpacity:1,weight:3}).addTo(layers)}
+    L.circleMarker(t,{radius:8,color:'#1f2a44',fillColor:'#2563eb',fillOpacity:1,weight:3}).addTo(layers);tip(t,'nr '+d.n,'n');
   }
   map.fitBounds(L.latLngBounds(all).pad(.3));
 }
@@ -1050,7 +1087,7 @@ function tick(){
   R.tkD='senast '+new Date(R.deadline).toLocaleTimeString('sv-SE',{hour:'2-digit',minute:'2-digit',second:'2-digit'});
   const a=$('tk'),b=$('tkd');if(a){a.textContent=R.tkT;a.className=R.tkC}if(b)b.textContent=R.tkD;
 }
-const V0=7,MINW=5,BOOST=45,ARROW=['↑','↗','→','↘','↓','↙','←','↖'];   // m/s, s, m/s
+const V0=7,MINW=5,BOOST=90,CRASHV=26,CRASH=1.3,ARROW=['↑','↗','→','↘','↓','↙','←','↖'];   // m/s, s, m/s
 const paused=()=>!$('lvm').hidden||!$('top').hidden||!$('mm').hidden||!$('lb').hidden;
 const dirIdx=(ch,pos)=>{const a=ptAt(ch,pos),b=ptAt(ch,pos+60);return Math.round(((Math.atan2(X(b)-X(a),Y(b)-Y(a))*180/Math.PI+360)%360)/45)%8};
 // A new crossing: the bike heads for it. On time: it gets there after max(distance/V0, MINW) seconds, answered or not.
@@ -1080,11 +1117,12 @@ function rideLoop(R,ts){
   if(dt>0&&!paused())rideStep(R,dt);
   requestAnimationFrame(t=>rideLoop(R,t));
 }
+function bikeCls(c,on){const el=ride&&ride.bike&&ride.bike.getElement&&ride.bike.getElement();if(el&&el.classList)on?el.classList.add(c):el.classList.remove(c)}
 function rideStep(R,dt){
   const leg=R.legs[R.li];
-  if(R.stage=='tail'){
-    R.pos=Math.min(leg.ch.len,R.pos+V0*dt);moveBike();
-    if(R.pos>=leg.ch.len-.01){R.dest?rideFinal():rideDone()}
+  if(R.stage=='tail'){   // last stretch to the address (tap the house number for a boost)
+    R.pos=Math.min(leg.ch.len,R.pos+(R.tailV||V0)*dt);moveBike();
+    if(R.pos>=leg.ch.len-.01){R.dest&&!R.finalDone?finalAnswer(null):rideDone()}
     return;
   }
   const e=leg.ev[R.ei];
@@ -1095,9 +1133,11 @@ function rideStep(R,dt){
       $('qbi').style.width=(100-f*100)+'%';$('qbar').className=f>.7?'low':'';
       if(f>=1)rideAnswer(null,true);      // reached the junction without an answer
     }else R.pos=Math.min(Math.max(R.p0,e.pos-25),R.pos+V0*dt);   // training: ride up to the junction and wait
+  }else if(!R.ok&&R.crash>0){            // fell off the bike: lie still for a moment
+    R.crash-=dt;if(R.crash<=0)bikeCls('fall',false);
+    return;
   }else{
-    const v=R.ok?BOOST:R.pace;
-    R.pos=Math.min(e.pos,R.pos+v*dt);
+    R.pos=Math.min(e.pos,R.pos+(R.ok?BOOST:CRASHV)*dt);
     if(R.pos>=e.pos-.01){moveBike();return passQ()}
   }
   moveBike();
@@ -1107,27 +1147,28 @@ function passQ(){
   const R=ride,leg=R.legs[R.li];
   if(++R.ei<leg.ev.length)return startQ();
   if(R.li+1<R.legs.length){R.from=leg.st.n;R.li++;R.ei=0;R.pos=0;return startQ()}
-  R.ei=leg.ev.length-1;R.stage='tail';
+  R.ei=leg.ev.length-1;R.stage='tail';R.tailV=V0;
   $('qbar').hidden=true;$('opts').innerHTML='';$('typed').hidden=true;$('sh').hidden=true;
-  $('q').textContent='🚲 Snart framme…';setFb('');
+  if(R.dest){R.answered=answered=false;$('q').textContent=`📍 Var ligger nummer ${R.dest.n}?`;setFb('Tryck på kartan – träff ger boost!')}
+  else{$('q').textContent='🚲 Snart framme…';setFb('')}
 }
 // Streets already crossed stay on the map in green (right) / red (wrong) with their names.
 function drawLog(){
   for(const a of ride.log){
-    const c=a.ok?'#1fa35c':'#e0245e';
+    const c=a.ok?'#2f9e63':'#d0505a';
     for(const l of a.o.s)L.polyline(l,{color:c,weight:5,opacity:.6,interactive:false}).addTo(layers);
     const o=along(a.o,a.p,45);rlabel(o.pt,a.o.n,'x',o.deg,c);
   }
 }
 // The street being asked about: whole line in blue (options mode), or just a short piece of it at the junction (typing mode).
 function hint(e){
-  if($('rd').value!='type'){for(const l of e.o.s)L.polyline(l,{color:'#3b82f6',weight:6,opacity:.8}).addTo(layers);return}
+  if($('rd').value!='type'){for(const l of e.o.s)L.polyline(l,{color:'#2563eb',weight:6,opacity:.8}).addTo(layers);return}
   for(const l of e.o.s){
     const i=l.findIndex(q=>q[0]===e.p[0]&&q[1]===e.p[1]);if(i<0)continue;
     for(const d of [1,-1]){
       const seg=[l[i]];let acc=0;
       for(let j=i+d;j>=0&&j<l.length&&acc<70;j+=d){acc+=dist(seg[seg.length-1],l[j]);seg.push(l[j])}
-      if(seg.length>1)L.polyline(seg,{color:'#3b82f6',weight:7,opacity:.9}).addTo(layers);
+      if(seg.length>1)L.polyline(seg,{color:'#2563eb',weight:7,opacity:.9}).addTo(layers);
     }
   }
 }
@@ -1135,11 +1176,11 @@ function drawScene(noX){
   const R=ride,leg=R.legs[R.li],e=leg.ev[Math.min(R.ei,leg.ev.length-1)];
   layers.clearLayers();
   R.legs.forEach((l,i)=>{if(i!=R.li)L.polyline(sub(l.ch,l.start,legEnd(l)),{color:PAL[i%PAL.length],weight:5,opacity:.45}).addTo(layers)});
-  L.polyline(sub(leg.ch,leg.start,legEnd(leg)),{color:'#ffcc00',weight:7,opacity:.75}).addTo(layers);
-  if(R.pos>0)L.polyline(sub(leg.ch,leg.start,R.pos),{color:'#00a83a',weight:7,opacity:.9}).addTo(layers);
+  L.polyline(sub(leg.ch,leg.start,legEnd(leg)),{color:'#9aa7bf',weight:7,opacity:.75}).addTo(layers);
+  if(R.pos>0)L.polyline(sub(leg.ch,leg.start,R.pos),{color:'#2f9e63',weight:7,opacity:.9}).addTo(layers);
   drawLog();
   if(!noX&&!R.answered)hint(e);
-  L.circleMarker(e.pt,{radius:8,color:'#1a1c2c',fillColor:'#fff',fillOpacity:1,weight:3}).addTo(layers);
+  L.circleMarker(e.pt,{radius:8,color:'#1f2a44',fillColor:'#fff',fillOpacity:1,weight:3}).addTo(layers);
   R.bike=mark('🚲',ptAt(leg.ch,R.pos));
 }
 function rideAnswer(x,late){
@@ -1153,15 +1194,14 @@ function rideAnswer(x,late){
     ok=j>=0;if(ok&&j!=R.ei)[leg.ev[R.ei],leg.ev[j]]=[leg.ev[j],leg.ev[R.ei]];
   }else ok=!!x&&x===leg.ev[R.ei].o;
   const e=leg.ev[R.ei];
-  R.pace=R.timed?Math.max(V0*.6,(e.pos-R.p0)/R.win):V0;   // a wrong answer keeps the current pace; a right one boosts
   R.answered=answered=true;R.ok=ok;R.total++;ok?R.okc++:R.errs++;
   R.log.push({o:e.o,p:e.p,ok});
   const g=grade(e.o,ok);reward(g);
   $('lastr').textContent=(ok?'✔ ':'✖ ')+e.o.n+(late?' (för sent)':typeof x=='string'&&!ok?` – du skrev "${x.trim()}"`:'')+(g.pts?'  +'+g.pts:'');
   $('lastr').className=ok?'ok':'bad';
-  setFb(ok?'💨 BOOST!':late?'För sent!':'Fel – cyklar vidare',ok?'ok':'bad');
+  setFb(ok?'💨 BOOST!':late?'💥 För sent – du trillade!':'💥 Fel – du trillade!',ok?'ok':'bad');
   drawScene();
-  if(ok){const el=R.bike&&R.bike.getElement&&R.bike.getElement();if(el&&el.classList)el.classList.add('boost')}
+  if(ok)bikeCls('boost',true);else{R.crash=CRASH;bikeCls('fall',true)}
   $('ans').disabled=$('go').disabled=true;$('qbar').hidden=true;
   [...$('opts').children].forEach(b=>{if(b.textContent===e.o.n)b.classList.add('ok');else if(x&&b.textContent===x.n)b.classList.add('bad')});
   $('sh').hidden=true;
@@ -1169,33 +1209,34 @@ function rideAnswer(x,late){
 function rideNext(){
   const R=ride;if(!R)return;
   if(R.briefing){
-    R.briefing=false;
-    if(R.timed){R.deadline=Date.now()+R.secs*1000;R.last=Date.now();R.timer=setInterval(tick,250)}
-    map.setView(R.legs[0].ch.pts[0],Math.max(map.getZoom(),16));
-    startQ();R.lt=0;requestAnimationFrame(t=>rideLoop(R,t));
+    R.briefing=false;R.stage='zoom';$('nx').hidden=true;
+    $('q').textContent='🚲 Gör dig redo…';setFb('');renderCard();
+    map.flyTo(R.legs[0].ch.pts[0],17,{duration:1.8});   // from the whole route to where the ride starts
+    setTimeout(()=>{
+      if(ride!==R||R.done)return;
+      if(R.timed){R.deadline=Date.now()+R.secs*1000;R.last=Date.now();R.timer=setInterval(tick,250)}
+      startQ();R.lt=0;requestAnimationFrame(t=>rideLoop(R,t));
+    },2000);
     return;
   }
   if(R.done)return rideStart();
 }
-// Last step: "Snart framme! Var ligger nummer XX?" – tap the house number on the map (extra points).
-function rideFinal(){
-  const R=ride,leg=R.legs[R.legs.length-1],d=R.dest,e=leg.ev[leg.ev.length-1];
-  R.stage='final';R.answered=answered=false;R.tok++;$('qbar').hidden=true;
-  drawScene(true);renderCard();
-  $('q').textContent='📍 Snart framme!';
-  setFb(`Var ligger nummer ${d.n} på ${leg.st.n}? Tryck på kartan.`);
-  $('opts').innerHTML='';$('typed').hidden=true;$('nx').hidden=true;$('sh').hidden=false;
-  map.setView(e.pt,Math.max(map.getZoom(),16));
-}
-function rideFinalClick(e){const R=ride;if(R&&R.stage=='final'&&!R.answered)finalAnswer([e.latlng.lat,e.latlng.lng])}
+function rideFinalClick(e){const R=ride;if(R&&R.stage=='tail'&&R.dest&&!R.finalDone)finalAnswer([e.latlng.lat,e.latlng.lng])}
+// Tapping the house number: points by distance, and a good hit boosts the bike the rest of the way.
 function finalAnswer(cl){
-  const R=ride,d=R.dest,leg=R.legs[R.legs.length-1];
+  const R=ride,d=R.dest,leg=R.legs[R.legs.length-1],t=[d.la,d.lo];
+  if(R.finalDone)return;
   R.answered=answered=true;R.finalDone=true;R.finalCl=cl;
   let frac=0,td=0;
-  if(cl){td=dist(cl,[d.la,d.lo]);frac=numFrac(td,leg.st,Math.max(1,+$('nr').value))}
+  if(cl){td=dist(cl,t);frac=numFrac(td,leg.st,Math.max(1,+$('nr').value))}
   R.finalPts=Math.round(BONUS*frac*mult(game.streak));
-  R.finalMsg=cl?`nummer ${d.n}: ${Math.round(td)} m från rätt ställe – ${numWord(frac)}`:`nummer ${d.n} låg vid markeringen`;
-  rideDone();
+  R.finalMsg=cl?`nummer ${d.n}: ${Math.round(td)} m från rätt ställe – ${numWord(frac)}`:`nummer ${d.n}: för sent`;
+  if(!cl)return rideDone();
+  const hit=frac>=.3;R.tailV=hit?BOOST:V0;bikeCls('boost',hit);
+  L.polyline([cl,t],{color:'#1f2a44',weight:2,dashArray:'5 5'}).addTo(layers);
+  L.circleMarker(t,{radius:8,color:'#1f2a44',fillColor:'#2563eb',fillOpacity:1,weight:3}).addTo(layers);tip(t,'nr '+d.n,'n');
+  $('lastr').textContent=`${hit?'💨':'✖'} ${R.finalMsg}${R.finalPts?'  +'+R.finalPts:''}`;$('lastr').className=hit?'ok':'bad';
+  setFb(hit?'💨 BOOST!':'Bom – cyklar vidare',hit?'ok':'bad');
 }
 function fillNames(){$('names').innerHTML=[...new Set(streets.map(s=>s.n))].map(n=>`<option value="${esc(n)}">`).join('')}
 function addScore(p){
@@ -1218,10 +1259,12 @@ function rideDone(){
 }
 
 // ---------- game-mode box ----------
+function rdUi(){const c=$('rd').value=='type';[['rdA',!c],['rdT',c]].forEach(([id,on])=>{const l=$(id).classList;on?l.add('on'):l.remove('on')})}
 function showModes(t,sub,close){
   $('mmt').textContent=t;$('mms').textContent=sub||'';$('mmx').hidden=!close;
-  const cur=mode=='ride'?($('rd').value=='type'?'mc4':'mc3'):mode=='name'?'mc2':'mc1';
-  ['mc1','mc2','mc3','mc4'].forEach(id=>{const c=$(id).classList;id==cur?c.add('cur'):c.remove('cur')});
+  const cur=mode=='ride'?'mc3':mode=='name'?'mc2':'mc1';
+  ['mc1','mc2','mc3'].forEach(id=>{const c=$(id).classList;id==cur?c.add('cur'):c.remove('cur')});
+  $('more').hidden=true;$('mmmore').textContent='Fler spellägen ▾';rdUi();
   $('mm').hidden=false;
 }
 function pickMode(m,r){
@@ -1257,7 +1300,7 @@ let editing=false,draft=[],dpoly=null;
 const dl=L.layerGroup().addTo(map);
 function drawDraft(){
   dl.clearLayers();
-  dpoly=L.polygon(draft,{color:'#e0245e',weight:3,fillOpacity:.08,interactive:false}).addTo(dl);
+  dpoly=L.polygon(draft,{color:'#d0505a',weight:3,fillOpacity:.08,interactive:false}).addTo(dl);
   draft.forEach((p,i)=>{
     const m=L.marker(p,{draggable:true,icon:L.divIcon({className:'',html:'<div class="vtx"></div>',iconSize:[26,26],iconAnchor:[13,13]})}).addTo(dl);
     m.on('drag',e=>{draft[i]=[e.latlng.lat,e.latlng.lng];dpoly.setLatLngs(draft)});
@@ -1274,7 +1317,7 @@ function addVertex(ll){
   draft.splice(bi+1,0,p);drawDraft();
 }
 function editZone(on){
-  editing=on;$('ed').hidden=!on;$('bot').hidden=on;
+  editing=on;$('ed').hidden=!on;$('bot').hidden=on;$('tp').hidden=on;
   if(on){draft=POLY.map(p=>p.slice());$('top').hidden=true;drawDraft();map.fitBounds(zone.getBounds().pad(.1))}else dl.clearLayers();
 }
 // ---------- controls ----------
@@ -1302,7 +1345,9 @@ $('edok').onclick=()=>{
   zone.setLatLngs(POLY);editZone(false);map.fitBounds(zone.getBounds());$('reload').onclick();
 };
 $('mc1').onclick=()=>pickMode('locate');$('mc2').onclick=()=>pickMode('name');
-$('mc3').onclick=()=>pickMode('ride','choice');$('mc4').onclick=()=>pickMode('ride','type');
+$('mc3').onclick=()=>pickMode('ride');
+$('rdA').onclick=()=>{$('rd').value='choice';rdUi()};$('rdT').onclick=()=>{$('rd').value='type';rdUi()};
+$('mmmore').onclick=()=>{$('more').hidden=!$('more').hidden;$('mmmore').textContent=$('more').hidden?'Fler spellägen ▾':'Färre ▴'};
 $('mmx').onclick=()=>{$('mm').hidden=true};$('modes').onclick=()=>{$('top').hidden=true;showModes('Välj spelläge','',true)};
 $('lvok').onclick=()=>{$('lvm').hidden=true};
 $('mute').onclick=()=>{muted=!muted;try{localStorage.setItem('gs_mute',muted?'1':'0')}catch(e){}$('mute').textContent=muted?'🔇':'🔊';sfx('ok')};
@@ -1379,6 +1424,9 @@ function pxUi(on){const c=$('map').classList;on?c.add('px'):c.remove('px');$('sc
 $('pxc').checked=lsg('gs_px')!=='0';pxUi($('pxc').checked);
 $('pxc').onchange=e=>{pxUi(e.target.checked);try{localStorage.setItem('gs_px',e.target.checked?'1':'0')}catch(x){}};
 
+// the bottom panel only exists while there is something to answer with
+function botSync(){$('bot').hidden=editing||!($('opts').children.length>0||!$('typed').hidden||!$('info').hidden||!$('ib').hidden||!$('sh').hidden||!$('nx').hidden)}
+setInterval(botSync,200);
 function fail(e){$('q').textContent='Kunde inte ladda gator';setFb(e.message+' Kontrollera anslutningen och tryck på "Ladda om data".','bad')}
 
 (async()=>{
