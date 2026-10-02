@@ -140,6 +140,63 @@ button.pri{background:var(--hi);color:#101820}
 .lr.me{background:#ffb40033}
 .tabs{display:flex;gap:6px;justify-content:center;margin:6px 0}.tabs button.on{background:var(--hi);color:#101820}
 #lbn{font-size:.85rem;color:var(--mut)}
+/* ---- light, high-contrast theme and compact layout (map first) ---- */
+:root{--pn:#fff8e7;--fg:#1a1c2c;--mut:#5f574f;--hi:#ffcc00;--ok:#00a83a;--bad:#e0003c;--bd:#1a1c2c;--ink:#1a1c2c}
+body{background:#c2c3c7}
+.panel,.mmc,#lvm .card,#ld .card{background:var(--pn);color:var(--ink);border:3px solid var(--ink);box-shadow:4px 4px 0 var(--ink)}
+button,select{background:#fff;color:var(--ink);border:2px solid var(--ink);box-shadow:0 3px 0 var(--ink)}
+button.pri{background:var(--hi);color:var(--ink)}
+.ttl{color:var(--ink);text-shadow:2px 2px 0 var(--hi)}
+.sub,#lbn,.num{color:var(--mut)}
+.mcard{background:#fff;color:var(--ink);border:3px solid var(--ink)}
+.mcard:hover,.mcard.cur{background:#fff3b0;border-color:var(--ink);box-shadow:4px 4px 0 var(--ink)}
+.mcard.cur::after{color:#a34f00}.mcard small{color:var(--mut)}.mmc label{color:var(--ink)}
+#fb{color:var(--mut);margin:2px 0 4px}#fb.ok{color:var(--ok)}#fb.bad{color:var(--bad)}
+#lastr{min-height:0;font-size:.95rem}#lastr.ok{color:var(--ok)}#lastr.bad{color:var(--bad)}
+#opts{gap:5px;margin-bottom:5px}#opts button{background:#fff;padding:8px 6px;font-weight:400}
+#opts button.ok{background:var(--ok);color:#fff}#opts button.bad{background:var(--bad);color:#fff}
+#info b{color:#a34f00}
+.cc{background:#fff;color:var(--ink);border:2px solid var(--ink);border-left-width:6px}
+#dv{background:#fff;color:var(--ink);border:2px solid var(--ink);border-left:6px solid var(--hi);padding:6px 8px;margin-bottom:6px}
+.dc{background:#e8e3d6;color:var(--ink)}.dc.done{background:#a8e6b8}.dc.now{background:var(--hi)}
+.dvm{display:flex;align-items:center;gap:10px;justify-content:space-between;font-size:1.05rem}
+.dvm span:first-child{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.tkr b.warn,#tk.warn{color:#a34f00}.tkr b.late,#tk.late{color:var(--bad);animation:blink 1s infinite}
+#typed input,#nmi{background:#fff;color:var(--ink);border:2px solid var(--ink)}
+.bar{background:#e8e3d6;border:2px solid var(--ink)}
+#ldl .ok{color:var(--ok)}#ldl .fail{color:var(--bad)}#ldl .run{color:#a34f00}
+.pxbar i{border-color:var(--ink);background:#e8e3d6}
+@keyframes blk{0%{background:var(--hi)}20%,100%{background:#e8e3d6}}
+.lr em{color:#a34f00}.lr.me{background:#fff3b0}.lr span{color:var(--mut)}.tabs button.on{background:var(--hi)}
+#mm,#nm,#lb,#lvm{background:#1a1c2c99;backdrop-filter:none}#ld{background:#1a1c2c66}
+#scan{background:repeating-linear-gradient(0deg,#0000 0 2px,#00000010 2px 3px)}
+/* top bar */
+#sb{position:fixed;z-index:1100;top:calc(6px + env(safe-area-inset-top,0px));left:6px;right:6px;width:auto;max-width:760px;margin:0 auto;
+  display:flex;align-items:center;gap:8px;padding:4px 8px;background:var(--pn);color:var(--ink);border:3px solid var(--ink);box-shadow:3px 3px 0 var(--ink);text-align:left}
+#sb #cfg{padding:2px 10px;font-size:1.15rem}
+#hs{min-width:0}#score{font-size:.7rem;color:var(--ink);text-shadow:none;white-space:nowrap}
+#sb .bar{height:6px;margin-top:3px;width:84px}
+#lv{font-size:.42rem;margin:0}#lv small{display:none}
+#pn{display:none;font-size:.4rem;max-width:150px;margin:0}@media(min-width:620px){#pn{display:block}}
+#streak{margin-left:auto;white-space:nowrap;font-size:1.05rem}
+#mx{background:var(--hi);color:var(--ink);padding:0 6px;border:2px solid var(--ink);font-size:1rem}
+#sb #mus,#sb #mute{padding:0 6px;font-size:1rem;box-shadow:none;background:#fff}
+#pop{top:calc(100% + 8px);left:auto;right:14px;color:var(--ink);text-shadow:2px 2px 0 var(--hi)}
+@keyframes glow{0%,100%{box-shadow:3px 3px 0 var(--ink)}40%{box-shadow:0 0 0 6px var(--hi),3px 3px 0 var(--ink)}}
+/* menu drawer */
+#top{position:fixed;z-index:1200;top:calc(56px + env(safe-area-inset-top,0px));left:6px;right:auto;width:min(440px,calc(100% - 12px));max-width:none;max-height:calc(100% - 72px);overflow:auto;margin:0;font-size:1rem}
+#cfgrow{flex-wrap:wrap}#cfx{margin-left:auto}
+.sec{font-family:"Press Start 2P",monospace;font-size:.42rem;margin:14px 0 4px;color:var(--mut)}
+#st,#nxt,#mt,#sess{color:var(--ink);font-size:.95rem}
+/* bottom panel: small, so the map stays visible */
+#bot{max-height:42vh;overflow:auto;padding:7px 9px}
+#q{font-size:1.3rem;line-height:1.15}
+#qbar{height:9px;border:2px solid var(--ink);background:#e8e3d6;margin-bottom:5px}
+#qbi{display:block;height:100%;width:100%;background:var(--ok)}#qbar.low #qbi{background:var(--bad)}
+#info{max-height:24vh}
+.row button{padding:6px}
+@media(max-width:600px){#bot{left:4px;right:4px;bottom:calc(4px + env(safe-area-inset-bottom,0px))}#opts button{font-size:.95rem;padding:7px 4px}}
+.bike.boost{filter:drop-shadow(-10px 0 0 #ffcc00) drop-shadow(-20px 0 0 #ffcc0088)}
 </style>
 </head>
 <body>
@@ -148,11 +205,26 @@ button.pri{background:var(--hi);color:#101820}
 <div id="map" class="px"></div>
 <div id="scan"></div>
 
-<div id="top" class="panel">
-  <div id="cfgrow"><button id="cfg" aria-expanded="false">⚙ Inställningar</button><button id="modes">🎮 Spellägen</button><button id="lbb">🏆 Topplista</button></div>
+<aside id="sb" aria-label="Poäng">
+  <button id="cfg" aria-label="Meny">☰</button>
+  <div id="hs"><div id="score">0</div><div class="bar"><i id="xp"></i></div></div>
+  <div id="lv"></div>
+  <div id="pn" title="Byt namn"></div>
+  <span id="streak">🔥 0</span><span id="mx">×1</span>
+  <button id="mus" aria-label="Musik på/av">🎵</button><button id="mute" aria-label="Ljud på/av">🔊</button>
+  <div id="pop"></div>
+</aside>
+
+<div id="top" class="panel" hidden>
+  <div id="cfgrow"><button id="modes">🎮 Spellägen</button><button id="lbb">🏆 Topplista</button><button id="cfx" class="pri" aria-label="Stäng">✕</button></div>
+  <div class="sec">FRAMSTEG</div>
   <div class="bar" title="Grönt = inlärd, gult = övas, rött = svag"><i id="mg"></i><i id="ma"></i><i id="mr"></i></div>
   <div id="st"></div>
-  <div id="ctl" hidden>
+  <div id="nxt"></div>
+  <div class="bar"><i id="sm"></i></div><div id="mt"></div>
+  <div id="sess"></div>
+  <div class="sec">INSTÄLLNINGAR</div>
+  <div id="ctl">
     <select id="mode" aria-label="Läge">
       <option value="locate">Hitta gatan</option>
       <option value="name">Namnge gatan</option>
@@ -174,31 +246,17 @@ button.pri{background:var(--hi);color:#101820}
       <option value="3">Husnummer: svår (50 m)</option>
     </select>
     <label><input type="checkbox" id="lab"> Visa namn</label>
+    <label><input type="checkbox" id="pxc" checked> 8-bit-grafik</label>
     <button id="area">Öva på vyn</button>
+    <button id="chn">Byt namn</button>
+    <button id="songb">🎵 Välj egen låt</button><input type="file" id="songf" accept="audio/*" hidden>
     <button id="reload">Ladda om data</button>
     <button id="edz">✏️ Rita området</button>
     <button id="exp">⬇ Exportera data</button>
     <button id="imp">⬆ Importera data</button><input type="file" id="impf" accept=".json,application/json" hidden>
     <button id="reset">Nollställ framsteg</button>
-    <label><input type="checkbox" id="pxc" checked> 8-bit-grafik</label>
-    <button id="chn">Byt namn</button>
-    <button id="songb">🎵 Välj egen låt</button><input type="file" id="songf" accept="audio/*" hidden>
   </div>
 </div>
-
-<aside id="sb" aria-label="Poäng">
-  <div id="pn" title="Byt namn"></div>
-  <div class="lab"><span>POÄNG</span><span><button id="mus" aria-label="Musik på/av">🎵</button><button id="mute" aria-label="Ljud på/av">🔊</button></span></div>
-  <div id="score">0</div>
-  <div id="pop"></div>
-  <div id="lv"></div>
-  <div class="bar"><i id="xp"></i></div>
-  <div id="nxt"></div>
-  <div class="sr"><span id="streak">🔥 0</span><span id="mx">×1</span></div>
-  <div class="bar"><i id="sm"></i></div>
-  <div id="mt"></div>
-  <div id="sess"></div>
-</aside>
 
 <div id="ld"><div class="card"><div id="ldt" class="ttl">LADDAR…</div><div class="pxbar"><i></i><i></i><i></i><i></i><i></i><i></i></div><div id="ldl"></div></div></div>
 
@@ -223,7 +281,7 @@ button.pri{background:var(--hi);color:#101820}
       <button id="mc3" class="mcard"><span class="mi">📦</span><b>Leverans · alternativ</b><small>Cykla en rutt, namnge korsande gator och pricka husnumret.</small></button>
       <button id="mc4" class="mcard"><span class="mi">🚲</span><b>Leverans · skriv själv</b><small>Samma rutt, men du skriver namnen. Svårare, fler poäng.</small></button>
     </div>
-    <label><input type="checkbox" id="tmc" checked> ⏱ Tidtagning i leveranser</label><br>
+    <label><input type="checkbox" id="tmc" checked> ⏱ Leverans på tid (cykeln väntar inte)</label><br>
     <button id="mmlb">🏆 Topplista</button> <button id="mmx" class="pri" hidden>Titta på kartan</button>
   </div>
 </div>
@@ -247,13 +305,16 @@ button.pri{background:var(--hi);color:#101820}
 
 <div id="bot" class="panel">
   <div id="dv" hidden></div>
+  <div id="qbar" hidden><i id="qbi"></i></div>
   <div id="q">Laddar…</div>
   <div id="fb"></div>
+  <div id="lastr"></div>
   <div id="opts"></div>
   <div id="typed" hidden><input id="ans" list="names" placeholder="Skriv gatans namn…" autocomplete="off" autocapitalize="words"><button id="go" class="pri">Svara</button></div>
   <datalist id="names"></datalist>
   <div id="info" hidden></div>
   <div class="row">
+    <button id="ib" hidden>ℹ️ Mer</button>
     <button id="sh" hidden>Visa mig</button>
     <button id="nx" class="pri" hidden>Nästa</button>
   </div>
@@ -409,7 +470,7 @@ function info(st){
   if(min.length)h+=`<b>Sidogator:</b><br>${chips(min)}<br>`;
   if(!cr.length)h+='Inga korsande gator hittades i datat.<br>';
   h+='<span id="nums"><b>Nummer:</b> kontrollerar…</span>';
-  $('info').innerHTML=h;$('info').hidden=false;
+  $('info').innerHTML=h;$('info').hidden=!infoOpen;$('ib').hidden=false;$('ib').textContent=infoOpen?'ℹ️ Mindre':'ℹ️ Mer';
   labelMap(st,cr);
   numbers(st,cr).catch(()=>{});
 }
@@ -636,7 +697,7 @@ function pop(t){const e=$('pop');e.textContent=t;e.classList.remove('go');void e
 function reward(g){
   if(!g.pts)return '';
   pop(g.up?'Ny nivå!':'+'+g.pts);
-  return ` · gata +${g.street}${g.num?' · husnummer +'+g.num:''}${g.mult>1?' · ×'+sv(g.mult):''} = +${g.pts} poäng`;
+  return ` +${g.pts}${g.mult>1?' (×'+sv(g.mult)+')':''}`;
 }
 function stats(){
   const p=pool(),c={g:0,a:0,r:0,u:0},lr=p.filter(s=>(prog[s.n]||0)>=2).length;
@@ -681,15 +742,17 @@ function prefetch(){
   }
 }
 function resetQueue(){for(const s of queue)seen.delete(s.n);queue.length=0}
+let infoOpen=false;
 function next(){
+  $('ib').hidden=true;$('qbar').hidden=true;$('lastr').textContent='';
   layers.clearLayers();answered=false;tg=null;$('opts').innerHTML='';$('info').hidden=true;$('typed').hidden=true;$('dv').hidden=true;$('nx').textContent='Nästa';
   if(ride&&ride.timer)clearInterval(ride.timer);
   if(mode=='ride'){ride=null;rideStart();stats();return}
   cur=queue.length?queue.shift():pick();
   if(!cur){$('q').textContent='Inga gator här';setFb('Zooma ut eller välj "Alla gator".');return}
   last=cur.n;$('nx').hidden=true;$('sh').hidden=mode!='locate';
-  if(mode=='locate'){$('q').textContent=cur.n;setFb('Tryck på kartan där den ligger.');if(+$('nr').value)prepareNumber(cur)}
-  else{$('q').textContent='Vad heter den här gatan?';setFb('');show(cur,'#ffb400');fit(cur);options()}
+  if(mode=='locate'){$('q').textContent=cur.n;setFb('Tryck på kartan');if(+$('nr').value)prepareNumber(cur)}
+  else{$('q').textContent='Vilken gata är gul?';setFb('');show(cur,'#ffb400');fit(cur);options()}
   stats();fill();
 }
 // House-number points are separate from the street points and slide: full close to the house, less in the
@@ -901,12 +964,12 @@ const legEnd=l=>l.endPos!=null?l.endPos:l.ev[l.ev.length-1].pos;
 const mmss=s=>{s=Math.abs(Math.round(s));return Math.floor(s/60)+':'+String(s%60).padStart(2,'0')};
 function nearAddr(r,pt){let b=null,bd=1e9;for(const a of r.pts||[]){const d=dist([a[1],a[2]],pt);if(d<bd){bd=d;b=a}}return b&&bd<250?b:null}
 async function rideStart(){
-  layers.clearLayers();$('opts').innerHTML='';$('info').hidden=true;$('typed').hidden=true;$('dv').hidden=true;
+  layers.clearLayers();$('opts').innerHTML='';$('info').hidden=true;$('typed').hidden=true;$('dv').hidden=true;$('qbar').hidden=true;$('lastr').textContent='';
   $('nx').textContent='Nästa';$('nx').hidden=true;$('sh').hidden=true;rnd={n:0,ok:0,pts:0};
   const legs=planRoute();
   if(!legs){$('q').textContent='Kunde inte planera en rutt';setFb('Prova "Alla gator" eller ladda om data.');return}
   last=legs[0].st.n;
-  const R=ride={legs,li:0,ei:0,errs:0,okc:0,total:0,tok:0,done:false,answered:true,from:null,stage:'cross',briefing:true,dest:null,job:null,log:[],timed:$('tmc').checked,timer:0};
+  const R=ride={legs,li:0,ei:0,errs:0,okc:0,total:0,tok:0,done:false,answered:true,from:null,stage:'brief',briefing:true,dest:null,job:null,log:[],timed:$('tmc').checked,timer:0,pos:0,el:0,win:1,p0:0,ok:false};
   answered=true;
   $('q').textContent='📦 Planerar leverans…';setFb('Hämtar adresser…');
   const f=legs[legs.length-1],sPt=legs[0].ch.pts[0],ePt=f.ch.pts[f.ch.pts.length-1];
@@ -919,11 +982,13 @@ async function rideStart(){
   R.dest=a2?{n:a2[0],la:a2[1],lo:a2[2]}:null;
   R.km=legs.reduce((s,l)=>s+l.ch.len,0);
   const n=legs.reduce((s,l)=>s+l.ev.length,0);
-  R.secs=Math.round(Math.max(R.km/SPEED,n*THINK)+(R.dest?10:0));
+  // normal riding time: every crossing gets at least MINW seconds; you must beat 90 % of it (= some boosts) to be on time
+  let norm=0;for(const l of legs){let p=0;for(const e of l.ev){norm+=Math.max((e.pos-p)/V0,MINW);p=e.pos}norm+=(l.ch.len-p)/V0}
+  R.nEv=n;R.secs=Math.round(norm*.9+(R.dest?10:0));
   drawRoute();renderCard();
   $('q').textContent='📦 Ny leverans!';
-  setFb('Snabbaste vägen är utritad. Tryck på Starta när du är redo.');
-  $('nx').textContent='Starta leverans 🚲';$('nx').hidden=false;
+  setFb(R.timed?'Svara innan cykeln når korsningen. Rätt svar = boost!':'Träning: cykeln väntar vid varje korsning.');
+  $('nx').textContent='Starta 🚲';$('nx').hidden=false;
 }
 const mark=(h,x)=>L.marker(x,{interactive:false,keyboard:false,icon:L.divIcon({className:'bike',html:h,iconSize:[46,46],iconAnchor:[23,23]})}).addTo(layers);
 function lblStreet(seg,name,cls,col){
@@ -963,7 +1028,12 @@ function renderCard(){
   const f=R.legs[R.legs.length-1],show=i=>R.briefing||R.done||i<=R.li;
   const chips=R.legs.map((l,i)=>`<span class="dc ${i<R.li||R.done?'done':i==R.li&&!R.briefing?'now':''}">${show(i)?esc(l.st.n):'•••'}</span>`).join('<i>›</i>');
   const tk=R.timed?`<div class="tkr"><b id="tk" class="${R.tkC||''}">${R.tkT||'Tid: '+mmss(R.secs)}</b><small id="tkd">${R.briefing?'klockan startar när du trycker Starta':R.tkD||''}</small></div>`:'';
-  $('dv').className=R.briefing||R.done?'':'mini';
+  if(!R.briefing&&!R.done){
+    $('dv').className='mini';
+    $('dv').innerHTML=`<div class="dvm"><span>${j.i} → <b>${esc(f.st.n)}${R.dest?' '+R.dest.n:''}</b></span>${R.timed?`<b id="tk" class="${R.tkC||''}">${R.tkT||''}</b>`:''}<span>${R.total}/${R.nEv}</span></div>`;
+    $('dv').hidden=false;return;
+  }
+  $('dv').className='';
   $('dv').innerHTML=`<div class="dvh"><span class="dvi">${j.i}</span><div><b>${esc(j.t)}</b><small>${esc(j.d)} · ${(R.km/1000).toFixed(1).replace('.',',')} km</small></div></div>
     <div class="dvr"><div><small>${j.i} FRÅN · ${esc(j.fromName)}</small><b>${esc(R.legs[0].st.n)}${j.sNo?' '+j.sNo:''}</b></div><span>➜</span><div><small>TILL · ${esc(j.toName)}</small><b>${esc(f.st.n)}${R.dest?' '+R.dest.n:''}</b></div></div>
     ${tk}<div class="dvc">${chips}</div>`;
@@ -973,21 +1043,25 @@ function renderCard(){
 function tick(){
   const R=ride;if(!R||!R.timer)return;
   const now=Date.now();
-  if(!$('lvm').hidden)R.deadline+=now-(R.last||now);
+  if(paused())R.deadline+=now-(R.last||now);
   R.last=now;
   const left=(R.deadline-now)/1000,late=left<0;
   R.tkT=late?`SEN +${mmss(left)}`:`${mmss(left)} kvar`;R.tkC=late?'late':left<R.secs*.25?'warn':'';
   R.tkD='senast '+new Date(R.deadline).toLocaleTimeString('sv-SE',{hour:'2-digit',minute:'2-digit',second:'2-digit'});
   const a=$('tk'),b=$('tkd');if(a){a.textContent=R.tkT;a.className=R.tkC}if(b)b.textContent=R.tkD;
 }
-function rideAsk(){
+const V0=7,MINW=5,BOOST=45,ARROW=['↑','↗','→','↘','↓','↙','←','↖'];   // m/s, s, m/s
+const paused=()=>!$('lvm').hidden||!$('top').hidden||!$('mm').hidden||!$('lb').hidden;
+const dirIdx=(ch,pos)=>{const a=ptAt(ch,pos),b=ptAt(ch,pos+60);return Math.round(((Math.atan2(X(b)-X(a),Y(b)-Y(a))*180/Math.PI+360)%360)/45)%8};
+// A new crossing: the bike heads for it. On time: it gets there after max(distance/V0, MINW) seconds, answered or not.
+function startQ(){
   const R=ride,leg=R.legs[R.li],e=leg.ev[R.ei],type=$('rd').value=='type';
-  answered=false;R.answered=false;R.stage='cross';R.tok++;
-  $('nx').hidden=true;$('nx').textContent='Nästa';$('sh').hidden=false;$('opts').innerHTML='';
+  R.stage='cross';R.answered=answered=false;R.ok=false;R.tok++;
+  R.p0=R.pos;R.el=0;R.win=Math.max((e.pos-R.pos)/V0,MINW);
+  $('nx').hidden=true;$('sh').hidden=false;$('opts').innerHTML='';$('qbar').hidden=!R.timed;$('qbar').className='';$('qbi').style.width='100%';
   drawScene();renderCard();
-  const hd=heading(leg.ch,R.ei?leg.ev[R.ei-1].pos:leg.start,leg.dir);
-  $('q').textContent='🚲 '+leg.st.n;
-  setFb((R.ei==0&&R.from?`Du svängde in från ${R.from}. `:'')+`Mot ${hd} · korsning ${R.ei+1}/${leg.ev.length} · gata ${R.li+1}/${R.legs.length} – vilken gata är markerad?`);
+  $('q').textContent=`🚲 ${leg.st.n} ${ARROW[dirIdx(leg.ch,R.pos)]}`;
+  setFb(R.ei==0&&R.from?`Svängde in från ${R.from}`:type?'Skriv namnet på den blå gatan':'Vilken är den blå gatan?');
   if(type){$('typed').hidden=false;$('ans').value='';$('ans').disabled=false;$('go').disabled=false;$('ans').focus()}
   else{
     $('typed').hidden=true;
@@ -997,7 +1071,45 @@ function rideAsk(){
       const b=document.createElement('button');b.textContent=s.n;b.onclick=()=>rideAnswer(s);$('opts').appendChild(b);
     });
   }
-  map.setView(e.pt,Math.max(map.getZoom(),16));
+}
+function follow(p){const now=Date.now();if(now-(follow.t||0)<700)return;follow.t=now;if(!map.getBounds().pad(-.25).contains(p))map.panTo(p,{animate:true,duration:.6})}
+function moveBike(){const R=ride,p=ptAt(R.legs[R.li].ch,R.pos);if(R.bike)R.bike.setLatLng(p);follow(p)}
+function rideLoop(R,ts){
+  if(ride!==R||mode!='ride'||R.done||!(R.stage=='cross'||R.stage=='tail'))return;
+  const dt=R.lt?Math.min(.1,(ts-R.lt)/1000):0;R.lt=ts;
+  if(dt>0&&!paused())rideStep(R,dt);
+  requestAnimationFrame(t=>rideLoop(R,t));
+}
+function rideStep(R,dt){
+  const leg=R.legs[R.li];
+  if(R.stage=='tail'){
+    R.pos=Math.min(leg.ch.len,R.pos+V0*dt);moveBike();
+    if(R.pos>=leg.ch.len-.01){R.dest?rideFinal():rideDone()}
+    return;
+  }
+  const e=leg.ev[R.ei];
+  if(!R.answered){
+    R.el+=dt;
+    if(R.timed){
+      const f=Math.min(1,R.el/R.win);R.pos=R.p0+(e.pos-R.p0)*f;
+      $('qbi').style.width=(100-f*100)+'%';$('qbar').className=f>.7?'low':'';
+      if(f>=1)rideAnswer(null,true);      // reached the junction without an answer
+    }else R.pos=Math.min(Math.max(R.p0,e.pos-25),R.pos+V0*dt);   // training: ride up to the junction and wait
+  }else{
+    const v=R.ok?BOOST:R.pace;
+    R.pos=Math.min(e.pos,R.pos+v*dt);
+    if(R.pos>=e.pos-.01){moveBike();return passQ()}
+  }
+  moveBike();
+}
+// Past the junction: next crossing, next street, or the last stretch to the address.
+function passQ(){
+  const R=ride,leg=R.legs[R.li];
+  if(++R.ei<leg.ev.length)return startQ();
+  if(R.li+1<R.legs.length){R.from=leg.st.n;R.li++;R.ei=0;R.pos=0;return startQ()}
+  R.ei=leg.ev.length-1;R.stage='tail';
+  $('qbar').hidden=true;$('opts').innerHTML='';$('typed').hidden=true;$('sh').hidden=true;
+  $('q').textContent='🚲 Snart framme…';setFb('');
 }
 // Streets already crossed stay on the map in green (right) / red (wrong) with their names.
 function drawLog(){
@@ -1022,15 +1134,15 @@ function hint(e){
 function drawScene(noX){
   const R=ride,leg=R.legs[R.li],e=leg.ev[Math.min(R.ei,leg.ev.length-1)];
   layers.clearLayers();
-  R.legs.forEach((l,i)=>{if(i!=R.li)L.polyline(sub(l.ch,l.start,legEnd(l)),{color:PAL[i%PAL.length],weight:5,opacity:.35}).addTo(layers)});
-  L.polyline(sub(leg.ch,leg.start,legEnd(leg)),{color:'#ffb400',weight:6,opacity:.6}).addTo(layers);
-  L.polyline(sub(leg.ch,leg.start,e.pos),{color:'#1fa35c',weight:6,opacity:.85}).addTo(layers);
+  R.legs.forEach((l,i)=>{if(i!=R.li)L.polyline(sub(l.ch,l.start,legEnd(l)),{color:PAL[i%PAL.length],weight:5,opacity:.45}).addTo(layers)});
+  L.polyline(sub(leg.ch,leg.start,legEnd(leg)),{color:'#ffcc00',weight:7,opacity:.75}).addTo(layers);
+  if(R.pos>0)L.polyline(sub(leg.ch,leg.start,R.pos),{color:'#00a83a',weight:7,opacity:.9}).addTo(layers);
   drawLog();
   if(!noX&&!R.answered)hint(e);
-  L.circleMarker(e.pt,{radius:8,color:'#101820',fillColor:'#fff',fillOpacity:1,weight:3}).addTo(layers);
-  mark('🚲',e.pt);
+  L.circleMarker(e.pt,{radius:8,color:'#1a1c2c',fillColor:'#fff',fillOpacity:1,weight:3}).addTo(layers);
+  R.bike=mark('🚲',ptAt(leg.ch,R.pos));
 }
-function rideAnswer(x){
+function rideAnswer(x,late){
   const R=ride;if(!R||R.answered||R.done||R.stage!='cross')return;
   if(typeof x=='string'&&!x.trim())return;
   const leg=R.legs[R.li];
@@ -1041,36 +1153,34 @@ function rideAnswer(x){
     ok=j>=0;if(ok&&j!=R.ei)[leg.ev[R.ei],leg.ev[j]]=[leg.ev[j],leg.ev[R.ei]];
   }else ok=!!x&&x===leg.ev[R.ei].o;
   const e=leg.ev[R.ei];
-  R.answered=answered=true;R.total++;ok?R.okc++:R.errs++;
+  R.pace=R.timed?Math.max(V0*.6,(e.pos-R.p0)/R.win):V0;   // a wrong answer keeps the current pace; a right one boosts
+  R.answered=answered=true;R.ok=ok;R.total++;ok?R.okc++:R.errs++;
   R.log.push({o:e.o,p:e.p,ok});
-  const g=grade(e.o,ok);
-  setFb((ok?'Rätt – ':'Det var ')+e.o.n+(typeof x=='string'&&!ok?` (du skrev "${x.trim()}")`:'')+reward(g),ok?'ok':'bad');
+  const g=grade(e.o,ok);reward(g);
+  $('lastr').textContent=(ok?'✔ ':'✖ ')+e.o.n+(late?' (för sent)':typeof x=='string'&&!ok?` – du skrev "${x.trim()}"`:'')+(g.pts?'  +'+g.pts:'');
+  $('lastr').className=ok?'ok':'bad';
+  setFb(ok?'💨 BOOST!':late?'För sent!':'Fel – cyklar vidare',ok?'ok':'bad');
   drawScene();
-  $('ans').disabled=$('go').disabled=true;
+  if(ok){const el=R.bike&&R.bike.getElement&&R.bike.getElement();if(el&&el.classList)el.classList.add('boost')}
+  $('ans').disabled=$('go').disabled=true;$('qbar').hidden=true;
   [...$('opts').children].forEach(b=>{if(b.textContent===e.o.n)b.classList.add('ok');else if(x&&b.textContent===x.n)b.classList.add('bad')});
-  $('sh').hidden=true;$('nx').hidden=false;
-  const tok=R.tok;   // a right answer moves on by itself; a wrong one waits for "Nästa"
-  if(ok)setTimeout(()=>{if(ride===R&&R.tok===tok&&R.answered)rideNext()},R.timed?600:1100);
+  $('sh').hidden=true;
 }
 function rideNext(){
   const R=ride;if(!R)return;
   if(R.briefing){
     R.briefing=false;
     if(R.timed){R.deadline=Date.now()+R.secs*1000;R.last=Date.now();R.timer=setInterval(tick,250)}
-    return rideAsk();
+    map.setView(R.legs[0].ch.pts[0],Math.max(map.getZoom(),16));
+    startQ();R.lt=0;requestAnimationFrame(t=>rideLoop(R,t));
+    return;
   }
   if(R.done)return rideStart();
-  if(!R.answered||R.stage=='final')return;
-  const leg=R.legs[R.li];
-  if(++R.ei<leg.ev.length)return rideAsk();
-  if(R.li+1<R.legs.length){R.from=leg.st.n;R.li++;R.ei=0;return rideAsk()}
-  R.ei=leg.ev.length-1;
-  R.dest?rideFinal():rideDone();
 }
 // Last step: "Snart framme! Var ligger nummer XX?" – tap the house number on the map (extra points).
 function rideFinal(){
   const R=ride,leg=R.legs[R.legs.length-1],d=R.dest,e=leg.ev[leg.ev.length-1];
-  R.stage='final';R.answered=answered=false;R.tok++;
+  R.stage='final';R.answered=answered=false;R.tok++;$('qbar').hidden=true;
   drawScene(true);renderCard();
   $('q').textContent='📍 Snart framme!';
   setFb(`Var ligger nummer ${d.n} på ${leg.st.n}? Tryck på kartan.`);
@@ -1102,7 +1212,7 @@ function rideDone(){
   const sum=`${R.okc} av ${R.total} korsningar rätt${perfect?' – perfekt':''}${R.timed?(late?' · för sent':' · i tid'):''}${R.finalMsg?' · '+R.finalMsg:''}`;
   $('q').textContent=late?'📦 Levererat – men för sent':'📦 Leverans framme!';
   setFb(`${R.job.t} levererad! ${sum} · +${pts} poäng`,late?'bad':'ok');
-  $('opts').innerHTML='';$('typed').hidden=true;$('sh').hidden=true;$('nx').hidden=false;$('nx').textContent='Ny leverans';
+  $('opts').innerHTML='';$('typed').hidden=true;$('sh').hidden=true;$('qbar').hidden=true;$('nx').hidden=false;$('nx').textContent='Ny leverans';
   const total=rnd.pts+pts,pl=postScore('ride',total,R.okc,R.total);
   setTimeout(()=>{if(ride===R)showModes('Leverans klar!',`${sum} · ${fmt(total)} poäng · plats ${pl} på topplistan`,true)},1500);
 }
@@ -1165,7 +1275,7 @@ function addVertex(ll){
 }
 function editZone(on){
   editing=on;$('ed').hidden=!on;$('bot').hidden=on;
-  if(on){draft=POLY.map(p=>p.slice());$('ctl').hidden=true;drawDraft();map.fitBounds(zone.getBounds().pad(.1))}else dl.clearLayers();
+  if(on){draft=POLY.map(p=>p.slice());$('top').hidden=true;drawDraft();map.fitBounds(zone.getBounds().pad(.1))}else dl.clearLayers();
 }
 // ---------- controls ----------
 $('mode').onchange=e=>{mode=e.target.value;resetQueue();seen.clear();$('nr').disabled=mode=='name';next()};
@@ -1193,10 +1303,11 @@ $('edok').onclick=()=>{
 };
 $('mc1').onclick=()=>pickMode('locate');$('mc2').onclick=()=>pickMode('name');
 $('mc3').onclick=()=>pickMode('ride','choice');$('mc4').onclick=()=>pickMode('ride','type');
-$('mmx').onclick=()=>{$('mm').hidden=true};$('modes').onclick=()=>showModes('Välj spelläge','',true);
+$('mmx').onclick=()=>{$('mm').hidden=true};$('modes').onclick=()=>{$('top').hidden=true;showModes('Välj spelläge','',true)};
 $('lvok').onclick=()=>{$('lvm').hidden=true};
 $('mute').onclick=()=>{muted=!muted;try{localStorage.setItem('gs_mute',muted?'1':'0')}catch(e){}$('mute').textContent=muted?'🔇':'🔊';sfx('ok')};
-$('cfg').onclick=()=>{const h=($('ctl').hidden=!$('ctl').hidden);$('cfg').setAttribute('aria-expanded',String(!h))};
+$('ib').onclick=()=>{infoOpen=!infoOpen;$('info').hidden=!infoOpen;$('ib').textContent=infoOpen?'ℹ️ Mindre':'ℹ️ Mer'};
+$('cfg').onclick=()=>{$('top').hidden=!$('top').hidden};$('cfx').onclick=()=>{$('top').hidden=true};
 $('lvl').onchange=e=>{level=+e.target.value;resetQueue();next()};
 $('lab').onchange=e=>{
   if(e.target.checked){map.removeLayer(plain);labeled.addTo(map)}else{map.removeLayer(labeled);plain.addTo(map)}
@@ -1247,7 +1358,7 @@ async function showBoard(k){
   $('lbn').textContent=BOARD_URL?(online?'Delad lista – alla spelare':'Kunde inte nå den delade listan – visar bara dina egna'):'Lista på den här enheten (delas inte med andra)';
   $('lbl').innerHTML=list.length?list.map((e,i)=>`<div class="lr${e.name===pname?' me':''}"><span>${i+1}.</span><b>${esc(String(e.name).slice(0,14))}</b><i>${e.kind=='ride'?'📦':'📍'}</i><em>${fmt(e.score)}</em></div>`).join(''):'Inga resultat ännu – spela en omgång!';
 }
-$('lbb').onclick=()=>showBoard();$('mmlb').onclick=()=>showBoard();$('lbx').onclick=()=>{$('lb').hidden=true};
+$('lbb').onclick=()=>{$('top').hidden=true;showBoard()};$('mmlb').onclick=()=>showBoard();$('lbx').onclick=()=>{$('lb').hidden=true};
 $('lbA').onclick=()=>showBoard('all');$('lbR').onclick=()=>showBoard('ride');$('lbO').onclick=()=>showBoard('round');
 
 // ---------- background music: put your song next to this file as musik.mp3 (or pick a song on this device) ----------
