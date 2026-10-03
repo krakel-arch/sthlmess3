@@ -326,6 +326,38 @@ button.pri,#mx,.tabs button.on,.bigbtn{background:var(--hi);color:var(--hif)}
 #dv.phone .dmsg{font-size:.9rem}
 #phbtn{margin-top:8px}
 #phbtn button{font-size:1.15rem;padding:7px}
+#end{position:fixed;inset:0;z-index:2700;display:flex;align-items:center;justify-content:center;background:#0b102099;padding:12px}
+.endc{position:relative;z-index:1}
+.endi{font-size:4.2rem;line-height:1;animation:bnc 1s infinite alternate}
+.endt{font-size:1.5rem;margin:6px 0}
+#end.win .endt{color:var(--ok)}#end.lose .endt{color:var(--hot)}
+#end.lose .endi{animation:shake .6s}
+.endl{margin:6px 0 12px;line-height:1.3}
+#conf2{position:absolute;inset:0;overflow:hidden;pointer-events:none}
+#conf2 i{position:absolute;top:-16px;width:9px;height:14px;opacity:.9;animation:fall linear forwards}
+.qo.qtxt{font-family:"VT323",ui-monospace,Menlo,Consolas,monospace;font-size:.76rem;font-weight:400;line-height:1;width:132px;padding:3px 6px;text-align:left;background:#fbf3e2;color:#192134;border:2px solid #192134;box-shadow:2px 2px 0 #192134;pointer-events:none}
+.qo.qtxt b{font-weight:400;color:#a43b4d}.qo.qtxt small{font-size:inherit;opacity:.75}
+@media(max-width:600px){.qo.qtxt{width:114px;font-size:.72rem;padding:2px 4px}}
+#bd{bottom:calc(8px + env(safe-area-inset-bottom,0px));z-index:1500;max-height:62vh;overflow:auto;text-align:center}
+#bda{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin:4px 0 8px}
+#bda button{font-size:.95rem;padding:3px 8px}#bda button.on{background:var(--hi);color:var(--hif)}#bda button[disabled]{opacity:.55}
+#bdp{display:flex;gap:4px;justify-content:center;margin:6px 0}
+#bdp i{font-style:normal;width:22px;height:22px;line-height:18px;text-align:center;border:2px solid var(--line);background:var(--pn3);font-size:.9rem}
+#bdp i.done{background:var(--ok);color:#fff}#bdp i.now{background:var(--hi);color:var(--hif)}
+.stopm{font-size:24px;line-height:28px;text-align:center;filter:drop-shadow(2px 2px 0 #192134)}
+.stopm b{position:absolute;right:-4px;top:-6px;font-size:.8rem;background:#fbf3e2;color:#192134;border:2px solid #192134;padding:0 3px;line-height:1}
+.stl{font-size:.95rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.stl b{display:inline-block;width:1.2em}
+.pk{display:flex;flex-wrap:wrap;gap:4px;margin:3px 0}.pk button{padding:1px 8px;font-size:1rem;min-width:30px}.pk button[disabled]{opacity:.4}
+#dv.phone .scr{position:relative}
+#dv.v75 .scb{max-height:calc(var(--pw)*2.17*.75 - 112px);overflow:hidden}
+#dv.v75 #phbtn{position:absolute;left:8px;right:8px;top:calc(var(--pw)*2.17*.75 - 88px);margin:0}
+.chips{display:flex;flex-wrap:wrap;gap:3px;margin:2px 0}.sc{font-size:.85rem;line-height:1.05;border:2px solid #192134;background:#fbf3e2;padding:0 4px;white-space:nowrap}
+#map{--mr:0deg}
+.bike .bk{transform:rotate(calc(var(--mr) * -1))}
+.bike.fall .bk{transform:rotate(calc(75deg - var(--mr))) translate(2px,8px)}
+.qrot{position:absolute;left:0;top:0;transform:rotate(calc(var(--mr) * -1))}
+.trot{display:inline-block;transform:rotate(calc(var(--mr) * -1))}
+.srot{display:block;position:relative;transform:rotate(calc(var(--mr) * -1))}
 </style>
 </head>
 <body>
@@ -382,6 +414,7 @@ button.pri,#mx,.tabs button.on,.bigbtn{background:var(--hi);color:var(--hif)}
     </select>
     <label><input type="checkbox" id="lab"> Visa namn</label>
     <label><input type="checkbox" id="pxc" checked> 8-bit-grafik</label>
+    <label><input type="checkbox" id="rotc" checked> Kartan vrids med cykeln</label>
     <button id="area">Öva på vyn</button>
     <button id="chn">Byt namn</button>
     <button id="songb">🎵 Välj egen låt</button><input type="file" id="songf" accept="audio/*" hidden>
@@ -395,9 +428,30 @@ button.pri,#mx,.tabs button.on,.bigbtn{background:var(--hi);color:var(--hif)}
 
 <div id="ld"><div class="card"><div id="ldt" class="ttl">LADDAR…</div><div class="pxbar"><i></i><i></i><i></i><i></i><i></i><i></i></div><div id="ldl"></div></div></div>
 
+<div id="bd" class="panel" hidden>
+  <div id="bdt" class="ttl">BUDA</div>
+  <div id="bdd" class="sub"></div>
+  <div class="sec">STARTOMRÅDE – tryck för att se området</div>
+  <div id="bda"></div>
+  <div class="tabs"><button id="bdA" class="on">Alternativ</button><button id="bdT">Skriv själv</button></div>
+  <div id="bdp"></div>
+  <div class="rvbtns"><button id="bdGo" class="pri">▶ Starta</button> <button id="bdX">Meny</button></div>
+</div>
+
+<div id="end" hidden role="dialog" aria-modal="true" aria-labelledby="endt">
+  <div id="conf2"></div>
+  <div class="mmc endc">
+    <div id="endi" class="endi">🏆</div>
+    <div id="endt" class="ttl endt">VINST!</div>
+    <div id="ends" class="sub"></div>
+    <div id="endl" class="endl"></div>
+    <button id="endNew" class="pri">Nytt bud</button> <button id="endMenu">Meny</button> <button id="endView">Se rutten</button>
+  </div>
+</div>
+
 <div id="ab" hidden role="dialog" aria-modal="true" aria-labelledby="abt">
-  <div class="mmc"><div id="abt" class="ttl">AVBRYTA LEVERANSEN?</div>
-  <div class="sub">Poängen du redan fått behålls, men leveransen hamnar inte på topplistan.</div>
+  <div class="mmc"><div id="abt" class="ttl">AVBRYTA BUDAEN?</div>
+  <div class="sub">Poängen du redan fått behålls, men budet hamnar inte på topplistan.</div>
   <button id="abNo" class="pri">Fortsätt leverera</button> <button id="abYes">Avbryt – till menyn</button></div>
 </div>
 
@@ -408,7 +462,7 @@ button.pri,#mx,.tabs button.on,.bigbtn{background:var(--hi);color:var(--hif)}
 
 <div id="lb" hidden role="dialog" aria-modal="true" aria-labelledby="lbt">
   <div class="mmc"><div id="lbt" class="ttl">🏆 TOPPLISTA</div>
-  <div class="tabs"><button id="lbA">Alla</button><button id="lbR">📦 Leveranser</button><button id="lbO">📍 Omgångar</button></div>
+  <div class="tabs"><button id="lbA">Alla</button><button id="lbR">📦 Bud</button><button id="lbO">📍 Omgångar</button></div>
   <div id="lbl"></div><div id="lbn"></div><br><button id="lbx" class="pri">Stäng</button></div>
 </div>
 
@@ -416,7 +470,7 @@ button.pri,#mx,.tabs button.on,.bigbtn{background:var(--hi);color:var(--hif)}
   <div class="mmc">
     <div id="mmt" class="ttl">VÄLJ SPELLÄGE</div>
     <div id="mms" class="sub"></div>
-    <button id="mc3" class="bigbtn"><span class="mi">📦</span><b>LEVERANS</b><small>Cykla en rutt, namnge korsande gator och pricka husnumret – mot klockan.</small></button>
+    <button id="mc3" class="bigbtn"><span class="mi">📦</span><b>BUDA</b><small id="mc3s">Cykla en rutt, namnge korsande gator och pricka husnumret – mot klockan.</small></button>
     <div class="tabs"><button id="rdA" class="on">Alternativ</button><button id="rdT">Skriv själv</button></div>
     <label><input type="checkbox" id="tmc" checked> ⏱ På tid (av = träning, cykeln väntar)</label><br>
     <button id="mmmore">Fler spellägen ▾</button>
@@ -637,11 +691,11 @@ function info(st){
   labelMap(st,cr);
   numbers(st,cr).catch(()=>{});
 }
-const tip=(pos,text,cls)=>L.tooltip({permanent:true,direction:'center',className:'lbl '+cls}).setLatLng(pos).setContent(esc(text)).addTo(layers);
+const tip=(pos,text,cls)=>L.tooltip({permanent:true,direction:'center',className:'lbl '+cls}).setLatLng(pos).setContent('<span class="trot">'+esc(text)+'</span>').addTo(layers);
 // Text angle (degrees) along the direction a->b, kept readable (never upside down).
 function rot(ax,ay,bx,by){let r=-Math.atan2(by-ay,bx-ax)*180/Math.PI;while(r>90)r-=180;while(r<=-90)r+=180;return r}
 function rlabel(pos,text,cls,deg,col){
-  const html=`<span class="rl ${cls}" style="transform:translate(-50%,-50%) rotate(${deg}deg);${col?'border-color:'+col:''}">${esc(text)}</span>`;
+  const html=`<span class="rl ${cls}" data-d="${deg}" style="transform:translate(-50%,-50%) rotate(${labAng(deg)}deg);${col?'border-color:'+col:''}">${esc(text)}</span>`;
   L.marker(pos,{interactive:false,keyboard:false,icon:L.divIcon({className:'rlw',html,iconSize:[0,0]})}).addTo(layers);
 }
 // A point ~off metres along street `st` from its vertex p, plus the text angle there.
@@ -801,7 +855,10 @@ function sfx(k){
   if(muted)return;
   try{
     AC=AC||new (window.AudioContext||window.webkitAudioContext)();if(AC.state=='suspended')AC.resume();
-    const S={ping:[[988,0,.07],[1319,.09,.12]],ok:[[660,0,.1],[880,.09,.16]],good:[[660,0,.08],[880,.07,.08],[1100,.14,.2]],mult:[[784,0,.08],[988,.08,.08],[1175,.16,.22]],
+    const S={ping:[[988,0,.07],[1319,.09,.12]],
+      lose:[[233,0,.32,'sawtooth'],[117,0,.32,'triangle'],[175,.42,.9,'sawtooth'],[87,.42,.9,'triangle']],
+      win:[[392,0,.12],[392,.15,.12],[392,.3,.12],[523,.46,.75],[659,.46,.75,'triangle'],[784,.46,.75,'triangle'],[1047,.46,.75]],
+      ok:[[660,0,.1],[880,.09,.16]],good:[[660,0,.08],[880,.07,.08],[1100,.14,.2]],mult:[[784,0,.08],[988,.08,.08],[1175,.16,.22]],
       fanfare:[[523,0,.12],[659,.12,.12],[784,.24,.12],[1047,.36,.2],[784,.58,.1],[1047,.7,.1],[1319,.82,.8],[1047,.82,.8,'triangle'],[784,.82,.8,'triangle'],[523,.82,.8,'triangle']],
       up:[[523,0,.12],[659,.11,.12],[784,.22,.12],[1047,.33,.45]],bad:[[220,0,.18,'sawtooth'],[165,.14,.3,'sawtooth']]};
     for(const [f,t,d,ty] of S[k]||[]){
@@ -810,6 +867,25 @@ function sfx(k){
       o.connect(g);g.connect(AC.destination);o.start(t0);o.stop(t0+d+.02);
     }
   }catch(e){}
+}
+function confetti(c,n){
+  c.innerHTML='';
+  for(let k=0;k<n;k++){
+    const e=document.createElement('i');
+    e.style.cssText=`left:${Math.random()*100}%;background:${['#1ea4b0','#ed9a64','#e54168','#f1e2c6','#fff'][k%5]};animation-delay:${Math.random()*.9}s;animation-duration:${1.8+Math.random()*1.5}s`;
+    c.appendChild(e);
+  }
+}
+// The end screen of a delivery: big and unmistakable, with its own sound (played by the caller).
+function showEnd(kind,l1,l2){
+  const win=kind=='win',late=kind=='late';
+  $('end').className=kind=='lose'?'lose':'win';
+  $('endi').textContent=win?'🏆':late?'📦':'💥';
+  $('endt').textContent=win?'VINST!':late?'LEVERERAD':'FÖRLORAT';
+  $('ends').textContent=win?(ride&&ride.timed?'Budet framme i tid!':'Budet är framme!'):late?'Men för sent – kunden fick vänta':'Fem fel – du tappade budet';
+  $('endl').innerHTML=esc(l1)+(l2?'<br>'+esc(l2):'');
+  confetti($('conf2'),win?60:0);
+  $('end').hidden=false;$('endNew').focus();
 }
 function showLevel(i){
   $('lvn').textContent='Nivå '+(i+1);$('lvr').textContent=RANKS[i][1];
@@ -910,7 +986,7 @@ function prefetch(){
 function resetQueue(){for(const s of queue)seen.delete(s.n);queue.length=0}
 let infoOpen=false;
 function next(){
-  blink([]);heartsUi(null);setPh(0);stopMusic();$('dv').hidden=true;if($('bot').appendChild){$('brow').appendChild($('nx'));$('bot').appendChild($('brow'))}
+  blink([]);followOff();heartsUi(null);setPh(0);stopMusic();$('dv').hidden=true;if($('bot').appendChild){$('brow').appendChild($('nx'));$('bot').appendChild($('brow'))}
   $('ib').hidden=true;$('qbar').hidden=true;$('lastr').textContent='';
   layers.clearLayers();answered=false;tg=null;$('opts').innerHTML='';$('info').hidden=true;$('typed').hidden=true;$('dv').hidden=true;$('nx').textContent='Nästa';
   if(ride&&ride.timer)clearInterval(ride.timer);
@@ -1065,41 +1141,99 @@ function search(sk,maxC){
   }
   return {D,P};
 }
-// Path -> legs (one per street) with the crossing streets at every junction along the way.
-function pathToLegs(path){
-  const {pos}=getGraph(),nodes=path.map(s=>s.split('|')),pts=nodes.map(n=>pos.get(n[0])),groups=[];
-  let cur=null;
-  for(let i=1;i<nodes.length;i++){
-    const si=+nodes[i][1];
-    if(!cur||cur.si!==si){cur={si,idx:[i-1]};groups.push(cur)}
-    cur.idx.push(i);
+
+// ---------- BUDA: ten levels, areas that unlock one by one ----------
+const AREAS=[{"id":"soder","name":"Södermalm","poly":[[59.3225,18.0],[59.3215,18.045],[59.32,18.07],[59.3195,18.08],[59.3165,18.1],[59.31,18.109],[59.304,18.105],[59.304,18.08],[59.3045,18.065],[59.3085,18.04],[59.311,18.023],[59.317,18.007]],"after":0},{"id":"kungs","name":"Kungsholmen","poly":[[59.327,17.988],[59.34,17.989],[59.3425,18.02],[59.3375,18.033],[59.334,18.042],[59.333,18.0535],[59.327,18.05],[59.3265,18.03],[59.329,18.005]],"after":3},{"id":"city","name":"City","poly":[[59.3215,18.059],[59.333,18.0545],[59.3395,18.056],[59.3395,18.07],[59.337,18.076],[59.328,18.083],[59.3215,18.08]],"after":5},{"id":"oster","name":"Östermalm","poly":[[59.328,18.078],[59.337,18.076],[59.3395,18.07],[59.344,18.076],[59.347,18.088],[59.348,18.099],[59.338,18.106],[59.331,18.1],[59.3265,18.088]],"after":6},{"id":"vasa","name":"Vasastan","poly":[[59.334,18.042],[59.3395,18.056],[59.3395,18.07],[59.344,18.076],[59.35,18.074],[59.351,18.052],[59.347,18.038],[59.34,18.033]],"after":7},{"id":"gard","name":"Gärdet","poly":[[59.3405,18.096],[59.348,18.09],[59.355,18.1],[59.357,18.126],[59.344,18.124],[59.34,18.11]],"after":8},{"id":"alba","name":"Albano","poly":[[59.359,18.042],[59.371,18.043],[59.374,18.06],[59.367,18.07],[59.358,18.065]],"after":10}];
+const pipPt=(p,poly)=>{let c=false;for(let i=0,j=poly.length-1;i<poly.length;j=i++){const a=poly[i],b=poly[j];if((a[1]>p[1])!=(b[1]>p[1])&&p[0]<(b[0]-a[0])*(p[1]-a[1])/(b[1]-a[1])+a[0])c=!c}return c};
+// which area a street belongs to (vote of a few of its points)
+const areaNear=p=>{let b=null,bd=1e18;for(const a of AREAS)for(const q of a.poly){const d=(p[0]-q[0])**2+((p[1]-q[1])*.51)**2;if(d<bd){bd=d;b=a.id}}return b};
+function areaOf(s){
+  if(s.ar!==undefined)return s.ar;
+  const pts=s.s.flat(),step=Math.max(1,Math.floor(pts.length/7)),v={};
+  for(let i=0;i<pts.length;i+=step){let id=null;for(const a of AREAS)if(pipPt(pts[i],a.poly)){id=a.id;break}if(!id)id=areaNear(pts[i]);v[id]=(v[id]||0)+1}
+  let b=null,bn=0;for(const k in v)if(v[k]>bn){bn=v[k];b=k}
+  return s.ar=b;
+}
+const BK='gs_buda_v1';
+let BU={passed:0,best:{}};try{Object.assign(BU,JSON.parse(localStorage.getItem(BK))||{})}catch(e){}
+const bSave=()=>{try{localStorage.setItem(BK,JSON.stringify(BU))}catch(e){}};
+const budaLv=()=>Math.min(10,BU.passed+1);                 // you always play the next level - no level picker
+const areasOpen=()=>AREAS.filter(a=>BU.passed>=a.after);   // Södermalm from the start, then Kungsholmen after level 3, City 5, Östermalm 6, Vasastan 7, Gärdet 8, Albano 10
+let budaArea='soder';
+// street classes: big = long main street, known = very long main street, small = side street
+const cls=(s,c)=>c=='big'?s.t==1&&slen(s)>=400:c=='known'?s.t==1&&slen(s)>=600:c=='small'?s.t==2&&slen(s)>=80:true;
+// buds = deliveries, pick = buds picked up along the way (so total stops = buds + pick); dist = route length in metres
+const LEVELS=[null,
+ {t:'1 bud · stor väg · kort sträcka · levereras på samma gata',buds:1,pick:0,start:'big',drops:['same'],dist:[350,800],minAsked:3,nr:1,time:1.15},
+ {t:'1 bud · från en stor känd gata till en annan, längre',buds:1,pick:0,start:'known',drops:['known'],dist:[900,1500],nr:1,time:1.1},
+ {t:'1 bud · från en stor gata till en mindre gata',buds:1,pick:0,start:'big',drops:['small'],dist:[1000,1700],nr:1,time:1.05},
+ {t:'1 bud · från en mindre gata till en mindre gata',buds:1,pick:0,start:'small',drops:['small'],dist:[1100,1800],nr:2,time:1},
+ {t:'2 bud från start · bud på mindre gator',buds:2,pick:0,start:'big',drops:['small','small'],dist:[1500,2400],nr:2,time:.95},
+ {t:'3 bud (2 från start, 1 hämtas på vägen) · tre välkända gator',buds:3,pick:1,start:'big',drops:['known','known','known'],dist:[1800,2800],nr:2,time:.92},
+ {t:'3 bud · blandade gator · minst en svår korsning',buds:3,pick:1,start:'any',drops:['any','any','any'],dist:[1800,2800],hard:1,nr:2,time:.9},
+ {t:'4 bud · större spridning · välj själv i vilken ordning (ruttoptimering)',buds:4,pick:1,start:'any',drops:['any'],dist:[2400,3600],opt:true,nr:3,time:.88},
+ {t:'4 bud, 2 upphämtningar · mindre gator · pressad tid · välj ordning',buds:4,pick:2,start:'any',drops:['small'],dist:[2800,4000],opt:true,nr:3,time:.8},
+ {t:'MÄSTARBUDET · 5 bud, 1 upphämtning · hela området · skriv alla namn',buds:5,pick:1,start:'any',drops:['any'],dist:[3400,5000],opt:true,typed:true,nr:3,time:.78}];
+const wpick=a=>{let r=Math.random()*a.reduce((x,s)=>x+imp(s),0);for(const s of a){r-=imp(s);if(r<=0)return s}return a[0]};
+const hasNums=s=>{const r=numCache[s.n];return !!(r&&r.pts&&r.pts.length>=6)};
+// ---- fast integer graph: nodes are numbered, a "state" is (node, street you arrived on) ----
+let gI=null;const SB=2048;
+function getGI(){
+  if(gI&&gI.src===streets)return gI;
+  const ids=new Map(),keys=[],adj=[],pos=[];
+  const idOf=p=>{const k=p[0]+','+p[1];let i=ids.get(k);if(i===undefined){i=keys.length;ids.set(k,i);keys.push(k);adj.push([]);pos.push(p)}return i};
+  streets.forEach((s,si)=>{for(const l of s.s){let prev=-1;for(let i=0;i<l.length;i++){const id=idOf(l[i]);if(i>0){const w=dist(l[i-1],l[i]);adj[prev].push({t:id,w,si});adj[id].push({t:prev,w,si})}prev=id}}});
+  return gI={src:streets,ids,keys,adj,pos};
+}
+// Dijkstra from node src; stops when all targets are settled (or at maxC). first = cheapest state per node.
+function searchI(src,targets,maxC){
+  const g=getGI(),D=new Map(),P=new Map(),first=new Map(),H=new Heap(),need=new Set(targets),s0=src*SB;
+  D.set(s0,0);H.push([0,s0]);
+  while(H.size){
+    const [d,S]=H.pop();
+    if(d>D.get(S))continue;
+    if(maxC!=null&&d>maxC)break;
+    const n=(S/SB)|0,si=S%SB-1;
+    if(!first.has(n)){first.set(n,S);if(need.delete(n)&&targets.length&&!need.size)break}
+    for(const e of g.adj[n]){
+      const nd=d+e.w+(si>=0&&e.si!==si?TURN:0),ns=e.t*SB+e.si+1,od=D.get(ns);
+      if(od===undefined||nd<od){D.set(ns,nd);P.set(ns,S);H.push([nd,ns])}
+    }
   }
+  return {D,P,first};
+}
+const costI=(res,n)=>res.first.has(n)?res.D.get(res.first.get(n)):Infinity;
+function pathI(res,n){const g=getGI(),p=[];for(let S=res.first.get(n);S!==undefined;S=res.P.get(S))p.push(g.keys[(S/SB)|0]+'|'+(S%SB-1));return p.reverse()}
+// ---- path -> legs; stops (pick-ups/deliveries) become events inside the legs ----
+function pathToLegs2(path,stops,o){
+  const g=getGI(),nodes=path.map(s=>s.split('|')),pts=nodes.map(n=>g.pos[g.ids.get(n[0])]),groups=[];
+  let cur=null;
+  for(let i=1;i<nodes.length;i++){const si=+nodes[i][1];if(!cur||cur.si!==si){cur={si,idx:[i-1]};groups.push(cur)}cur.idx.push(i)}
+  if(!groups.length)return null;
   const legs=groups.map(g=>{
     const lp=g.idx.map(i=>pts[i]),cum=[0];
     for(let i=1;i<lp.length;i++)cum.push(cum[i-1]+dist(lp[i-1],lp[i]));
     const len=cum[cum.length-1];
     return {st:streets[g.si],ch:{pts:lp,cum,len},start:0,dir:1,ev:[],endPos:len,keys:g.idx.map(i=>nodes[i][0])};
   });
-  const DUP=200;   // m
+  const DUP=200;
   legs.forEach((l,li)=>{
     const nxt=legs[li+1],res=[];
     l.keys.forEach((k,j)=>{
       if(j==0)return;
-      const mk=o=>({o,p:l.ch.pts[j],pos:l.ch.cum[j],pt:l.ch.pts[j]});
-      if(j==l.keys.length-1){   // the junction where you turn: the street you turn into
+      const mk=o2=>({o:o2,p:l.ch.pts[j],pos:l.ch.cum[j],pt:l.ch.pts[j]});
+      if(j==l.keys.length-1){
         if(nxt){const t=mk(nxt.st);for(let q=res.length-1;q>=0;q--)if(res[q].o===t.o&&t.pos-res[q].pos<DUP)res.splice(q,1);res.push(t)}
         return;
       }
-      for(const o of (vidx.get(k)||[]).filter(o=>o!==l.st).sort((a,b)=>imp(b)-imp(a))){
-        const e=mk(o);
-        if(res.some(r=>r.o===o&&e.pos-r.pos<DUP))continue;   // e.g. Karlavägen crossing both carriageways of Valhallavägen
+      for(const o2 of (vidx.get(k)||[]).filter(x=>x!==l.st).sort((a,b)=>imp(b)-imp(a))){
+        const e=mk(o2);
+        if(res.some(r=>r.o===o2&&e.pos-r.pos<DUP))continue;
         res.push(e);
       }
     });
     l.ev=res;
   });
-  // every street is asked only once per delivery (also when the route crosses it again later); a street you already
-  // answered, or have ridden on, is not asked again - if it is the street you turn into, you just pass the junction
   const seen=new Set();
   legs.forEach((l,li)=>{
     seen.add(l.st);const nxt=legs[li+1];
@@ -1110,41 +1244,140 @@ function pathToLegs(path){
     });
   });
   const asked=l=>l.ev.filter(e=>!e.skip).length,n=legs.reduce((a,l)=>a+asked(l),0);
-  // the first road must be long enough to see where you are and where you're heading
-  return legs.length<2||n<6||n>45||legs.some(l=>!l.ev.length)||legs[0].ch.len<250||asked(legs[0])<2?null:legs;
+  let hard=0;legs.forEach(l=>{for(const e of l.ev)if(!e.skip&&l.ev.filter(x=>!x.skip&&Math.abs(x.pos-e.pos)<30).length>=2){hard++;break}});
+  if(legs.length<o.minLegs||n<o.minAsked||n>o.maxAsked||(o.minFirst&&(legs[0].ch.len<o.minFirst||asked(legs[0])<2))||(o.hard&&!hard))return null;
+  if(legs.length>1&&legs.some(l=>!l.ev.length))return null;
+  for(const sp of stops){   // a stop event goes BEFORE the crossing events at the same junction
+    const gi=groups.findIndex(g=>g.idx.indexOf(sp.idx)>0);if(gi<0)return null;
+    const l=legs[gi],j=groups[gi].idx.indexOf(sp.idx);
+    const ev={stop:true,kind:sp.kind,street:sp.street,sid:sp.id,letter:sp.letter,pos:l.ch.cum[j],pt:l.ch.pts[j],p:l.ch.pts[j],addr:sp.addr||null};
+    let k=l.ev.findIndex(e=>e.pos>=ev.pos-1e-6);if(k<0)k=l.ev.length;
+    l.ev.splice(k,0,ev);sp.ev=ev;
+  }
+  legs.hard=hard;legs.asked=n;
+  return legs;
 }
-function planRoute(){
-  const {adj}=getGraph(),cands=pool().filter(s=>slen(s)>=150);
-  if(!cands.length)return null;
-  for(let t=0;t<30;t++){
-    let r=Math.random()*cands.reduce((a,s)=>a+imp(s),0),st=cands[0];
-    for(const s of cands){r-=imp(s);if(r<=0){st=s;break}}
-    const sp=pickOf(pickOf(st.s)),sk=sp[0]+','+sp[1];
-    if(!adj.has(sk))continue;
-    const {D,P}=search(sk,2300),best=new Map();
-    for(const [k,d] of D){   // cheapest way of arriving at each junction
-      if(k.endsWith('|-1'))continue;
-      const n=k.slice(0,k.lastIndexOf('|'));
-      if(!best.has(n)||d<best.get(n)[0])best.set(n,[d,k]);
+const LETTERS='ABCDEFGHIJ';
+// order = indices into plan.stops; builds the whole route with the stops visited in that order
+function budaBuild(plan,order,o){
+  let path=[],src=0;const st=[];
+  for(const i of order){
+    const sp=plan.stops[i],seg=pathI(plan.res[src],sp.nid);if(!seg.length)return null;
+    path=path.length?path.concat(seg.slice(1)):seg;
+    st.push({idx:path.length-1,kind:sp.kind,street:sp.street,id:sp.id,letter:sp.letter,addr:sp.addr});
+    src=i+1;
+  }
+  const legs=pathToLegs2(path,st,o);if(!legs)return null;
+  legs.order=order.slice();legs.len=order.reduce((a,i,k)=>a+plan.C[k?order[k-1]+1:0][i+1],0);
+  return legs;
+}
+// ---- planning a level ----
+function candNodes(c,open){
+  const g=getGI(),out=[];
+  for(const s of streets){
+    if(!cls(s,c)||slen(s)<120)continue;const a=areaOf(s);if(!a||!open.includes(a))continue;
+    for(const l of s.s)for(let i=1;i<l.length-1;i+=3){const id=g.ids.get(l[i][0]+','+l[i][1]);if(id!==undefined)out.push({id,s})}
+  }
+  return out;
+}
+function bestOrder(C,slots){
+  const K=slots.length;let best=null;const used=Array(K).fill(false),seq=[];
+  (function rec(prev,len){
+    if(best&&len>=best.len)return;
+    if(seq.length==K){best={order:seq.slice(),len};return}
+    for(let i=0;i<K;i++){
+      if(used[i])continue;
+      const sl=slots[i];if(sl.kind=='drop'&&sl.pairP!=null&&!used[sl.pairP])continue;   // a picked-up bud is delivered after its pick-up
+      used[i]=true;seq.push(i);rec(i+1,len+C[prev][i+1]);seq.pop();used[i]=false;
     }
-    const ends=[...best.values()].filter(x=>x[0]>=800&&x[0]<=2200).map(x=>x[1]);
-    if(!ends.length)continue;
-    const path=[];
-    for(let k=pickOf(ends);k;k=P.get(k))path.push(k);
-    const legs=pathToLegs(path.reverse());
-    if(legs)return legs;
+  })(0,0);
+  return best;
+}
+// greedy tour length (nearest neighbour, pick-ups before their drops) - a cheap estimate of the best order
+function nnLen(Cm,slots){
+  const K=slots.length,used=Array(K).fill(false);let prev=0,len=0;
+  for(let n=0;n<K;n++){
+    let b=-1,bc=1e18;
+    for(let i=0;i<K;i++){
+      if(used[i])continue;const sl=slots[i];if(sl.kind=='drop'&&sl.pairP!=null&&!used[sl.pairP])continue;
+      const c=Cm[prev][i+1];if(c<bc){bc=c;b=i}
+    }
+    if(b<0)return Infinity;used[b]=true;len+=bc;prev=b+1;
+  }
+  return len;
+}
+// Picks a start, runs ONE bounded search from it (real street distances, so nothing across the water is "near"),
+// samples stop sets from the reachable nodes until the estimated tour fits the level, and then checks the real tour with a few
+// early-stopping searches. The second half of the tries is relaxed.
+function budaPlan(lv,areaId){
+  const L=LEVELS[lv],open=areasOpen().map(a=>a.id),g=getGI(),K=L.buds+L.pick;
+  const startC=streets.filter(s=>areaOf(s)===areaId&&cls(s,L.start)&&slen(s)>=200);
+  if(!startC.length)return null;
+  const cache={};const nodes=c=>cache[c]||(cache[c]=candNodes(c,open));
+  const F=budaPlan.f={nocand:0,est:0,inf:0,optrange:0,build:0,l1:0,tries:0};
+  const slots=[];
+  for(let i=0;i<L.buds;i++)slots.push({kind:'drop',c:L.drops[Math.min(i,L.drops.length-1)],id:'D'+(i+1)});
+  for(let i=0;i<L.pick;i++){slots.push({kind:'pickup',c:'known',id:'P'+(i+1)});slots[i].pairP=L.buds+i}
+  let fac=1.5;                                  // real length / straight-line length between stops, learnt while planning
+  for(let t=0;t<40;t++){
+    F.tries++;const tier=t<14?0:t<28?1:2,relax=tier>0,lo=[.9,.75,.6][tier],hi=[1,1.2,1.5][tier],st0=wpick(startC),v0=pickOf(pickOf(st0.s)),sid=g.ids.get(v0[0]+','+v0[1]);if(sid===undefined)continue;
+    const sp0=g.pos[sid],dMin=L.dist[0],dMax=L.dist[1],sep=relax?200:250;
+    const O={minLegs:lv==1?1:2,minAsked:lv==1?3:(K>1?4+2*K:6),maxAsked:130,minFirst:lv==1?0:(relax?150:250),hard:L.hard&&!relax};
+    const rMax=K>1?dMax*(.55+.1*tier):dMax*hi,rMin=K>1?150:dMin*lo;
+    const reach=searchI(sid,[],rMax),cost=n=>reach.first.has(n)?reach.D.get(reach.first.get(n)):Infinity;
+    const near={};
+    const nearOf=sl=>{
+      const c=sl.c=='same'?'same':(relax&&(sl.c=='small'||sl.kind=='pickup')?'any':sl.kind=='pickup'?'big':sl.c);
+      if(near[c])return near[c];
+      const base=c=='same'?st0.s.flat().filter((v,i)=>i%2==0).map(v=>({id:g.ids.get(v[0]+','+v[1]),s:st0})):nodes(c);
+      return near[c]=base.filter(x=>{if(x.id===undefined)return false;const d=cost(x.id);return d>=rMin&&d<=rMax&&dist(g.pos[x.id],sp0)>=(K>1?150:200)});
+    };
+    if(slots.some(sl=>!nearOf(sl).length)){F.nocand++;continue}
+    let stops=null,estLen=0;
+    for(let k=0;k<(K>1?400:30)&&!stops;k++){
+      const cand=[];let ok=true;
+      for(const sl of slots){
+        const list=nearOf(sl);let x=null;
+        for(let q=0;q<14&&!x;q++){   // rejection sampling: cheap
+          const pr=Math.random()<.6?list.filter(y=>hasNums(y.s)):[],src=pr.length?pr:list,y=src[Math.floor(Math.random()*src.length)];
+          if(cand.every(o=>o.nid!==y.id&&dist(g.pos[o.nid],g.pos[y.id])>=sep&&(sl.c=='same'||o.street!==y.s)))x=y;
+        }
+        if(!x){ok=false;break}
+        cand.push({nid:x.id,key:g.keys[x.id],street:x.s,kind:sl.kind,id:sl.id,pairP:sl.pairP,letter:LETTERS[cand.length]});
+      }
+      if(!ok)continue;
+      const pts=[sp0,...cand.map(o=>g.pos[o.nid])],Ce=pts.map((a,i)=>pts.map((b,j)=>i==j?0:(i==0?cost(cand[j-1].nid):fac*dist(a,b))));
+      const len=K>1?nnLen(Ce,cand)*.95:cost(cand[0].nid);
+      if(len>=dMin*lo&&len<=dMax*hi){stops=cand;estLen=len}
+    }
+    if(!stops){F.est++;continue}
+    const ids=[sid,...stops.map(o=>o.nid)],res=[],C=[];
+    for(let i=0;i<ids.length;i++){res.push(i==0?reach:searchI(ids[i],ids.filter((_,j)=>j!=i)));C.push(ids.map((n,j)=>j==i?0:costI(res[i],n)))}
+    if(C.some((r,i)=>r.some((v,j)=>i!=j&&!isFinite(v)))){   // the start search was bounded: complete it for the stops
+      res[0]=searchI(sid,ids.slice(1));for(let j=0;j<ids.length;j++)C[0][j]=j==0?0:costI(res[0],ids[j]);
+      if(C.some(r=>r.some(v=>!isFinite(v)))){F.inf++;continue}
+    }
+    res[0]=C[0].every(isFinite)&&ids.slice(1).every(n=>res[0].first.has(n))?res[0]:searchI(sid,ids.slice(1));
+    const opt=bestOrder(C,stops);if(!opt){F.inf++;continue}
+    if(K>1&&estLen>0)fac=Math.max(1,Math.min(3,fac*(opt.len/Math.max(1,estLen))*.5+fac*.5));
+    if(opt.len<dMin*(lo-.1)||opt.len>dMax*(hi+.25)){F.optrange++;continue}
+    const plan={lv,areaId,startId:sid,startSt:st0,stops,res,C,opt,O};
+    const legs=budaBuild(plan,opt.order,O);if(!legs){F.build++;continue}
+    if(lv==1&&legs.length!=1){F.l1++;continue}
+    plan.legs0=legs;return plan;
   }
   return null;
 }
+
 function heading(ch,pos,dir){
   const a=ptAt(ch,pos),b=ptAt(ch,pos+dir*80);
   return COMPASS[Math.round(((Math.atan2(X(b)-X(a),Y(b)-Y(a))*180/Math.PI+360)%360)/45)%8];
 }
 const JOBS=[
- {i:'🍕',t:'Matleverans',d:['2 pizzor','tre hamburgare','thaimat för fyra','en stor sushibricka'],f:['Pizzeria Vesuvio','Burgerköket','Thai Orchid','Sushi Nami'],r:['familjen Lindgren','kontorsgänget','en hungrig student','kvällsgästerna']},
+ {i:'🍕',t:'Matbud',d:['2 pizzor','tre hamburgare','thaimat för fyra','en stor sushibricka'],f:['Pizzeria Vesuvio','Burgerköket','Thai Orchid','Sushi Nami'],r:['familjen Lindgren','kontorsgänget','en hungrig student','kvällsgästerna']},
  {i:'💐',t:'Blomsterbud',d:['en bukett tulpaner','rosor till jubilaren','en bröllopsbukett'],f:['Blomsterhandeln','Blomsterverkstan'],r:['fru Ekström','Hotell Aurora','en glad jubilar']},
  {i:'📄',t:'Dokumentbud',d:['ett avtal att signera','ritningar till bygget','viktiga kontrakt'],f:['Advokatbyrån Berg','Arkitektkontoret'],r:['Börsen Förvaltning','kommunens kansli','Nordic Bank']},
- {i:'💊',t:'Apoteksleverans',d:['receptbelagd medicin','ett paket från apoteket'],f:['Apoteket Lejonet','Apoteket Hjärtat'],r:['en pigg pensionär','herr Wallin']},
+ {i:'💊',t:'Apoteksbud',d:['receptbelagd medicin','ett paket från apoteket'],f:['Apoteket Lejonet','Apoteket Hjärtat'],r:['en pigg pensionär','herr Wallin']},
  {i:'☕',t:'Fikabeställning',d:['sex kanelbullar och kaffe','prinsesstårta till kalaset'],f:['Konditori Sture','Fikarummet'],r:['redaktionen','styrelsemötet','födelsedagsbarnet']}];
 const pickOf=a=>a[Math.floor(Math.random()*a.length)];
 const withTimeout=(p,ms)=>Promise.race([p.catch(()=>null),new Promise(r=>setTimeout(()=>r(null),ms))]);
@@ -1152,62 +1385,89 @@ const legEnd=l=>l.endPos!=null?l.endPos:l.ev[l.ev.length-1].pos;
 const mmss=s=>{s=Math.abs(Math.round(s));return Math.floor(s/60)+':'+String(s%60).padStart(2,'0')};
 function nearAddr(r,pt){let b=null,bd=1e9;for(const a of r.pts||[]){const d=dist([a[1],a[2]],pt);if(d<bd){bd=d;b=a}}return b&&bd<250?b:null}
 async function rideStart(){
-  layers.clearLayers();$('opts').innerHTML='';$('info').hidden=true;$('typed').hidden=true;$('dv').hidden=true;$('qbar').hidden=true;$('lastr').textContent='';
-  $('nx').textContent='Nästa';$('nx').hidden=true;$('sh').hidden=true;rnd={n:0,ok:0,pts:0};
-  const legs=planRoute();
-  if(!legs){$('q').textContent='Kunde inte planera en rutt';setFb('Prova "Alla gator" eller ladda om data.');return}
-  last=legs[0].st.n;
-  const R=ride={legs,li:0,ei:0,errs:0,okc:0,total:0,tok:0,done:false,answered:true,from:null,stage:'brief',briefing:true,dest:null,job:null,log:[],timed:$('tmc').checked,timer:0,pos:0,el:0,win:1,p0:0,ok:false};
-  answered=true;
-  $('q').textContent='📦 Planerar leverans…';setFb('Hämtar adresser…');
-  const f=legs[legs.length-1],sPt=legs[0].ch.pts[0],ePt=f.ch.pts[f.ch.pts.length-1];
-  ldReset();ldShow(true,'PLANERAR LEVERANS');step('route','Snabbaste vägen','ok');step('adr','Adresser (max 5 s)','run');
-  const [r1,r2]=await Promise.all([legs[0].st,f.st].map(st=>withTimeout(getNumbers(st),5000)));
-  ldShow(false);
-  if(ride!==R)return;
-  const J=pickOf(JOBS),a=r1&&nearAddr(r1,sPt),a2=r2&&nearAddr(r2,ePt);
-  R.job={i:J.i,t:J.t,d:pickOf(J.d),fromName:pickOf(J.f),toName:pickOf(J.r),sNo:a?a[0]:null};heartsUi(R);
-  R.dest=a2?{n:a2[0],la:a2[1],lo:a2[2]}:null;
-  R.km=legs.reduce((s,l)=>s+l.ch.len,0);
-  const n=legs.reduce((s,l)=>s+l.ev.filter(e=>!e.skip).length,0);
-  // normal riding time: every crossing gets at least MINW seconds; you must beat 90 % of it (= some boosts) to be on time
-  let norm=0;for(const l of legs){let p=0;for(const e of l.ev){norm+=Math.max((e.pos-p)/V0,e.skip?0:MINW);p=e.pos}norm+=(l.ch.len-p)/V0}
-  R.nEv=n;R.secs=Math.round(norm*.9+(R.dest?10:0));
-  drawRoute();renderCard();
-  $('q').textContent='📦 Ny leverans!';
-  R.chat=[{kind:'info',text:'Ny order! Tryck Starta när du är redo.'}];
-  R.hint=R.timed?'Namnge korsningen innan cykeln når den – rätt svar ger boost!':'Träning: cykeln väntar vid varje korsning.';
-  $('nx').textContent='Starta 🚲';$('nx').hidden=false;
+  layers.clearLayers();blink([]);$('opts').innerHTML='';$('info').hidden=true;$('typed').hidden=true;$('qbar').hidden=true;$('lastr').textContent='';
+  $('nx').textContent='Nästa';$('nx').hidden=true;$('sh').hidden=true;$('dv').hidden=true;rnd={n:0,ok:0,pts:0};setPh(0);
+  const lv=budaLv(),L=LEVELS[lv];
+  if(!areasOpen().some(a=>a.id==budaArea))budaArea='soder';
+  ldReset();ldShow(true,'PLANERAR BUD');step('plan',`Nivå ${lv}: planerar rutt`,'run');
+  await new Promise(r=>setTimeout(r,40));
+  const plan=budaPlan(lv,budaArea);
+  if(!plan){ldShow(false);if(mode!=='ride')return;answered=true;showModes('Välj spelläge','Det gick inte att planera ett bud – försök igen.',true);return}
+  step('plan','Rutt planerad','ok');ldShow(false);
+  if(mode!=='ride')return;                 // the player left meanwhile
+  const J=pickOf(JOBS);
+  const R=ride={plan,lv,L,stops:plan.stops,legs:null,li:0,ei:0,errs:0,okc:0,total:0,tok:0,done:false,answered:true,from:null,stage:'brief',briefing:true,
+    job:{i:J.i,t:J.t,d:pickOf(J.d),fromName:pickOf(J.f),toName:pickOf(J.r)},log:[],timed:true,timer:0,nrLvl:L.nr,opt:!!L.opt,picks:[],
+    stopFracs:[],stopPts:0,stopHits:0,stopsDone:0,stopLog:[],pos:0,el:0,win:1,p0:0,ok:false,chat:[{kind:'info',text:'Hämtar adresser…'}]};
+  answered=true;heartsUi(R);
+  if(L.typed)$('rd').value='type';
+  if(!L.opt)budaApply(R,plan.opt.order);     // fixed order: the best route is planned for you
+  else drawStopsOverview(R);                 // levels 8-10: you choose the order of the stops
+  renderCard();
+  $('q').textContent='📦 Nytt bud!';setFb('');
+  $('nx').textContent='Starta 🚲';$('nx').hidden=true;R.addrReady=false;
+  Promise.all(plan.stops.map(sp=>withTimeout(getNumbers(sp.street),5000))).then(nums=>{
+    if(ride!==R)return;const g=getGI();
+    plan.stops.forEach((sp,i)=>{const a=nums[i]&&nearAddr(nums[i],g.pos[sp.nid]);sp.addr=a?{n:a[0],la:a[1],lo:a[2]}:null});
+    if(R.legs)for(const l of R.legs)for(const e of l.ev)if(e.stop){const sp=plan.stops.find(x=>x.id==e.sid);if(sp)e.addr=sp.addr}
+    R.addrReady=true;R.chat=[{kind:'info',text:'Adresserna är klara – tryck Starta!'}];
+    renderCard();$('nx').hidden=!R.legs;
+  });
 }
+// Builds the legs for a chosen order of stops, the time limit, and draws the route.
+function budaApply(R,order){
+  const legs=budaBuild(R.plan,order,R.opt?{minLegs:1,minAsked:1,maxAsked:200,minFirst:0}:R.plan.O);
+  if(!legs)return false;
+  R.legs=legs;R.stops=order.map(i=>R.plan.stops[i]);R.order=order;R.chosenLen=legs.len;
+  R.km=legs.reduce((s,l)=>s+l.ch.len,0);
+  R.nEv=legs.reduce((s,l)=>s+l.ev.filter(e=>!e.skip&&!e.stop).length,0);
+  let norm=0;for(const l of legs){let p=0;for(const e of l.ev){norm+=Math.max((e.pos-p)/V0,e.skip?0:MINW)+(e.stop?4:0);p=e.pos}norm+=(l.ch.len-p)/V0}
+  R.secs=Math.round(norm*R.L.time);
+  R.hint='Namnge korsningen innan cykeln når den – rätt svar ger boost! Hämta/lämna paket genom att trycka där husnumret ligger.';
+  drawRoute();
+  return true;
+}
+function budaPick(i){
+  const R=ride;if(!R||!R.briefing||R.legs)return;
+  R.picks.push(i);sfx('ok');
+  if(R.picks.length==R.plan.stops.length){if(!budaApply(R,R.picks)){R.picks=[];drawStopsOverview(R)}else{$('nx').hidden=!R.addrReady}}
+  renderCard();
+}
+function budaUndo(){const R=ride;if(!R||!R.briefing||R.legs)return;R.picks.pop();renderCard()}
 const mark=(h,x)=>L.marker(x,{interactive:false,keyboard:false,icon:L.divIcon({className:'bike',html:`<span class="bk">${h}</span>`,iconSize:[46,46],iconAnchor:[23,23]})}).addTo(layers);
 function lblStreet(seg,name,cls,col){
   const i=Math.floor(seg.length/2),a=seg[Math.max(0,i-1)],b=seg[Math.min(seg.length-1,i+1)];
   rlabel(seg[i],name,cls,rot(X(a),Y(a),X(b),Y(b)),col);
 }
-// The whole route on the map: every street in its own colour, start (📦) and finish (🏁).
+const stopsTot=R=>R.stops.filter(sp=>sp.addr).length;
+const stopMarker=sp=>L.marker(getGI().pos[sp.nid],{interactive:false,keyboard:false,icon:L.divIcon({className:'stopm',html:`<span class="srot">${sp.kind=='pickup'?'📦':'🏠'}<b>${sp.letter}</b></span>`,iconSize:[30,30],iconAnchor:[15,15]})}).addTo(layers);
+function drawStopsOverview(R){
+  layers.clearLayers();const all=[getGI().pos[R.plan.startId]];
+  mark('🚲',all[0]);
+  R.plan.stops.forEach(sp=>{all.push(getGI().pos[sp.nid]);stopMarker(sp)});
+  map.fitBounds(L.latLngBounds(all),{paddingTopLeft:[30,hudH()+12],paddingBottomRight:[30,phVis(.75)+16]});
+}
+// The whole route on the map: every street in its own colour, the stops with their letters.
 function drawRoute(){
   const R=ride,all=[];layers.clearLayers();
   R.legs.forEach((l,i)=>{
     const c=PAL[i%PAL.length],seg=sub(l.ch,l.start,legEnd(l));all.push(...seg);
     L.polyline(seg,{color:c,weight:7,opacity:.85}).addTo(layers);lblStreet(seg,l.st.n,'x',c);
   });
-  const f=R.legs[R.legs.length-1];
-  mark('📦',ptAt(R.legs[0].ch,R.legs[0].start));mark('🏁',ptAt(f.ch,legEnd(f)));
+  mark('🚲',R.legs[0].ch.pts[0]);R.stops.forEach(stopMarker);
   map.fitBounds(L.latLngBounds(all),{paddingTopLeft:[30,hudH()+12],paddingBottomRight:[30,phVis(.75)+16]});
 }
-// Result screen: the whole route, every crossing in green (right) or red (wrong) with its name, and the house number.
+// Result screen: the whole route, every crossing in green/red with its name, and where each house number really was.
 function drawResult(){
   const R=ride,all=[];layers.clearLayers();
-  R.legs.forEach(l=>{const seg=sub(l.ch,l.start,legEnd(l));all.push(...seg);L.polyline(seg,{color:'#e54168',weight:9,opacity:.4}).addTo(layers)});
+  R.legs.forEach(l=>{const seg=sub(l.ch,l.start,legEnd(l));all.push(...seg);L.polyline(seg,{color:'#ed9a64',weight:9,opacity:.4}).addTo(layers)});
   drawLog();
   R.legs.forEach(l=>lblStreet(sub(l.ch,l.start,legEnd(l)),l.st.n,'m'));
-  const f=R.legs[R.legs.length-1];
-  mark('📦',ptAt(R.legs[0].ch,R.legs[0].start));mark('🏁',ptAt(f.ch,legEnd(f)));
-  const d=R.dest;
-  if(d&&R.finalDone){
-    const t=[d.la,d.lo];
-    if(R.finalCl){L.polyline([R.finalCl,t],{color:'#192134',weight:2,dashArray:'5 5'}).addTo(layers);L.circleMarker(R.finalCl,{radius:7,color:'#192134',fillColor:'#fff',fillOpacity:1,weight:3}).addTo(layers)}
-    L.circleMarker(t,{radius:8,color:'#192134',fillColor:'#e54168',fillOpacity:1,weight:3}).addTo(layers);tip(t,'nr '+d.n,'n');
+  R.stops.forEach(stopMarker);
+  for(const g of R.stopLog){
+    const t=[g.e.addr.la,g.e.addr.lo];
+    if(g.cl){L.polyline([g.cl,t],{color:'#192134',weight:2,dashArray:'5 5'}).addTo(layers);L.circleMarker(g.cl,{radius:6,color:'#192134',fillColor:'#fff',fillOpacity:1,weight:3}).addTo(layers)}
+    L.circleMarker(t,{radius:7,color:'#192134',fillColor:g.frac>=.3?'#2ba58f':'#e54168',fillOpacity:1,weight:3}).addTo(layers);tip(t,'nr '+g.e.addr.n,'n');
   }
   map.fitBounds(L.latLngBounds(all),{paddingTopLeft:[30,hudH()+12],paddingBottomRight:[30,phVis(.75)+16]});
 }
@@ -1242,23 +1502,28 @@ function dispatch(R,left){
   else if(fr-tf>.12)say('good',pickOf(CHEER));
 }
 function renderCard(){
-  const R=ride,j=R.job;if(!j)return;
+  const R=ride;if(!R||!R.job)return;
   const brief=R.briefing,done=R.done,dvEl=$('dv'),row=$('brow'),nx=$('nx'),big=brief||done;
   if(!big&&nx.parentNode!==row&&row.appendChild)row.appendChild(nx);   // the button goes back before the screen is rebuilt
-  const f=R.legs[R.legs.length-1],dest=esc(f.st.n)+(R.dest?' '+R.dest.n:'');
-  const hhmm=new Date().toLocaleTimeString('sv-SE',{hour:'2-digit',minute:'2-digit'}),km=(R.km/1000).toFixed(1).replace('.',',')+' km';
-  const chat=(R.chat||[]).slice(big?-3:-2).map(m=>`<div class="dmsg ${m.kind}">📻 ${esc(m.text)}</div>`).join('');
+  const hhmm=new Date().toLocaleTimeString('sv-SE',{hour:'2-digit',minute:'2-digit'}),km=n=>(n/1000).toFixed(1).replace('.',',')+' km';
+  const chat=(R.chat||[]).slice(-(big?1:2)).map(m=>`<div class="dmsg ${m.kind}">📻 ${esc(m.text)}</div>`).join('');
+  const chips=(R.legs?R.stops:R.plan.stops).map(sp=>`<span class="sc">${sp.letter} ${sp.kind=='pickup'?'📦':'🏠'} ${esc(sp.street.n)}${sp.addr?' '+sp.addr.n:''}</span>`).join('');
   let body;
-  if(brief)body=`<div class="dvt">${j.i} <b>${esc(j.t)}</b></div><div class="dvd">${esc(j.d)} · ${km}</div>
-    <div class="dvr"><small>FRÅN · ${esc(j.fromName)}</small><b>${esc(R.legs[0].st.n)}${j.sNo?' '+j.sNo:''}</b></div>
-    <div class="dvr"><small>TILL · ${esc(j.toName)}</small><b>${dest}</b></div>
-    ${R.timed?`<div class="tkr"><b id="tk">⏱ ${mmss(R.secs)}</b></div>`:''}
-    <div class="dvhint">${esc(R.hint||'')}</div>${chat}`;
-  else if(done)body=`<div class="dvt"><b>${esc(R.res.title)}</b></div><div class="dvres">${esc(R.res.line)}</div>${chat}`;
-  else body=`<div class="dvt">${j.i} <b>${esc(j.t)}</b> → <b>${dest}</b></div>
-    <div class="tkr">${R.timed?`<b id="tk" class="${R.tkC||''}">${R.tkT||''}</b>`:'<span></span>'}<span>${R.total}/${R.nEv}</span></div>${chat}`;
+  if(brief){
+    body=`<div class="dvt">${R.job.i} <b>BUDA · nivå ${R.lv}</b>${R.km?' · '+km(R.km):''}</div><div class="chips">${chips}</div>`;
+    if(R.opt&&!R.legs){
+      body+=`<div class="dvd">Välj ordning:</div><div class="pk">${R.plan.stops.map((sp,i)=>{const used=R.picks.includes(i),blocked=sp.kind=='drop'&&sp.pairP!=null&&!R.picks.includes(sp.pairP);return `<button ${used||blocked?'disabled':''} onclick="budaPick(${i})">${sp.letter}</button>`}).join('')}<button onclick="budaUndo()">↺</button></div><div class="dvd">${esc(R.picks.map(i=>R.plan.stops[i].letter).join(' → ')||'–')}</div>`;
+    }else body+=`<div class="tkr"><b id="tk">⏱ ${mmss(R.secs)}</b>${R.opt?`<small>bäst ${km(R.plan.opt.len)}</small>`:''}</div>`;
+    body+=chat;
+  }else if(done)body=`<div class="dvt"><b>${esc(R.res.title)}</b></div><div class="dvres">${esc(R.res.line)}</div>${chat}`;
+  else{
+    const nx2=R.stops.find(sp=>!(sp.ev&&sp.ev.done));
+    body=`<div class="dvt">${R.job.i} <b>nivå ${R.lv}</b> · stopp ${R.stopsDone}/${R.stops.length}</div>
+      ${nx2?`<div class="stl"><b>${nx2.letter}</b>${nx2.kind=='pickup'?'📦':'🏠'} ${esc(nx2.street.n)}${nx2.addr?' '+nx2.addr.n:''}</div>`:''}
+      <div class="tkr"><b id="tk" class="${R.tkC||''}">${R.tkT||''}</b><span>${R.total}/${R.nEv}</span></div>${chat}`;
+  }
   dvEl.className='phone '+(big?'v75':'v40');
-  dvEl.innerHTML=`<div class="scr"><div class="sbar"><span>${hhmm}</span><span>BUDAPPEN</span><span>▂▄▆ ▮</span></div>${body}<div id="phbtn"></div></div>`;
+  dvEl.innerHTML=`<div class="scr"><div class="sbar"><span>${hhmm}</span><span>BUDAPPEN</span><span>▂▄▆ ▮</span></div><div class="scb">${body}</div><div id="phbtn"></div></div>`;
   const hb=$('phbtn');if(big&&hb&&hb.appendChild)hb.appendChild(nx);
   dvEl.hidden=false;setPh(big?.75:.4);
 }
@@ -1274,7 +1539,7 @@ function tick(){
   const a=$('tk'),b=$('tkd');if(a){a.textContent=R.tkT;a.className=R.tkC}if(b)b.textContent=R.tkD;
   if(R.stage=='cross'||R.stage=='tail')dispatch(R,left);
 }
-const V0=7,MINW=5,QT=5,BOOST=90,CRASHV=150,CRASH=2.4,ARROW=['↑','↗','→','↘','↓','↙','←','↖'];   // m/s, s, m/s
+const V0=9,MINW=4,QT=5,BOOST=90,CRASHV=150,CRASH=2.4,ARROW=['↑','↗','→','↘','↓','↙','←','↖'];   // m/s, s, m/s
 const paused=()=>!$('ab').hidden||!$('lvm').hidden||!$('top').hidden||!$('mm').hidden||!$('lb').hidden;
 const dirIdx=(ch,pos)=>{const a=ptAt(ch,pos),b=ptAt(ch,pos+60);return Math.round(((Math.atan2(X(b)-X(a),Y(b)-Y(a))*180/Math.PI+360)%360)/45)%8};
 // A new crossing: the bike heads for it. On time: it gets there after max(distance/V0, MINW) seconds, answered or not.
@@ -1289,18 +1554,59 @@ function startQ(){
   blink([]);$('nx').hidden=true;$('sh').hidden=true;$('opts').innerHTML='';$('typed').hidden=true;$('qbar').hidden=true;$('qbar').className='';
   drawScene();renderCard();
   $('q').textContent=`🚲 ${leg.st.n} ${ARROW[dirIdx(leg.ch,R.pos)]}`;
+  if(e.stop)return startStop(e);
   setFb(R.ei==0&&R.from?`Svängde in från ${R.from}`:'');
   showQ();
 }
+// A stop: tap where the house number is (extra points + a boost). No address data -> the bud is simply handed over.
+function startStop(e){
+  const R=ride,leg=R.legs[R.li];
+  R.qShown=true;
+  if(!e.addr){
+    R.answered=answered=true;R.free=true;e.done=true;R.stopsDone++;
+    $('lastr').textContent=`${e.kind=='pickup'?'📦 Hämtat':'🏠 Lämnat'} på ${e.street.n} (ingen adressdata)`;$('lastr').className='ok';
+    renderCard();return;
+  }
+  $('qbar').hidden=false;$('qbi').style.width='100%';
+  const what=e.kind=='pickup'?'📦 Hämta':'🏠 Lämna';
+  $('q').textContent=`${what}: ${e.street.n} ${e.addr.n}`;
+  setFb('Tryck på kartan där numret ligger – träff ger boost!');
+  R.stopBox=anchorBox(ptAt(leg.ch,R.pos),box=>{box.classList.add('qtxt');box.innerHTML=`${what}<br><b>${esc(e.street.n)} ${e.addr.n}</b><br><small>Tryck på kartan</small>`},false);
+}
+function stopAnswer(cl){
+  const R=ride,leg=R.legs[R.li],e=leg&&leg.ev[R.ei];
+  if(!e||!e.stop||R.answered)return;
+  if(R.stopBox){layers.removeLayer(R.stopBox);R.stopBox=null}
+  R.answered=answered=true;e.done=true;R.stopsDone++;
+  const t=[e.addr.la,e.addr.lo];let frac=0,td=0;
+  if(cl){td=dist(cl,t);frac=numFrac(td,e.street,R.nrLvl)}
+  const hit=frac>=.3,pen=e.kind=='pickup'&&!hit,pts=pen?-PICKPEN:Math.round(BONUS*frac*mult(game.streak));
+  R.ok=hit;R.free=!hit;R.stopFracs.push(frac);R.stopPts+=pts;if(hit)R.stopHits++;R.stopLog.push({e,cl,frac,td});
+  if(pts)addScore(pts,true);
+  sfx(hit?'good':'bad');
+  if(cl){
+    L.polyline([cl,t],{color:'#192134',weight:2,dashArray:'5 5'}).addTo(layers);
+    L.circleMarker(t,{radius:8,color:'#192134',fillColor:hit?'#2ba58f':'#e54168',fillOpacity:1,weight:3}).addTo(layers);tip(t,'nr '+e.addr.n,'n');
+  }
+  $('qbar').hidden=true;
+  $('lastr').textContent=`${hit?'💨':'✖'} ${e.street.n} ${e.addr.n}: ${cl?Math.round(td)+' m – '+numWord(frac):'för sent'}${pts?'  '+(pts>0?'+':'−')+Math.abs(pts):''}`;$('lastr').className=hit?'ok':'bad';
+  setFb(hit?'💨 BOOST!':cl?'Bom – cyklar vidare':'För sent – cyklar vidare',hit?'ok':'bad');
+  if(hit)bikeCls('boost',true);
+  renderCard();
+}
 const inView=p=>{const s=map.getSize(),c=map.latLngToContainerPoint(p);return c.x>40&&c.x<s.x-40&&c.y>hudH()+80&&c.y<s.y-phVis(.4)-24};
-function focusBoth(a,b,anim){if(inView(a)&&inView(b))return;map.fitBounds(L.latLngBounds([a,b]),{paddingTopLeft:[40,hudH()+90],paddingBottomRight:[40,phVis(.4)+30],maxZoom:17,animate:!!anim})}
+function focusBoth(a,b,anim){if(FOLLOW.on||(inView(a)&&inView(b)))return;map.fitBounds(L.latLngBounds([a,b]),{paddingTopLeft:[40,hudH()+90],paddingBottomRight:[40,phVis(.4)+30],maxZoom:17,animate:!!anim})}
 // The question: the junction street blinks, and the answers hang right at the junction (typing mode: input at the bottom).
 // A box hung on the map at a point (answers at a junction, the house-number question at the end of the road).
 function anchorBox(pt,fill,interactive){
-  const sz=map.getSize(),c=map.latLngToContainerPoint(pt),right=c.x<sz.x/2,below=c.y<sz.y/2;   // open towards the side with most room
+  const c=map.latLngToContainerPoint(pt);let sx,sy;   // where the point is on the SCREEN (the map may be turned)
+  if(FOLLOW.on){const t=FOLLOW.theta*Math.PI/180,x=c.x-FOLLOW.D/2,y=c.y-FOLLOW.D/2;sx=Math.cos(t)*x-Math.sin(t)*y;sy=Math.sin(t)*x+Math.cos(t)*y}
+  else{const sz=map.getSize();sx=c.x-sz.x/2;sy=c.y-sz.y/2}
+  const right=sx<0,below=sy<0;   // open towards the side with most room
   const box=document.createElement('div');box.className='qo '+(right?'r ':'l ')+(below?'b':'a');
   fill(box);if(interactive)L.DomEvent.disableClickPropagation(box);
-  return L.marker(pt,{icon:L.divIcon({className:'qopt',html:box,iconSize:[0,0]}),keyboard:false,interactive:!!interactive,zIndexOffset:2000}).addTo(layers);
+  const rot=document.createElement('div');rot.className='qrot';rot.appendChild(box);   // keeps the box upright while the map turns
+  return L.marker(pt,{icon:L.divIcon({className:'qopt',html:rot,iconSize:[0,0]}),keyboard:false,interactive:!!interactive,zIndexOffset:2000}).addTo(layers);
 }
 function showQ(){
   const R=ride,leg=R.legs[R.li],e=leg.ev[R.ei],type=$('rd').value=='type';
@@ -1310,13 +1616,14 @@ function showQ(){
   blink(hint(e));
   if(type){$('typed').hidden=false;$('ans').value='';$('ans').disabled=false;$('go').disabled=false;$('ans').focus();return}
   $('typed').hidden=true;
-  const adj=new Set(leg.ev.filter(x=>Math.abs(x.pos-e.pos)<40).map(x=>x.o));
+  const adj=new Set(leg.ev.filter(x=>!x.stop&&Math.abs(x.pos-e.pos)<40).map(x=>x.o));
   const near=streets.filter(s=>!adj.has(s)&&s!==leg.st&&inLevel(s)).map(s=>[dist(cent(s),e.pt),s]).sort((a,b)=>a[0]-b[0]).slice(0,12).map(x=>x[1]);
   anchorBox(e.pt,box=>shuffle([e.o,...shuffle(near).slice(0,3)]).forEach(st=>{
     const b=document.createElement('button');b.textContent=st.n;b.onclick=()=>rideAnswer(st);box.appendChild(b);
   }),true);
 }
 function follow(p){
+  if(FOLLOW.on)return;
   const now=Date.now();if(now-(follow.t||0)<700)return;follow.t=now;
   const R=ride,j=R&&R.qShown&&!R.answered&&R.legs[R.li].ev[R.ei];
   if(j)focusBoth(p,j.pt,true);else if(!map.getBounds().pad(-.25).contains(p))map.panTo(p,{animate:true,duration:.6});
@@ -1325,24 +1632,18 @@ function moveBike(){const R=ride,p=ptAt(R.legs[R.li].ch,R.pos);if(R.bike)R.bike.
 function rideLoop(R,ts){
   if(ride!==R||mode!='ride'||R.done||!(R.stage=='cross'||R.stage=='tail'))return;
   const dt=R.lt?Math.min(.1,(ts-R.lt)/1000):0;R.lt=ts;
-  if(dt>0&&!paused())rideStep(R,dt);
+  if(dt>0&&!paused()){rideStep(R,dt);followFrame(R,dt)}
   requestAnimationFrame(t=>rideLoop(R,t));
 }
 function bikeCls(c,on){const el=ride&&ride.bike&&ride.bike.getElement&&ride.bike.getElement();if(el&&el.classList)on?el.classList.add(c):el.classList.remove(c)}
 function rideStep(R,dt){
-  const leg=R.legs[R.li];
-  if(R.stage=='tail'){   // last stretch to the address (tap the house number for a boost)
-    R.pos=Math.min(leg.ch.len,R.pos+(R.tailV||V0)*dt);moveBike();
-    if(R.pos>=leg.ch.len-.01){R.dest&&!R.finalDone?finalAnswer(null):rideDone()}
-    return;
-  }
-  const e=leg.ev[R.ei];
+  const leg=R.legs[R.li],e=leg.ev[R.ei];
   if(!R.answered){
     R.el+=dt;
     if(R.timed){
-      const f=Math.min(1,R.el/R.win);R.pos=R.p0+(e.pos-R.p0)*f;
+      const f=Math.min(1,R.el/R.win);R.pos=Math.min(e.pos,R.p0+V0*R.el);
       const q=Math.max(0,R.win-R.el)/R.qt;$('qbi').style.width=(q*100)+'%';$('qbar').className=q<.3?'low':'';
-      if(f>=1)rideAnswer(null,true);      // reached the junction without an answer
+      if(f>=1){e.stop?stopAnswer(null):rideAnswer(null,true)}      // reached the junction/stop without an answer
     }else R.pos=Math.min(Math.max(R.p0,e.pos-25),R.pos+V0*dt);   // training: ride up to the junction and wait there
   }else if(!R.ok&&R.crash>0){            // fell off the bike: lie still for a moment
     R.crash-=dt;if(R.crash<=0){bikeCls('fall',false);if(R.lost)rideLost()}
@@ -1353,18 +1654,12 @@ function rideStep(R,dt){
   }
   moveBike();
 }
-// Past the junction: next crossing, next street, or the last stretch to the address.
+// Past the junction/stop: the next event, the next street, or the end of the route.
 function passQ(){
   const R=ride,leg=R.legs[R.li];
   if(++R.ei<leg.ev.length)return startQ();
   if(R.li+1<R.legs.length){R.from=leg.st.n;R.li++;R.ei=0;R.pos=0;return startQ()}
-  R.ei=leg.ev.length-1;R.stage='tail';R.tailV=V0;
-  $('qbar').hidden=true;$('opts').innerHTML='';$('typed').hidden=true;$('sh').hidden=true;
-  if(R.dest){
-    R.answered=answered=false;$('q').textContent=`📍 Var ligger nummer ${R.dest.n}?`;setFb('Tryck på kartan – träff ger boost!');
-    R.tailBox=anchorBox(leg.ev[leg.ev.length-1].pt,box=>{box.classList.add('qtxt');box.innerHTML=`📍 Var ligger<br><b>nummer ${R.dest.n}</b>?<br><small>Tryck på kartan</small>`},false);   // same spot as the answers
-  }
-  else{$('q').textContent='🚲 Snart framme…';setFb('');R.tailV=BOOST;bikeCls('boost',true)}   // nothing to guess: boost to the goal
+  R.ei=leg.ev.length-1;rideDone();
 }
 // Streets already crossed stay on the map in green (right) / red (wrong) with their names.
 function drawLog(){
@@ -1395,7 +1690,8 @@ function drawScene(noX){
   L.polyline(sub(leg.ch,leg.start,legEnd(leg)),{color:TH.route,weight:7,opacity:.75}).addTo(layers);
   if(R.pos>0)L.polyline(sub(leg.ch,leg.start,R.pos),{color:TH.trav,weight:7,opacity:.9}).addTo(layers);
   drawLog();
-  L.circleMarker(e.pt,{radius:8,color:'#192134',fillColor:'#fff',fillOpacity:1,weight:3}).addTo(layers);
+  R.stops.forEach(sp=>{if(!(sp.ev&&sp.ev.done))stopMarker(sp)});
+  if(!e.stop)L.circleMarker(e.pt,{radius:8,color:'#192134',fillColor:'#fff',fillOpacity:1,weight:3}).addTo(layers);
   R.bike=mark('🚲',ptAt(leg.ch,R.pos));
 }
 function rideAnswer(x,late){
@@ -1406,7 +1702,7 @@ function rideAnswer(x,late){
   let ok;
   if(typeof x=='string'){
     // typed: any street meeting the route at this junction (within 40 m) counts, and the one you named gets the credit
-    const e0=leg.ev[R.ei],j=leg.ev.findIndex((v,i)=>i>=R.ei&&Math.abs(v.pos-e0.pos)<40&&!v.skip&&sameName(v.o.n,x));
+    const e0=leg.ev[R.ei],j=leg.ev.findIndex((v,i)=>i>=R.ei&&Math.abs(v.pos-e0.pos)<40&&!v.skip&&!v.stop&&sameName(v.o.n,x));
     ok=j>=0;if(ok&&j!=R.ei)[leg.ev[R.ei],leg.ev[j]]=[leg.ev[j],leg.ev[R.ei]];
   }else ok=!!x&&x===leg.ev[R.ei].o;
   const e=leg.ev[R.ei];
@@ -1434,69 +1730,118 @@ function rideAnswer(x,late){
 function rideNext(){
   const R=ride;if(!R)return;
   if(R.briefing){
+    if(!R.legs||!R.addrReady)return;       // choose the order of the stops first; wait for the addresses
     R.briefing=false;R.stage='zoom';$('nx').hidden=true;startMusic();
     (R.chat=R.chat||[]).push({kind:'info',text:'Kör! Kunden väntar.'});sfx('ping');
     $('q').textContent='🚲 Gör dig redo…';setFb('');renderCard();
     map.flyTo(R.legs[0].ch.pts[0],17,{duration:1.8});   // from the whole route to where the ride starts
     setTimeout(()=>{
       if(ride!==R||R.done)return;
-      if(R.timed){R.deadline=Date.now()+R.secs*1000;R.last=Date.now();R.timer=setInterval(tick,250)}
-      startQ();R.lt=0;requestAnimationFrame(t=>rideLoop(R,t));
+      R.deadline=Date.now()+R.secs*1000;R.last=Date.now();R.timer=setInterval(tick,250);
+      followOn(R);startQ();R.lt=0;requestAnimationFrame(t=>rideLoop(R,t));
     },2000);
     return;
   }
-  if(R.done)return rideStart();
+  if(R.done)openBuda();
 }
-function rideFinalClick(e){const R=ride;if(R&&R.stage=='tail'&&R.dest&&!R.finalDone)finalAnswer([e.latlng.lat,e.latlng.lng])}
-// Tapping the house number: points by distance, and a good hit boosts the bike the rest of the way.
-function finalAnswer(cl){
-  const R=ride,d=R.dest,leg=R.legs[R.legs.length-1],t=[d.la,d.lo];
-  if(R.finalDone)return;
-  if(R.tailBox){layers.removeLayer(R.tailBox);R.tailBox=null}
-  R.answered=answered=true;R.finalDone=true;R.finalCl=cl;
-  let frac=0,td=0;
-  if(cl){td=dist(cl,t);frac=numFrac(td,leg.st,Math.max(1,+$('nr').value))}
-  R.finalPts=Math.round(BONUS*frac*mult(game.streak));
-  R.finalMsg=cl?`nummer ${d.n}: ${Math.round(td)} m från rätt ställe – ${numWord(frac)}`:`nummer ${d.n}: för sent`;
-  if(!cl)return rideDone();
-  const hit=frac>=.3;R.tailV=hit?BOOST:V0;bikeCls('boost',hit);
-  L.polyline([cl,t],{color:'#192134',weight:2,dashArray:'5 5'}).addTo(layers);
-  L.circleMarker(t,{radius:8,color:'#192134',fillColor:'#e54168',fillOpacity:1,weight:3}).addTo(layers);tip(t,'nr '+d.n,'n');
-  $('lastr').textContent=`${hit?'💨':'✖'} ${R.finalMsg}${R.finalPts?'  +'+R.finalPts:''}`;$('lastr').className=hit?'ok':'bad';
-  setFb(hit?'💨 BOOST!':'Bom – cyklar vidare',hit?'ok':'bad');
-}
+function rideFinalClick(e){const R=ride,ev=R&&R.legs&&R.legs[R.li]&&R.legs[R.li].ev[R.ei];if(ev&&ev.stop&&!R.answered&&R.stage=='cross')stopAnswer([e.latlng.lat,e.latlng.lng])}
 function fillNames(){$('names').innerHTML=[...new Set(streets.map(s=>s.n))].map(n=>`<option value="${esc(n)}">`).join('')}
-function addScore(p){
-  const r0=rank(game.score);game.score+=p;gsave();stats();pop('+'+p);
+const PICKPEN=60;
+function addScore(p,quiet){
+  const r0=rank(game.score);game.score=Math.max(0,game.score+p);gsave();stats();pop((p<0?'−':'+')+Math.abs(p));
   const r1=rank(game.score);
-  if(r1>r0)setTimeout(()=>{sfx('fanfare');showLevel(r1)},700);else sfx('mult');
+  if(r1>r0){setTimeout(()=>{sfx('fanfare');showLevel(r1)},700);return true}
+  if(!quiet)sfx('mult');return false;
 }
-function rideLost(){
-  const R=ride;tick();clearInterval(R.timer);R.timer=0;
-  R.done=true;R.stage='done';R.lost=true;answered=true;sfx('bad');
-  (R.chat=R.chat||[]).push({kind:'hurry',text:'Du tappade leveransen… Kunden får vänta.'});heartsUi(R);stopMusic();
-  R.res={title:'📦💥 Leveransen tappades',line:`${R.okc}/${R.total} rätt · fem fel`};
+function rideLost(){budaFinish(true)}
+function rideDone(){budaFinish(false)}
+// Result: delivered buds, precision (street names / house numbers), time and route optimisation -> a status.
+function budaFinish(lost){
+  const R=ride;if(!R||R.done)return;
+  followOff();
+  tick();clearInterval(R.timer);R.timer=0;
+  R.done=true;R.stage='done';answered=true;stopMusic();heartsUi(R);blink([]);
+  const lv=R.lv,L=R.L,late=Date.now()>R.deadline,ontime=!late;
+  const drops=R.stops.filter(sp=>sp.kind=='drop').length,hitRate=stopsTot(R)?R.stopHits/stopsTot(R):1;
+  const optRatio=R.opt?Math.min(1,R.plan.opt.len/Math.max(1,R.chosenLen)):1;
+  let status='Misslyckad';
+  if(!lost){
+    status='Godkänd';
+    if(ontime&&R.errs<=2&&hitRate>=.5&&optRatio>=.85)status='Bra';
+    if(ontime&&R.errs==0&&hitRate>=.8&&optRatio>=.95)status='Perfekt';
+  }
+  const passed=!lost;
+  const bDeliver=lost?0:100*drops,bTime=(passed&&ontime)?100*lv:0,bOpt=(passed&&R.opt)?Math.round(300*Math.max(0,(optRatio-.6)/.4)):0,bonus=bDeliver+bTime+bOpt;
+  const total=rnd.pts+R.stopPts+bonus;
+  const up=addScore(bonus,true);
+  if(!up)sfx(lost?'lose':status=='Godkänd'&&late?'ok':'win');
+  // progress: pass -> next level, and new areas
+  let newAreas=[];
+  if(passed){
+    const before=BU.passed;BU.passed=Math.max(BU.passed,lv);
+    const b=BU.best[lv];if(!b||total>b.score)BU.best[lv]={score:total,status};
+    newAreas=AREAS.filter(a=>a.after>before&&a.after<=BU.passed);bSave();
+  }
+  const pl=lost?null:postScore('ride',total,R.okc,R.total);
+  const used=Math.max(0,Math.round(R.secs-(R.deadline-Date.now())/1000));
+  const lines=[
+    `Bud levererade: ${lost?R.stopsDone:R.stops.length}/${R.stops.length} stopp`,
+    `Korsningar rätt: ${R.okc}/${R.total}${stopsTot(R)?` · husnummer: ${Math.round(100*R.stopFracs.reduce((a,b)=>a+b,0)/Math.max(1,R.stopFracs.length))} % träffsäkerhet`:''}`,
+    `Tid: ${mmss(used)} av ${mmss(R.secs)}${late?' (för sent)':''}`,
+    ...(R.opt?[`Ruttoptimering: ${Math.round(optRatio*100)} %`]:[]),
+    `Poäng: ${fmt(total)}${pl?` · plats ${pl} på topplistan`:''}`,
+    ...(passed&&lv<10?[`Nivå ${lv+1} är upplåst!`]:[]),
+    ...newAreas.map(a=>`Nytt område upplåst: ${a.name}!`)];
+  (R.chat=R.chat||[]).push(lost?{kind:'hurry',text:'Du tappade budet… Kunden får vänta.'}:{kind:late?'hurry':'good',text:late?'Framme, men sent… kunden fick vänta.':'Budet i tid – kunden är jättenöjd! 🎉'});
+  R.res={title:lost?'📦💥 Budet tappades':`📦 ${status.toUpperCase()}`,line:`${fmt(total)} poäng · nivå ${lv} ${passed?'klarad':'ej klarad'}`};
   drawResult();renderCard();
-  $('q').textContent='📦💥 Leveransen tappades';setFb('Fem fel – leveransen är förlorad','bad');
-  $('opts').innerHTML='';$('typed').hidden=true;$('sh').hidden=true;$('qbar').hidden=true;$('nx').hidden=false;$('nx').textContent='Ny leverans';
-  setTimeout(()=>{if(ride===R)showModes('Leveransen förlorad',`${R.okc} av ${R.total} rätt innan du tappade paketet`,true)},1800);
+  $('q').textContent=R.res.title;setFb(R.res.line,passed?'ok':'bad');
+  $('opts').innerHTML='';$('typed').hidden=true;$('sh').hidden=true;$('qbar').hidden=true;$('nx').hidden=false;$('nx').textContent=passed?'Nästa nivå ▶':'Försök igen';
+  setTimeout(()=>{if(ride===R)showBudaEnd({status,lv,passed,lines})},lost?1400:1000);
 }
-function rideDone(){
-  const R=ride;tick();clearInterval(R.timer);R.timer=0;
-  const perfect=R.errs==0,late=R.timed&&Date.now()>R.deadline,ontime=R.timed&&!late;
-  const pts=100+(perfect?100:0)+(ontime?100:0)+(R.finalPts||0);
-  R.done=true;R.stage='done';answered=true;addScore(pts);
-  (R.chat=R.chat||[]).push(R.timed?{kind:late?'hurry':'good',text:late?'Framme, men sent… kunden fick vänta.':'Leveransen i tid – kunden är jättenöjd! 🎉'}:{kind:'good',text:'Bra träning – leveransen är framme!'});stopMusic();
-  R.res={title:late?'📦 Levererat – men sent':'📦 Leverans framme!',line:`${R.okc}/${R.total} rätt · +${pts} poäng`};
-  drawResult();renderCard();
-  const sum=`${R.okc} av ${R.total} korsningar rätt${perfect?' – perfekt':''}${R.timed?(late?' · för sent':' · i tid'):''}${R.finalMsg?' · '+R.finalMsg:''}`;
-  $('q').textContent=late?'📦 Levererat – men för sent':'📦 Leverans framme!';
-  setFb(`${R.job.t} levererad! ${sum} · +${pts} poäng`,late?'bad':'ok');
-  $('opts').innerHTML='';$('typed').hidden=true;$('sh').hidden=true;$('qbar').hidden=true;$('nx').hidden=false;$('nx').textContent='Ny leverans';
-  const total=rnd.pts+pts,pl=postScore('ride',total,R.okc,R.total);
-  setTimeout(()=>{if(ride===R)showModes('Leverans klar!',`${sum} · ${fmt(total)} poäng · plats ${pl} på topplistan`,true)},1500);
+function showBudaEnd(info){
+  const ic={Perfekt:'🏆',Bra:'🥇','Godkänd':'✅',Misslyckad:'💥'}[info.status];
+  $('end').className=info.passed?'win':'lose';
+  $('endi').textContent=ic;$('endt').textContent=info.passed?info.status.toUpperCase()+'!':'MISSLYCKADES';
+  $('ends').textContent=`Nivå ${info.lv} ${info.passed?'klarad':'inte klarad'}`;
+  $('endl').innerHTML=info.lines.map(esc).join('<br>');
+  $('endNew').textContent=info.passed?(info.lv>=10?'Spela Mästarbudet igen':'Nästa nivå ▶'):'Försök igen';
+  confetti($('conf2'),info.status=='Perfekt'?80:info.passed?40:0);
+  $('end').hidden=false;$('endNew').focus();
 }
-
+// ---- the BUDA screen: start area -> polygon on the map -> start the level ----
+let alayer=null;
+function drawAreas(sel){
+  if(!alayer)alayer=L.layerGroup().addTo(map);alayer.clearLayers();
+  const open=areasOpen(),all=[];
+  open.forEach((a,i)=>{
+    const on=a.id==sel,c=PAL[i%PAL.length];
+    const cc=a.poly.reduce((x,p)=>[x[0]+p[0]/a.poly.length,x[1]+p[1]/a.poly.length],[0,0]),gp=a.poly.map(p=>[cc[0]+(p[0]-cc[0])*1.07,cc[1]+(p[1]-cc[1])*1.07]);   // grown a little so neighbouring areas touch
+    L.polygon(gp,{color:TH.route,weight:on?3:1,fillColor:on?TH.ask:TH.route,fillOpacity:on?.3:.16,interactive:false}).addTo(alayer);
+    const cen=a.poly.reduce((x,p)=>[x[0]+p[0]/a.poly.length,x[1]+p[1]/a.poly.length],[0,0]);
+    L.marker(cen,{interactive:false,keyboard:false,icon:L.divIcon({className:'rlw',html:`<span class="rl ${on?'m':''}" style="transform:translate(-50%,-50%)">${esc(a.name)}</span>`,iconSize:[0,0]})}).addTo(alayer);
+    all.push(...a.poly);
+  });
+  map.fitBounds(L.latLngBounds(all),{paddingTopLeft:[20,hudH()+10],paddingBottomRight:[20,300]});
+}
+function openBuda(){
+  followOff();$('end').hidden=true;$('mm').hidden=true;$('top').hidden=true;$('ab').hidden=true;
+  if(ride){clearInterval(ride.timer);ride.done=true;ride=null}
+  layers.clearLayers();blink([]);stopMusic();heartsUi(null);setPh(0);$('dv').hidden=true;$('opts').innerHTML='';$('typed').hidden=true;$('qbar').hidden=true;$('nx').hidden=true;$('sh').hidden=true;
+  $('q').textContent='';setFb('');$('lastr').textContent='';answered=true;cur=null;mode='ride';$('mode').value='ride';
+  const lv=budaLv(),L=LEVELS[lv];
+  if(!areasOpen().some(a=>a.id==budaArea))budaArea='soder';
+  $('bdt').textContent=`BUDA – NIVÅ ${lv} AV 10`;$('bdd').textContent='';
+  $('bda').innerHTML=AREAS.map(a=>{const op=BU.passed>=a.after;return `<button ${op?'':'disabled'} class="${a.id==budaArea?'on':''}" onclick="budaSel('${a.id}')">${op?'':'🔒 '}${esc(a.name)}${op?'':` (efter nivå ${a.after})`}</button>`}).join('');
+  $('bdp').innerHTML=Array.from({length:10},(_,i)=>`<i class="${i<BU.passed?'done':i==BU.passed?'now':''}">${i+1}</i>`).join('');
+  $('bdGo').textContent=`▶ Starta nivå ${lv}`;
+  const ty=$('rd').value=='type';[['bdA',!ty],['bdT',ty]].forEach(([id,on])=>{const c=$(id).classList;on?c.add('on'):c.remove('on')});
+  $('bd').hidden=false;drawAreas(budaArea);
+}
+function budaSel(id){if(BU.passed>=AREAS.find(a=>a.id==id).after){budaArea=id;openBuda()}}
+$('bdGo').onclick=()=>{$('bd').hidden=true;if(alayer)alayer.clearLayers();pickMode('ride')};
+$('bdX').onclick=()=>{$('bd').hidden=true;if(alayer)alayer.clearLayers();showModes('Välj spelläge','',true)};
+$('bdA').onclick=()=>{$('rd').value='choice';openBuda()};$('bdT').onclick=()=>{$('rd').value='type';openBuda()};
 // ---------- game-mode box ----------
 function rdUi(){const c=$('rd').value=='type';[['rdA',!c],['rdT',c]].forEach(([id,on])=>{const l=$(id).classList;on?l.add('on'):l.remove('on')})}
 function showModes(t,sub,close){
@@ -1504,6 +1849,7 @@ function showModes(t,sub,close){
   const cur=mode=='ride'?'mc3':mode=='name'?'mc2':'mc1';
   ['mc1','mc2','mc3'].forEach(id=>{const c=$(id).classList;id==cur?c.add('cur'):c.remove('cur')});
   $('more').hidden=true;$('mmmore').textContent='Fler spellägen ▾';rdUi();
+  $('mc3s').textContent=`Nivå ${budaLv()} av 10 · ${areasOpen().map(a=>a.name).join(', ')}`;
   $('mm').hidden=false;
 }
 function pickMode(m,r){
@@ -1584,7 +1930,7 @@ $('edok').onclick=()=>{
   zone.setLatLngs(POLY);editZone(false);map.fitBounds(zone.getBounds());$('reload').onclick();
 };
 $('mc1').onclick=()=>pickMode('locate');$('mc2').onclick=()=>pickMode('name');
-$('mc3').onclick=()=>pickMode('ride');
+$('mc3').onclick=()=>openBuda();
 $('rdA').onclick=()=>{$('rd').value='choice';rdUi()};$('rdT').onclick=()=>{$('rd').value='type';rdUi()};
 $('mmmore').onclick=()=>{$('more').hidden=!$('more').hidden;$('mmmore').textContent=$('more').hidden?'Fler spellägen ▾':'Färre ▴'};
 $('mmx').onclick=()=>{$('mm').hidden=true};$('modes').onclick=()=>{$('top').hidden=true;showModes('Välj spelläge','',true)};
@@ -1607,7 +1953,7 @@ $('reload').onclick=async()=>{
   try{await loadData(true);queue.length=0;buildIdx();fillNames();try{await loadPlaces(true)}catch(e){}ldShow(false);next()}catch(e){ldShow(false);fail(e)}
 };
 $('reset').onclick=()=>{
-  if(confirm('Nollställa alla framsteg och poäng?')){prog={};save();game={score:0,streak:0,best:0,total:0,right:0};gsave();queue.length=0;seen.clear();sOk=sTot=0;stats()}
+  if(confirm('Nollställa alla framsteg och poäng?')){prog={};save();BU={passed:0,best:{}};bSave();game={score:0,streak:0,best:0,total:0,right:0};gsave();queue.length=0;seen.clear();sOk=sTot=0;stats()}
 };
 // ---------- player name ----------
 let pname=lsg('gs_name')||'',nameThen=null;
@@ -1681,14 +2027,59 @@ function abortGame(){
 function doAbort(){
   const R=ride;
   if(R){clearInterval(R.timer);R.timer=0;R.done=true}
-  ride=null;blink([]);layers.clearLayers();cur=null;answered=true;heartsUi(null);setPh(0);stopMusic();
+  followOff();ride=null;blink([]);layers.clearLayers();cur=null;answered=true;heartsUi(null);setPh(0);stopMusic();
   ['dv','qbar','typed','info','ib','sh','nx'].forEach(id=>{$(id).hidden=true});$('opts').innerHTML='';
   $('q').textContent='';setFb('');$('lastr').textContent='';
   showModes('Välj spelläge','Spelet avbröts',false);
 }
+$('endNew').onclick=()=>{$('end').hidden=true;openBuda()};
+$('endMenu').onclick=()=>{$('end').hidden=true;showModes('Välj spelläge','',true)};
+$('endView').onclick=()=>{$('end').hidden=true};
 $('abNo').onclick=()=>{$('ab').hidden=true};
 $('abYes').onclick=()=>{$('ab').hidden=true;doAbort()};
 $('abort').onclick=abortGame;
+// ---------- follow camera ----------
+const FOLLOW={on:false,theta:0,D:0,target:null,init:false,lastLab:0};
+const wrap180=a=>{a%=360;if(a>180)a-=360;if(a<=-180)a+=360;return a};
+function labAng(d){let a=d+FOLLOW.theta;while(a>90)a-=180;while(a<=-90)a+=180;return a-FOLLOW.theta}   // keep road names readable on a turned map
+const _mp=map.mouseEventToContainerPoint.bind(map);
+map.mouseEventToContainerPoint=function(e){   // taps on a turned map: undo the rotation so the right place is hit
+  if(!FOLLOW.on)return _mp(e);
+  const c=this._container,r=c.getBoundingClientRect(),x=e.clientX-(r.left+r.width/2),y=e.clientY-(r.top+r.height/2),t=FOLLOW.theta*Math.PI/180,co=Math.cos(t),si=Math.sin(t);
+  return L.point(c.offsetWidth/2+co*x+si*y,c.offsetHeight/2-si*x+co*y);
+};
+function followOn(R){
+  if(FOLLOW.on||!$('rotc').checked||!window.innerWidth)return;
+  const W=window.innerWidth,H=window.innerHeight,D=Math.ceil(Math.hypot(W,H))+16,m=$('map').style;   // the map is made large enough to fill the screen when turned
+  m.position='fixed';m.left='50%';m.top='50%';m.right='auto';m.bottom='auto';m.width=D+'px';m.height=D+'px';m.marginLeft=(-D/2)+'px';m.marginTop=(-D/2)+'px';
+  Object.assign(FOLLOW,{on:true,D,theta:0,target:null,init:false});
+  map.invalidateSize({pan:false});map.dragging.disable();map.touchZoom.disable();map.doubleClickZoom.disable();
+  map.setZoom(17,{animate:false});followFrame(R,1);
+}
+function followOff(){
+  if(!FOLLOW.on)return;
+  const m=$('map').style;FOLLOW.on=false;FOLLOW.theta=0;
+  m.transform='';m.position='';m.left='';m.top='';m.right='';m.bottom='';m.width='';m.height='';m.marginLeft='';m.marginTop='';if(m.setProperty)m.setProperty('--mr','0deg');
+  map.invalidateSize({pan:false});map.dragging.enable();map.touchZoom.enable();map.doubleClickZoom.enable();fixLabels();
+}
+function fixLabels(){
+  if(!document.querySelectorAll)return;
+  document.querySelectorAll('#map .rl').forEach(e=>{const d=+e.dataset.d;if(!isNaN(d))e.style.transform=`translate(-50%,-50%) rotate(${labAng(d)}deg)`});
+}
+// turns the map smoothly so that the direction you ride is up, and keeps the bike just above the phone's top edge
+function followFrame(R,dt){
+  if(!FOLLOW.on||!R.legs)return;
+  const leg=R.legs[R.li],p=ptAt(leg.ch,R.pos),q=ptAt(leg.ch,Math.min(leg.ch.len,R.pos+30)),dx=X(q)-X(p),dy=Y(q)-Y(p);
+  if(Math.hypot(dx,dy)>2)FOLLOW.target=-Math.atan2(dx,dy)*180/Math.PI;
+  if(FOLLOW.target===null)FOLLOW.target=0;
+  if(!FOLLOW.init){FOLLOW.theta=FOLLOW.target;FOLLOW.init=true}
+  FOLLOW.theta=wrap180(FOLLOW.theta+wrap180(FOLLOW.target-FOLLOW.theta)*Math.min(1,dt*3.5));
+  const m=$('map').style;m.transform=`rotate(${FOLLOW.theta}deg)`;if(m.setProperty)m.setProperty('--mr',FOLLOW.theta+'deg');
+  const H=window.innerHeight,off=(H-phVis(.4)-56)-H/2,t=FOLLOW.theta*Math.PI/180,D=FOLLOW.D;
+  const c=map.latLngToContainerPoint(p);map.panBy([c.x-(D/2+off*Math.sin(t)),c.y-(D/2+off*Math.cos(t))],{animate:false});
+  if(Math.abs(wrap180(FOLLOW.theta-FOLLOW.lastLab))>5){FOLLOW.lastLab=FOLLOW.theta;fixLabels()}
+}
+setTimeout(()=>{try{getGI();for(const s of streets)areaOf(s)}catch(e){}},1500);   // warm up the street network and the areas
 function fail(e){$('q').textContent='Kunde inte ladda gator';setFb(e.message+' Kontrollera anslutningen och tryck på "Ladda om data".','bad')}
 
 (async()=>{
