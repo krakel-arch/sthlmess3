@@ -391,6 +391,13 @@ button.pri,#mx,.tabs button.on,.bigbtn{background:var(--hi);color:var(--hif)}
 #owa{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin:6px 0}#owa button.on{background:var(--hi);color:var(--hif)}
 #ow .rvbtns{display:flex;flex-wrap:wrap;gap:6px;justify-content:center}
 #cr.new .ed{display:none}#cr:not(.new) .nw{display:none}
+.alab{overflow:visible}
+.alab span{position:absolute;left:0;top:0;transform:translate(-50%,-50%);white-space:nowrap;font-family:"VT323",ui-monospace,Menlo,Consolas,monospace;font-size:.95rem;line-height:1;padding:1px 6px;background:var(--pn);color:var(--ink);border:2px solid var(--line);box-shadow:2px 2px 0 var(--sh)}
+.alab.on span{background:var(--hi);color:var(--hif)}.alab.lock span{opacity:.55}
+.pi{display:inline-block;line-height:0;vertical-align:-2px}.pi svg{display:block}
+.mi .pi svg{width:32px;height:auto}.trophy{color:#e8a52b}
+.rl.sk{opacity:.85;background:#e9e9e9;color:#333;border-style:dashed}
+.rl.nm{background:#f4f7fcd8;color:#4a5568;border-width:1px;border-color:#b4bccb;font-size:.6rem;padding:0 3px;box-shadow:none;opacity:.95}
 </style>
 </head>
 <body>
@@ -404,14 +411,14 @@ button.pri,#mx,.tabs button.on,.bigbtn{background:var(--hi);color:var(--hif)}
   <div id="hs"><div id="score">0</div><div class="bar"><i id="xp"></i></div></div>
   <div id="lv"></div>
   <div id="pn" title="Byt namn"></div>
-  <span id="streak">🔥 0</span><span id="mx">×1</span>
-  <button id="mus" aria-label="Musik på/av">🎵</button><button id="mute" aria-label="Ljud på/av">🔊</button><button id="abort" aria-label="Avbryt och gå till menyn">⏹</button>
+  <span id="streak"><i data-i="flame" data-px="2"></i> 0</span><span id="mx">×1</span>
+  <button id="mus" aria-label="Musik på/av"><i data-i="note" data-px="2"></i></button><button id="mute" aria-label="Ljud på/av"><i data-i="spk" data-px="2"></i></button><button id="abort" aria-label="Avbryt och gå till menyn"><i data-i="stop" data-px="2"></i></button>
   <div id="pop"></div>
-  <div id="hrow" hidden><i id="h0">❤</i><i id="h1">❤</i><i id="h2">❤</i><i id="h3">❤</i><i id="h4">❤</i></div>
+  <div id="hrow" hidden><i id="h0" data-i="heart" data-px="2"></i><i id="h1" data-i="heart" data-px="2"></i><i id="h2" data-i="heart" data-px="2"></i><i id="h3" data-i="heart" data-px="2"></i><i id="h4" data-i="heart" data-px="2"></i></div>
 </aside>
 
 <div id="top" class="panel" hidden>
-  <div id="cfgrow"><button id="modes">🎮 Spellägen</button><button id="lbb">🏆 Topplista</button><button id="cfx" class="pri" aria-label="Stäng">✕</button></div>
+  <div id="cfgrow"><button id="modes">Spellägen</button><button id="lbb"><i data-i="trophy" data-px="2"></i> Topplista</button><button id="cfx" class="pri" aria-label="Stäng">✕</button></div>
   <div class="sec">FRAMSTEG</div>
   <div class="bar" title="Grönt = inlärd, gult = övas, rött = svag"><i id="mg"></i><i id="ma"></i><i id="mr"></i></div>
   <div id="st"></div>
@@ -446,12 +453,12 @@ button.pri,#mx,.tabs button.on,.bigbtn{background:var(--hi);color:var(--hif)}
     <label><input type="checkbox" id="pxc" checked> 8-bit-grafik</label>
     <button id="area">Öva på vyn</button>
     <button id="chn">Byt namn</button>
-    <button id="songb">🎵 Välj egen låt</button><input type="file" id="songf" accept="audio/*" hidden>
+    <button id="songb"><i data-i="note" data-px="2"></i> Välj egen låt</button><input type="file" id="songf" accept="audio/*" hidden>
     <button id="reload">Ladda om data</button>
     <button id="crb">Skapar-läge</button>
-    <button id="edz">✏️ Rita området</button>
-    <button id="exp">⬇ Exportera data</button>
-    <button id="imp">⬆ Importera data</button><input type="file" id="impf" accept=".json,application/json" hidden>
+    <button id="edz"><i data-i="pencil" data-px="2"></i> Rita området</button>
+    <button id="exp"><i data-i="down" data-px="2"></i> Exportera data</button>
+    <button id="imp"><i data-i="up" data-px="2"></i> Importera data</button><input type="file" id="impf" accept=".json,application/json" hidden>
     <button id="reset">Nollställ framsteg</button>
   </div>
 </div>
@@ -459,7 +466,7 @@ button.pri,#mx,.tabs button.on,.bigbtn{background:var(--hi);color:var(--hif)}
 <div id="ld"><div class="card"><div id="ldt" class="ttl">LADDAR…</div><div class="pxbar"><i></i><i></i><i></i><i></i><i></i><i></i></div><div id="ldl"></div></div></div>
 
 <div id="nb" hidden><div class="nbt">NYTT BUD FRÅN DISPATCH</div><div id="nbd"></div><button id="nbGo" class="pri">ACCEPTERA</button><div class="nbbar"><i id="nbi"></i></div></div>
-<button id="cmp" hidden aria-label="Vrid kartan med cykeln"><span id="cmpa">⬆</span><small>N</small></button>
+<button id="cmp" hidden aria-label="Vrid kartan med cykeln"><span id="cmpa"><i data-i="up" data-px="3"></i></span><small>N</small></button>
 
 <div id="bd" class="panel" hidden>
   <div id="bdt" class="ttl">BÖRJA BUDA</div>
@@ -493,7 +500,7 @@ button.pri,#mx,.tabs button.on,.bigbtn{background:var(--hi);color:var(--hif)}
 <div id="end" hidden role="dialog" aria-modal="true" aria-labelledby="endt">
   <div id="conf2"></div>
   <div class="mmc endc">
-    <div id="endi" class="endi">🏆</div>
+    <div id="endi" class="endi"><i data-i="trophy" data-px="6"></i></div>
     <div id="endt" class="ttl endt">VINST!</div>
     <div id="ends" class="sub"></div>
     <div id="endl" class="endl"></div>
@@ -513,8 +520,8 @@ button.pri,#mx,.tabs button.on,.bigbtn{background:var(--hi);color:var(--hif)}
 </div>
 
 <div id="lb" hidden role="dialog" aria-modal="true" aria-labelledby="lbt">
-  <div class="mmc"><div id="lbt" class="ttl">🏆 TOPPLISTA</div>
-  <div class="tabs"><button id="lbA">Alla</button><button id="lbR">📦 Bud</button><button id="lbO">📍 Omgångar</button></div>
+  <div class="mmc"><div id="lbt" class="ttl"><i data-i="trophy" data-px="2"></i> TOPPLISTA</div>
+  <div class="tabs"><button id="lbA">Alla</button><button id="lbR"><i data-i="box" data-px="2"></i> Bud</button><button id="lbO"><i data-i="pin" data-px="2"></i> Omgångar</button></div>
   <div id="lbl"></div><div id="lbn"></div><br><button id="lbx" class="pri">Stäng</button></div>
 </div>
 
@@ -522,22 +529,22 @@ button.pri,#mx,.tabs button.on,.bigbtn{background:var(--hi);color:var(--hif)}
   <div class="mmc">
     <div id="mmt" class="ttl">VÄLJ SPELLÄGE</div>
     <div id="mms" class="sub"></div>
-    <button id="mc3" class="bigbtn"><span class="mi">📦</span><b>BÖRJA BUDA</b><small id="mc3s">Cykla en rutt, namnge korsande gator och pricka husnumret – mot klockan.</small></button>
+    <button id="mc3" class="bigbtn"><span class="mi"><i data-i="box" data-px="4"></i></span><b>BÖRJA BUDA</b><small id="mc3s">Cykla en rutt, namnge korsande gator och pricka husnumret – mot klockan.</small></button>
     <button id="mmmore">Fler spellägen ▾</button>
     <div id="more" class="mgrid" hidden>
-      <button id="mc1" class="mcard"><span class="mi">📍</span><b>Hitta gatan</b><small>Du får ett gatunamn – tryck där den ligger.</small></button>
-      <button id="mc2" class="mcard"><span class="mi">🔤</span><b>Namnge gatan</b><small>En gata lyser upp – välj rätt namn av fyra.</small></button>
-      <button id="mc6" class="mcard"><span class="mi">📍</span><b>Eget område</b><small>Rita ett område, hämta gatorna och buda där.</small></button>
+      <button id="mc1" class="mcard"><span class="mi"><i data-i="pin" data-px="4"></i></span><b>Hitta gatan</b><small>Du får ett gatunamn – tryck där den ligger.</small></button>
+      <button id="mc2" class="mcard"><span class="mi"><i data-i="letter" data-px="4"></i></span><b>Namnge gatan</b><small>En gata lyser upp – välj rätt namn av fyra.</small></button>
+      <button id="mc6" class="mcard"><span class="mi"><i data-i="pencil" data-px="4"></i></span><b>Eget område</b><small>Rita ett område, hämta gatorna och buda där.</small></button>
     </div>
     <br>
-    <button id="mmlb">🏆 Topplista</button> <button id="mmx" class="pri" hidden>Titta på kartan</button>
+    <button id="mmlb"><i data-i="trophy" data-px="2"></i> Topplista</button> <button id="mmx" class="pri" hidden>Titta på kartan</button>
   </div>
 </div>
 
 <div id="lvm" hidden role="dialog" aria-modal="true" aria-labelledby="lvt">
   <div id="conf"></div>
   <div class="card">
-    <div class="trophy">🏆</div>
+    <div class="trophy"><i data-i="trophy" data-px="6"></i></div>
     <div id="lvt" class="ttl">NY NIVÅ!</div>
     <div id="lvn" class="num"></div>
     <div id="lvr" class="nm"></div>
@@ -568,7 +575,7 @@ button.pri,#mx,.tabs button.on,.bigbtn{background:var(--hi);color:var(--hif)}
   <datalist id="names"></datalist>
   <div id="info" hidden></div>
   <div class="row" id="brow">
-    <button id="ib" hidden>ℹ️ Mer</button>
+    <button id="ib" hidden>Mer</button>
     <button id="sh" hidden>Visa mig</button>
     <button id="nx" class="pri" hidden>Nästa</button>
   </div>
@@ -588,6 +595,30 @@ const KEY='gs_streets_v2', PKEY='gs_progress_v1', TOL=50; // within TOL m of the
 const $=id=>document.getElementById(id);
 
 // ---------- map ----------
+// ---------- small pixel icons for the interface ----------
+const ICO={
+  heart:['.##...##.','####.####','#########','#########','.#######.','..#####..','...###...','....#....'],
+  flame:['....#..','...##..','...###.','..####.','.#####.','.##.###','###.###','.#####.','..###..'],
+  note:['..#####','..#...#','..#...#','..#...#','.##..##','###.###','.#...#.'],
+  spk:['...#..#..','..##...#.','####.#.#.','####.#.#.','####.#.#.','..##...#.','...#..#..'],
+  spkx:['...#......','..##.#...#','####..#.#.','####...#..','####..#.#.','..##.#...#','...#......'],
+  trophy:['#########','#.#####.#','#.#####.#','.#.###.#.','..#####..','...###...','....#....','...###...','..#####..'],
+  pencil:['......###','.....#..#','....#..#.','...#..#..','..#..#...','.#..#....','##.#.....','###......'],
+  pin:['.#####.','#######','###.###','###.###','#######','.#####.','..###..','..###..','...#...'],
+  box:['.#######.','#########','#...#...#','#...#...#','#...#...#','#########'],
+  letter:['..###..','.#...#.','#.....#','#.....#','#######','#.....#','#.....#','#.....#'],
+  stop:['#######','#######','#######','#######','#######','#######','#######'],
+  up:['...#...','..###..','.#####.','#######','..###..','..###..','..###..'],
+  down:['..###..','..###..','..###..','#######','.#####.','..###..','...#...']
+};
+function ico(n,px){
+  const a=ICO[n];if(!a)return '';
+  const w=a[0].length,h=a.length;let r='';
+  a.forEach((row,y)=>{for(let x=0;x<w;x++)if(row[x]=='#')r+=`<rect x="${x}" y="${y}" width="1" height="1"/>`});
+  return `<span class="pi"><svg viewBox="0 0 ${w} ${h}" width="${w*(px||2)}" height="${h*(px||2)}" shape-rendering="crispEdges" fill="currentColor">${r}</svg></span>`;
+}
+function fillIcons(){if(!document.querySelectorAll)return;document.querySelectorAll('[data-i]').forEach(el=>{el.innerHTML=ico(el.dataset.i,+el.dataset.px||2)})}
+fillIcons();
 const map=L.map('map',{zoomControl:false,preferCanvas:true,zoomSnap:0}).fitBounds(L.polygon(POLY).getBounds());
 // CARTO now requires a free key (carto.com/basemaps/apikey). Paste it here for the cleanest map;
 // leave empty to use keyless Esri (no names) and OpenStreetMap (with names).
@@ -602,7 +633,7 @@ if(CARTO_KEY){
 }
 plain.addTo(map);
 let mapOK=false;plain.on('load',()=>{mapOK=true;step('map','Karta','ok')});
-const zone=L.polygon(POLY,{color:'#555',weight:1,dashArray:'4 4',fill:false,interactive:false}).addTo(map);
+const zone=L.polygon(POLY,{color:'#555',weight:1,dashArray:'4 4',fill:false,interactive:false});   // not drawn on the map (only used by the zone editor)
 const layers=L.layerGroup().addTo(map);
 
 // ---------- data ----------
@@ -611,7 +642,7 @@ let streets=[];
 const LD={};let ldTimer=0;
 function renderLd(){
   const now=Date.now();
-  $('ldl').innerHTML=Object.values(LD).map(x=>`<div class="${x.st}">${x.st=='ok'?'■':x.st=='fail'?'✖':'▶'} ${esc(x.label)}${x.st=='run'?' '+Math.floor((now-x.t0)/1000)+' s':''}</div>`).join('');
+  $('ldl').innerHTML=Object.values(LD).map(x=>`<div class="${x.st}">${x.st=='ok'?'■':x.st=='fail'?'x':'▶'} ${esc(x.label)}${x.st=='run'?' '+Math.floor((now-x.t0)/1000)+' s':''}</div>`).join('');
 }
 function step(id,label,st){LD[id]=Object.assign(LD[id]||{t0:Date.now()},{label,st});renderLd()}
 function ldReset(){for(const k in LD)delete LD[k]}
@@ -738,7 +769,7 @@ function info(st){
   if(min.length)h+=`<b>Sidogator:</b><br>${chips(min)}<br>`;
   if(!cr.length)h+='Inga korsande gator hittades i datat.<br>';
   h+='<span id="nums"><b>Nummer:</b> kontrollerar…</span>';
-  $('info').innerHTML=h;$('info').hidden=!infoOpen;$('ib').hidden=false;$('ib').textContent=infoOpen?'ℹ️ Mindre':'ℹ️ Mer';
+  $('info').innerHTML=h;$('info').hidden=!infoOpen;$('ib').hidden=false;$('ib').textContent=infoOpen?'Mindre':'Mer';
   labelMap(st,cr);
   numbers(st,cr).catch(()=>{});
 }
@@ -931,7 +962,7 @@ function confetti(c,n){
 function showEnd(kind,l1,l2){
   const win=kind=='win',late=kind=='late';
   $('end').className=kind=='lose'?'lose':'win';
-  $('endi').textContent=win?'🏆':late?'📦':'💥';
+  $('endi').innerHTML=win?pix('star','#e8a52b',5).repeat(3):late?pix('check','#2ba58f',6):pix('cross','#e54168',6);
   $('endt').textContent=win?'VINST!':late?'LEVERERAD':'FÖRLORAT';
   $('ends').textContent=win?(ride&&ride.timed?'Budet framme i tid!':'Budet är framme!'):late?'Men för sent – kunden fick vänta':'Fem fel – du tappade budet';
   $('endl').innerHTML=esc(l1)+(l2?'<br>'+esc(l2):'');
@@ -997,7 +1028,7 @@ function stats(){
   $('lv').innerHTML=`Nivå ${i+1}<small>${RANKS[i][1]}</small>`;
   $('xp').style.width=(nx?(game.score-from)/(nx[0]-from)*100:100)+'%';
   $('nxt').textContent=nx?`${fmt(nx[0]-game.score)} p till ${nx[1]}`:'Högsta nivån!';
-  $('streak').textContent=`🔥 ${game.streak}`;$('mx').textContent='×'+sv(m);
+  $('streak').innerHTML=`${ico('flame',2)} ${game.streak}`;$('mx').textContent='×'+sv(m);
   $('sm').style.width=(nt?game.streak/nt*100:100)+'%';
   $('mt').textContent=nt?`${nt-game.streak} till ×${sv(mult(nt))}`:'Max multiplikator!';
   $('sess').innerHTML=`Omgång ${sOk}/${sTot}<br>Bästa serie ${game.best}`;
@@ -1303,7 +1334,7 @@ function pathToLegs2(path,stops,o){
       if(j==0)return;
       const mk=o2=>({o:o2,p:l.ch.pts[j],pos:l.ch.cum[j],pt:l.ch.pts[j]});
       if(j==l.keys.length-1){
-        if(nxt){const t=mk(nxt.st);for(let q=res.length-1;q>=0;q--)if(res[q].o===t.o&&t.pos-res[q].pos<DUP)res.splice(q,1);res.push(t)}
+        if(nxt){const t=mk(nxt.st);t.turn=true;for(let q=res.length-1;q>=0;q--)if(res[q].o===t.o&&t.pos-res[q].pos<DUP)res.splice(q,1);res.push(t)}
         return;
       }
       for(const o2 of (vidx.get(k)||[]).filter(x=>x!==l.st).sort((a,b)=>imp(b)-imp(a))){
@@ -1316,15 +1347,16 @@ function pathToLegs2(path,stops,o){
   });
   if(o.skipFirst)legs[0].ev=legs[0].ev.filter((e,k)=>{   // no question within the first metres: you must see where you are and where you're heading
     if(e.pos>=o.skipFirst)return true;
-    if(k==legs[0].ev.length-1&&legs[1]){e.skip=true;return true}
-    return false;
+    return !!e.turn;   // a turn is always asked - so the first leg must be long enough (checked below)
   });
+  if(o.skipFirst&&legs[1]&&legs[0].ev.some(e=>e.turn&&e.pos<o.skipFirst))return null;
   const seen=new Set(o.seen||[]);
   legs.forEach((l,li)=>{
     seen.add(l.st);const nxt=legs[li+1];
     l.ev=l.ev.filter((e,k)=>{
       const turn=nxt&&k==l.ev.length-1&&e.o===nxt.st;
-      if(seen.has(e.o)){if(turn){e.skip=true;return true}return false}
+      if(turn)e.turn=true;
+      if(seen.has(e.o)){if(turn)return true;return false}   // a street asked before is not asked again - except where you turn
       seen.add(e.o);return true;
     });
   });
@@ -1341,7 +1373,7 @@ function pathToLegs2(path,stops,o){
       const e=seq[i];
       if(e.stop){cnt=0;continue}
       if(e.skip)continue;
-      if(++cnt>NEAR&&!(e.o&&cls(e.o,'big')))e.skip=true;
+      if(++cnt>NEAR&&!e.turn&&!(e.o&&cls(e.o,'big')))e.skip=true;
     }
   }
   const asked=l=>l.ev.filter(e=>!e.skip&&!e.stop).length,n=legs.reduce((a,l)=>a+asked(l),0);
@@ -1501,8 +1533,8 @@ async function rideStart(){
   if(!L.opt)budaApply(R,plan.opt.order);     // fixed order: the best route is planned for you
   else drawStopsOverview(R);                 // levels 8-10: you choose the order of the stops
   renderCard();
-  $('q').textContent='📦 Nytt bud!';setFb('');
-  $('nx').textContent='Starta 🚲';$('nx').hidden=true;R.addrReady=false;
+  $('q').textContent='Nytt bud!';setFb('');
+  $('nx').textContent='Starta';$('nx').hidden=true;R.addrReady=false;
   Promise.all(plan.stops.map(sp=>withTimeout(getNumbers(sp.street),5000))).then(nums=>{
     if(ride!==R)return;const g=getGI();
     plan.stops.forEach((sp,i)=>{const a=nums[i]&&nearAddr(nums[i],g.pos[sp.nid]);sp.addr=a?{n:a[0],la:a[1],lo:a[2]}:null});
@@ -1537,10 +1569,21 @@ function lblStreet(seg,name,cls,col){
 }
 const stopsTot=R=>R.stops.filter(sp=>sp.addr).length;
 const stopMarker=sp=>L.marker(getGI().pos[sp.nid],{interactive:false,keyboard:false,icon:L.divIcon({className:'stopm',html:`<span class="srot">${sp.kind=='pickup'?'📦':'🏠'}<b>${sp.letter}</b></span>`,iconSize:[30,30],iconAnchor:[15,15]})}).addTo(layers);
+// Names of all crossing streets along the whole route that you are not asked about (grey): shown before the start and at the end.
+function drawSkippedAll(R){
+  const done=new Set();
+  for(const a of (R.log||[]))done.add(a.o);
+  const seen=new Set();
+  for(const l of R.legs)for(const e of l.ev){
+    if(!e.skip||e.stop||!e.o||done.has(e.o)||seen.has(e.o))continue;
+    seen.add(e.o);
+    const o=along(e.o,e.p,45);if(o)rlabel(o.pt,e.o.n,'sk',o.deg,'#6a6a6a');
+  }
+}
 function drawStopsOverview(R){
   layers.clearLayers();const all=[getGI().pos[R.plan.startId]];
   mark('🚲',all[0]);
-  R.plan.stops.forEach(sp=>{all.push(getGI().pos[sp.nid]);stopMarker(sp)});
+  R.plan.stops.forEach(sp=>{const p=getGI().pos[sp.nid];all.push(p);stopMarker(sp)});
   map.fitBounds(L.latLngBounds(all),{paddingTopLeft:[30,hudH()+12],paddingBottomRight:[30,phVis(.75)+16]});
 }
 // The whole route on the map: every street in its own colour, the stops with their letters.
@@ -1645,7 +1688,7 @@ function startQ(){
   R.win=e.stop?QTS:QT;R.qel=0;R.vq=VMIN;R.asked.add(leg.st);if(e.o)R.asked.add(e.o);
   blink([]);$('nx').hidden=true;$('sh').hidden=true;$('opts').innerHTML='';$('typed').hidden=true;$('qbar').hidden=true;$('qbar').className='';hidePkg();
   drawScene();renderCard();
-  $('q').textContent=`🚲 ${leg.st.n} ${ARROW[dirIdx(leg.ch,R.pos)]}`;
+  $('q').textContent=`${leg.st.n} ${ARROW[dirIdx(leg.ch,R.pos)]}`;
   if(e.skip){   // junction already asked about earlier: just ride through it
     R.answered=answered=true;R.free=true;R.qShown=true;setFb('');return;
   }
@@ -1674,13 +1717,13 @@ function startStop(e){
   const R=ride,nums=stopNums(e);
   if(!nums){   // no address data: the bud is simply handed over
     R.answered=answered=true;R.free=true;e.done=true;R.stopsDone++;
-    $('lastr').textContent=`${e.kind=='pickup'?'📦 Hämtat':'🏠 Lämnat'} på ${e.street.n} (ingen adressdata)`;$('lastr').className='ok';
+    $('lastr').textContent=`${e.kind=='pickup'?'Hämtat':'Lämnat'} på ${e.street.n} (ingen adressdata)`;$('lastr').className='ok';
     renderCard();return;
   }
   R.nums=nums;
   R.numMarks=nums.map(a=>{const m=L.marker([a.la,a.lo],{keyboard:false,zIndexOffset:1500,icon:L.divIcon({className:'hnm',html:`<span class="hn">${a.n}</span>`,iconSize:[0,0]})}).addTo(layers);
     m.on('click',ev=>{if(ev&&ev.originalEvent)L.DomEvent.stopPropagation(ev);stopAnswer(a.n)});return m});   // tapping a number is the answer
-  const what=e.kind=='pickup'?'📦 Hämta':'🏠 Lämna';
+  const what=e.kind=='pickup'?'Hämta':'Lämna';
   $('qbar').hidden=false;$('qbi').style.width='100%';
   $('q').textContent=`${what}: ${e.street.n} ${e.addr.n}`;
   setFb(`Tryck på nummer ${e.addr.n}`);
@@ -1707,7 +1750,7 @@ function stopAnswer(n){   // n = the number the package was dropped on, null = t
   sfx(ok?'good':'bad');
   $('qbar').hidden=true;
   $('lastr').textContent=`${ok?'RÄTT':'FEL'} ${e.street.n} ${e.addr.n}: ${n==null?'för sent':ok?'rätt nummer':'fel nummer ('+n+')'}${pts?'  '+(pts>0?'+':'−')+Math.abs(pts):''}`;$('lastr').className=ok?'ok':'bad';
-  setFb(ok?'💨 BOOST!':n==null?'För sent – cyklar vidare':'Fel nummer – cyklar vidare',ok?'ok':'bad');
+  setFb(ok?'BOOST!':n==null?'För sent – cyklar vidare':'Fel nummer – cyklar vidare',ok?'ok':'bad');
   if(n!=null){   // the item of the bud (pizza, flowers ...) jumps between the bike and the house
     const bl=ptAt(leg.ch,R.pos);let tgt=[e.addr.la,e.addr.lo];
     if(!ok){const w=(R.nums||[]).find(a=>a.n==n);if(w)tgt=[w.la,w.lo]}
@@ -1763,8 +1806,9 @@ function rideLoop(R,ts){
 }
 function bikeCls(c,on){const el=ride&&ride.bike&&ride.bike.getElement&&ride.bike.getElement();if(el&&el.classList)on?el.classList.add(c):el.classList.remove(c)}
 // distance (m) from the bike to the point QDIST before the next question (across skipped junctions and legs)
-function remToNext(R){
-  let acc=0,li=R.li,ei=R.ei,pos=R.pos;
+function remToNext(R){return remFrom(R,R.li,R.ei,R.pos)}
+function remFrom(R,li,ei,pos){
+  let acc=0;
   for(;;){
     const leg=R.legs[li],e=leg&&leg.ev[ei];if(!e)return acc;
     if(!e.skip)return acc+Math.max(0,e.pos-pos-QDIST);
@@ -1772,18 +1816,35 @@ function remToNext(R){
     if(ei>=leg.ev.length){li++;ei=0;pos=0}
   }
 }
+// the stretch that follows the current question
+function remAfter(R){
+  const leg=R.legs[R.li],e=leg&&leg.ev[R.ei];if(!e)return 0;
+  let li=R.li,ei=R.ei+1,pos=e.pos;if(ei>=leg.ev.length){li++;ei=0;pos=0}
+  return remFrom(R,li,ei,pos);
+}
 // transport speed: a long stretch takes ~3 s (up to 900 m/s), slowing down over the last 260 m
 function transV(R){
-  if(R.vT==null){const rem=remToNext(R);R.vT=rem>350?Math.min(900,Math.max(VFAST,rem/3)):VFAST}
+  if(R.vT==null){const rem=remToNext(R);R.vT=rem>350?Math.min(900,Math.max(VFAST,rem/3)):VFAST;R.longT=rem>450}
   const rem=remToNext(R);return rem>260?R.vT:Math.max(VFAST,Math.min(R.vT,rem/2.5));
 }
-// zoom out while transporting fast, zoom in again before the question
+// the stretch that follows the next question that will be asked (skipped junctions are passed over)
+function afterNext(R){
+  let li=R.li,ei=R.ei;
+  for(;;){
+    const leg=R.legs[li],e=leg&&leg.ev[ei];if(!e)return 0;
+    if(!e.skip){let l2=li,e2=ei+1,p2=e.pos;if(e2>=leg.ev.length){l2++;e2=0;p2=0}return remFrom(R,l2,e2,p2)}
+    ei++;if(ei>=leg.ev.length){li++;ei=0}
+  }
+}
+// zoom out only for a really long stretch; if another long stretch comes right after the question, stay (almost) zoomed out
 function camZoom(R,dt){
   const moving=(!R.answered&&!R.qShown)||(R.answered&&R.free);
   let tz=17;
-  if(moving){const v=transV(R);if(remToNext(R)>260&&v>VFAST*1.5)tz=Math.max(13,Math.min(16.2,Math.log2(80626*100/v)))}
+  const stay=R.zOut&&afterNext(R)>450;   // another long stretch right after the next question: don't zoom in and out again
+  if(moving){const v=transV(R);if(R.longT&&remToNext(R)>260&&v>VFAST*1.5){tz=Math.max(13,Math.min(16.2,Math.log2(80626*100/v)));R.zOut=tz}else if(stay)tz=Math.max(15.8,R.zOut)}
+  else if(R.stage=='cross'&&stay)tz=Math.max(15.8,R.zOut);
   const z=map.getZoom();
-  if(Math.abs(z-tz)>.01)map.setZoom(z+(tz-z)*Math.min(1,dt*4),{animate:false});
+  if(Math.abs(z-tz)>.01)map.setZoom(z+(tz-z)*Math.min(1,dt*3),{animate:false});
 }
 function rideStep(R,dt){
   lateCheck(R);offerTick(R,dt);
@@ -1819,13 +1880,14 @@ function showOffer(R,pend,text){
 function hideOffer(){const R=ride;if(R)R.offer=null;$('nb').hidden=true}
 function offerTick(R,dt){
   const o=R.offer;if(!o)return;
-  o.left-=dt;$('nbi').style.width=Math.max(0,o.left/5*100)+'%';$('nbGo').textContent=`ACCEPTERA (${Math.max(1,Math.ceil(o.left))})`;
+  o.left-=dt;$('nbi').style.width=Math.max(0,o.left/5*100)+'%';
+  const sec=Math.max(1,Math.ceil(o.left));if(sec!==o.sec){o.sec=sec;$('nbGo').textContent=`ACCEPTERA (${sec})`}   // changed once a second (a label rebuilt every frame can swallow the tap)
   if(o.left<2.4&&!o.beep){o.beep=true;sfx('alert')}
   if(o.left<=0){hideOffer();R.pend=null;addScore(-OFFERPEN,true);sfx('bad');R.stopPts-=OFFERPEN;say('hurry',`Du hann inte svara – budet gick till någon annan. −${OFFERPEN} poäng`)}
 }
 function offerAccept(){
   const R=ride,o=R&&R.offer;if(!o)return;
-  R.pend=o.pend;hideOffer();sfx('good');say('good','Bud accepterat – rutten ändras vid nästa sväng.');
+  R.pend=o.pend;hideOffer();sfx('good');say('good','Bud accepterat – rutten ändras vid nästa sväng.');setFb('Bud accepterat – rutten ändras vid nästa sväng','ok');
 }
 function lateCheck(R){
   if(R.pend||R.offer||R.lateBusy||!R.late)return;
@@ -1905,6 +1967,21 @@ function hint(e){
   }
   return out;
 }
+// The crossing streets that are NOT asked about (skipped) between the bike and the next question are named on the map.
+function drawSkipped(R){
+  let li=R.li,ei=R.ei,n=0;
+  for(;;){
+    const leg=R.legs[li];if(!leg)return;
+    const e=leg.ev[ei];
+    if(!e){li++;ei=0;continue}
+    if(!e.skip&&!e.stop)return;          // the next question: stop here
+    if(e.skip&&e.o&&!(li==R.li&&e.pos<R.pos-5)){
+      const o=along(e.o,e.p,45);if(o)rlabel(o.pt,e.o.n,'sk',o.deg,'#6a6a6a');
+      if(++n>12)return;
+    }
+    ei++;
+  }
+}
 function drawScene(noX){
   const R=ride,leg=R.legs[R.li],e=leg.ev[Math.min(R.ei,leg.ev.length-1)];
   layers.clearLayers();
@@ -1913,7 +1990,6 @@ function drawScene(noX){
   if(R.pos>0)L.polyline(sub(leg.ch,leg.start,R.pos),{color:TH.trav,weight:7,opacity:.9}).addTo(layers);
   drawLog();
   R.stops.forEach(sp=>{if(!(sp.ev&&sp.ev.done))stopMarker(sp)});
-  if(!e.stop)L.circleMarker(e.pt,{radius:8,color:'#192134',fillColor:'#fff',fillOpacity:1,weight:3}).addTo(layers);
   R.bike=mark('🚲',ptAt(leg.ch,R.pos));
 }
 function rideAnswer(x,late){
@@ -1934,7 +2010,7 @@ function rideAnswer(x,late){
   const g=grade(e.o,ok);reward(g);
   $('lastr').textContent=(ok?'RÄTT ':'FEL ')+e.o.n+(late?' (för sent)':typeof x=='string'&&!ok?` – du skrev "${x.trim()}"`:'')+(g.pts?'  +'+g.pts:'');
   $('lastr').className=ok?'ok':'bad';
-  setFb(ok?'💨 BOOST!':late?'💥 För sent – du trillade!':'💥 Fel – du trillade!',ok?'ok':'bad');
+  setFb(ok?'BOOST!':late?'För sent – du trillade!':'Fel – du trillade!',ok?'ok':'bad');
   drawScene();
   if(ok){bikeCls('boost',true);if(R.run==5||R.run==10||R.run==15)say('good',`${R.run} rätt i rad – grymt jobbat!`)}
   else{
@@ -1942,7 +2018,7 @@ function rideAnswer(x,late){
     if(R.errs>=MAXERR){   // fifth mistake: the package is dropped and the delivery is lost
       R.lost=true;R.crash=LOSTCR;
       L.marker(ptAt(leg.ch,R.pos),{interactive:false,keyboard:false,icon:L.divIcon({className:'bike',html:'<span class="bk">📦</span>',iconSize:[46,46],iconAnchor:[-6,38]})}).addTo(layers);
-      setFb('💥 Fem fel – du tappade paketet!','bad');
+      setFb('Fem fel – du tappade paketet!','bad');
     }else renderCard();
   }
   $('ans').disabled=$('go').disabled=true;$('qbar').hidden=true;
@@ -1955,7 +2031,7 @@ function rideNext(){
     if(!R.legs||!R.addrReady)return;       // choose the order of the stops first; wait for the addresses
     R.briefing=false;R.stage='zoom';$('nx').hidden=true;startMusic();
     (R.chat=R.chat||[]).push({kind:'info',text:'Kör! Kunden väntar.'});sfx('ping');
-    $('q').textContent='🚲 Gör dig redo…';setFb('');renderCard();
+    $('q').textContent='Gör dig redo…';setFb('');renderCard();
     map.flyTo(R.legs[0].ch.pts[0],17,{duration:1.8});   // from the whole route to where the ride starts
     setTimeout(()=>{
       if(ride!==R||R.done)return;
@@ -2055,6 +2131,16 @@ function drawAreas(sel){
   });
   map.fitBounds(L.latLngBounds(all),{paddingTopLeft:[20,hudH()+10],paddingBottomRight:[20,300]});
 }
+const apl=L.layerGroup().addTo(map);
+const polyCenter=poly=>poly.reduce((c,p)=>[c[0]+p[0]/poly.length,c[1]+p[1]/poly.length],[0,0]);
+function drawAreaPolys(list,selIds,openIds){   // polygons with the name of each area (only while you choose)
+  apl.clearLayers();
+  list.forEach(a=>{
+    const on=selIds.includes(a.id),op=!openIds||openIds.includes(a.id);
+    L.polygon(a.poly,{color:on?TH.route:'#6a6a6a',weight:on?3:1,fillColor:on?TH.route:'#777',fillOpacity:on?.22:.06,opacity:op?1:.45,interactive:false}).addTo(apl);
+    L.marker(polyCenter(a.poly),{interactive:false,keyboard:false,icon:L.divIcon({className:'alab'+(on?' on':'')+(op?'':' lock'),html:`<span>${esc(a.name)}</span>`,iconSize:[0,0]})}).addTo(apl);
+  });
+}
 let budaCustom=null,budaCustomSel=null,budaCustomDiff=1;
 const CUSTOM_K=[0,3,6,9];            // easy / medium / hard follow the campaign's levels 3 / 6 / 9
 const DIFFN=['','Lätt','Medel','Svår'];
@@ -2069,7 +2155,7 @@ function fitAreas(ids){   // no polygons are drawn - the map just moves to the c
   if(pts.length)map.fitBounds(L.latLngBounds(pts),{paddingTopLeft:[20,hudH()+10],paddingBottomRight:[20,300]});
 }
 function leaveRide(){
-  rideUiOff();$('end').hidden=true;$('mm').hidden=true;$('top').hidden=true;$('ab').hidden=true;$('bd').hidden=true;$('ow').hidden=true;
+  apl.clearLayers();rideUiOff();$('end').hidden=true;$('mm').hidden=true;$('top').hidden=true;$('ab').hidden=true;$('bd').hidden=true;$('ow').hidden=true;
   if(ride){clearInterval(ride.timer);ride.done=true;ride=null}
   layers.clearLayers();blink([]);stopMusic();heartsUi(null);setPh(0);$('dv').hidden=true;$('opts').innerHTML='';$('typed').hidden=true;$('qbar').hidden=true;$('nx').hidden=true;$('sh').hidden=true;
   $('q').textContent='';setFb('');$('lastr').textContent='';answered=true;cur=null;mode='ride';$('mode').value='ride';
@@ -2081,7 +2167,7 @@ function openBuda(){
   $('bda').innerHTML=AREAS.filter(a=>!a.custom).map(a=>{const op=BU.passed>=a.after;return `<button ${op?'':'disabled'} class="${op&&sel.includes(a.id)?'on':''}" onclick="budaTog('${a.id}')">${esc(a.name)}${op?'':` – efter nivå ${a.after}`}</button>`}).join('');
   $('bdp').innerHTML=Array.from({length:10},(_,i)=>{const n=i+1;return `<button class="lvb ${n<=BU.passed?'done':''} ${n==lv?'on':''}" ${n<=BU.passed+1?'':'disabled'} onclick="budaLvPick(${n})">${n}</button>`}).join('');
   $('bdGo').textContent=`▶ Starta nivå ${lv}`;$('bdGo').disabled=false;
-  $('bd').hidden=false;fitAreas(sel);
+  $('bd').hidden=false;fitAreas(sel);drawAreaPolys(AREAS.filter(a=>!a.custom),sel,areasOpen().map(a=>a.id));
 }
 function budaTog(id){
   const a=areaById(id);if(!a||BU.passed<a.after)return;
@@ -2104,7 +2190,7 @@ function openOwn(msg){
   [1,2,3].forEach(d=>setOn('owL'+d,d==budaCustomDiff));
   $('owGo').disabled=!a||!a.own;$('owData').hidden=!a||!!a.own;$('owDel').hidden=!a;$('owDel').textContent='Ta bort';
   $('owmsg').textContent=msg||(a?(a.own?`${a.nstreets||''} gator hämtade från OpenStreetMap.`:'Gatorna måste hämtas från OpenStreetMap innan du kan spela.'):'');
-  $('ow').hidden=false;if(a)fitAreas([a.id]);
+  $('ow').hidden=false;if(a)fitAreas([a.id]);drawAreaPolys(cs,[budaCustomSel]);
 }
 function budaCsel(id){budaCustomSel=id;openOwn()}
 [1,2,3].forEach(d=>{$('owL'+d).onclick=()=>{budaCustomDiff=d;openOwn()}});
@@ -2176,6 +2262,7 @@ function showModes(t,sub,close){
 }
 function pickMode(m,r){
   mode=m;if(r)$('rd').value=r;$('mode').value=m;
+  apl.clearLayers();
   if(m!=='ride'||!budaCustom){budaCustom=null;restoreMain()}   // the other modes always use the ordinary street data
   resetQueue();seen.clear();rnd={n:0,ok:0,pts:0};
   $('nr').disabled=m=='name';$('mm').hidden=true;next();
@@ -2232,7 +2319,7 @@ function editZone(on){
 $('mode').onchange=e=>{mode=e.target.value;resetQueue();seen.clear();$('nr').disabled=mode=='name';next()};
 $('nr').onchange=()=>next();
 $('rd').onchange=()=>{if(mode=='ride')next()};
-$('mute').textContent=muted?'🔇':'🔊';
+$('mute').innerHTML=ico(muted?'spkx':'spk',2);
 $('exp').onclick=()=>{
   if(!streets.length){alert('Inga gator hämtade ännu.');return}
   const a=document.createElement('a');
@@ -2257,13 +2344,11 @@ $('mc3').onclick=()=>openBuda();
 $('mmmore').onclick=()=>{$('more').hidden=!$('more').hidden;$('mmmore').textContent=$('more').hidden?'Fler spellägen ▾':'Färre ▴'};
 $('mmx').onclick=()=>{$('mm').hidden=true};$('modes').onclick=()=>{$('top').hidden=true;showModes('Välj spelläge','',true)};
 $('lvok').onclick=()=>{$('lvm').hidden=true};
-$('mute').onclick=()=>{muted=!muted;try{localStorage.setItem('gs_mute',muted?'1':'0')}catch(e){}$('mute').textContent=muted?'🔇':'🔊';sfx('ok')};
-$('ib').onclick=()=>{infoOpen=!infoOpen;$('info').hidden=!infoOpen;$('ib').textContent=infoOpen?'ℹ️ Mindre':'ℹ️ Mer'};
+$('mute').onclick=()=>{muted=!muted;try{localStorage.setItem('gs_mute',muted?'1':'0')}catch(e){}$('mute').innerHTML=ico(muted?'spkx':'spk',2);sfx('ok')};
+$('ib').onclick=()=>{infoOpen=!infoOpen;$('info').hidden=!infoOpen;$('ib').textContent=infoOpen?'Mindre':'Mer'};
 $('cfg').onclick=()=>{$('top').hidden=!$('top').hidden};$('cfx').onclick=()=>{$('top').hidden=true};
 $('lvl').onchange=e=>{level=+e.target.value;resetQueue();next()};
-$('lab').onchange=e=>{
-  if(e.target.checked){map.removeLayer(plain);labeled.addTo(map)}else{map.removeLayer(labeled);plain.addTo(map)}
-};
+$('lab').onchange=()=>baseSync();
 $('area').onclick=()=>{
   if(areaBounds){areaBounds=null;$('area').textContent='Öva på vyn'}
   else{areaBounds=map.getBounds();$('area').textContent='Hela området'}
@@ -2279,7 +2364,7 @@ $('reset').onclick=()=>{
 };
 // ---------- player name ----------
 let pname=lsg('gs_name')||'',nameThen=null;
-function setName(n){pname=n.trim().slice(0,14);try{localStorage.setItem('gs_name',pname)}catch(e){}$('pn').textContent=pname?'👤 '+pname:''}
+function setName(n){pname=n.trim().slice(0,14);try{localStorage.setItem('gs_name',pname)}catch(e){}$('pn').textContent=pname||''}
 function askName(then){nameThen=then||null;$('nmi').value=pname;$('nm').hidden=false;$('nmi').focus()}
 $('nmok').onclick=()=>{
   const v=$('nmi').value.trim();if(!v){$('nmi').focus();return}
@@ -2308,7 +2393,7 @@ async function showBoard(k){
   if(BOARD_URL){try{const r=await fetch(BOARD_URL+'/scores.json?orderBy=%22score%22&limitToLast=100');if(r.ok){list=Object.values(await r.json()||{});online=true}}catch(e){}}
   list=list.filter(e=>e&&typeof e.score=='number'&&(lbk=='all'||e.kind==lbk)).sort((a,b)=>b.score-a.score).slice(0,15);
   $('lbn').textContent=BOARD_URL?(online?'Delad lista – alla spelare':'Kunde inte nå den delade listan – visar bara dina egna'):'Lista på den här enheten (delas inte med andra)';
-  $('lbl').innerHTML=list.length?list.map((e,i)=>`<div class="lr${e.name===pname?' me':''}"><span>${i+1}.</span><b>${esc(String(e.name).slice(0,14))}</b><i>${e.kind=='ride'?'📦':'📍'}</i><em>${fmt(e.score)}</em></div>`).join(''):'Inga resultat ännu – spela en omgång!';
+  $('lbl').innerHTML=list.length?list.map((e,i)=>`<div class="lr${e.name===pname?' me':''}"><span>${i+1}.</span><b>${esc(String(e.name).slice(0,14))}</b><i>${ico(e.kind=='ride'?'box':'pin',2)}</i><em>${fmt(e.score)}</em></div>`).join(''):'Inga resultat ännu – spela en omgång!';
 }
 $('lbb').onclick=()=>{$('top').hidden=true;showBoard()};$('mmlb').onclick=()=>showBoard();$('lbx').onclick=()=>{$('lb').hidden=true};
 $('lbA').onclick=()=>showBoard('all');$('lbR').onclick=()=>showBoard('ride');$('lbO').onclick=()=>showBoard('round');
@@ -2392,13 +2477,17 @@ function fixLabels(){
   document.querySelectorAll('#map .rl').forEach(e=>{const d=+e.dataset.d;if(!isNaN(d))e.style.transform=`translate(-50%,-50%) rotate(${labAng(d)}deg)`});
 }
 // turns the map smoothly so that the direction you ride is up, and keeps the bike just above the phone's top edge
+function aheadPt(R,la){   // the point la metres ahead along the route (across legs)
+  let li=R.li,pos=R.pos+la;
+  for(;;){const l=R.legs[li];if(!l)return null;if(pos<=l.ch.len||li==R.legs.length-1)return ptAt(l.ch,Math.min(pos,l.ch.len));pos-=l.ch.len;li++}
+}
 function followFrame(R,dt){
   if(!FOLLOW.on||!R.legs)return;
-  const leg=R.legs[R.li],p=ptAt(leg.ch,R.pos),q=ptAt(leg.ch,Math.min(leg.ch.len,R.pos+30)),dx=X(q)-X(p),dy=Y(q)-Y(p);
+  const leg=R.legs[R.li],p=ptAt(leg.ch,R.pos),v=(R.answered&&!R.free)?BOOST:((!R.qShown||R.free)?transV(R):R.vq),q=aheadPt(R,Math.max(45,Math.min(300,v*.35)))||p,dx=X(q)-X(p),dy=Y(q)-Y(p);
   if(Math.hypot(dx,dy)>2)FOLLOW.target=-Math.atan2(dx,dy)*180/Math.PI;
   if(FOLLOW.target===null)FOLLOW.target=0;
   if(!FOLLOW.init){FOLLOW.theta=FOLLOW.target;FOLLOW.init=true}
-  FOLLOW.theta=wrap180(FOLLOW.theta+wrap180(FOLLOW.target-FOLLOW.theta)*Math.min(1,dt*3.5));
+  FOLLOW.theta=wrap180(FOLLOW.theta+wrap180(FOLLOW.target-FOLLOW.theta)*Math.min(1,dt*5));
   const m=$('map').style;m.transform=`rotate(${FOLLOW.theta}deg)`;if(m.setProperty)m.setProperty('--mr',FOLLOW.theta+'deg');
   $('cmpa').style.transform=`rotate(${FOLLOW.theta}deg)`;   // the needle points north
   const H=window.innerHeight,off=(H-phVis(.4)-56)-H/2,t=FOLLOW.theta*Math.PI/180,D=FOLLOW.D;
@@ -2447,6 +2536,7 @@ function crLoad(id){
   map.fitBounds(L.latLngBounds(a.poly),{paddingTopLeft:[20,hudH()+10],paddingBottomRight:[20,280]});
 }
 function crOpen(mode){
+  apl.clearLayers();
   if(ride)openBuda();$('bd').hidden=true;$('ow').hidden=true;$('mm').hidden=true;$('end').hidden=true;
   crOn=true;map.doubleClickZoom.disable();$('cr').hidden=false;$('cr').className='panel'+(mode=='new'?' new':'');$('tp').hidden=true;
   if(mode=='new'){
@@ -2493,6 +2583,61 @@ $('crData').onclick=async()=>{
   $('crData').disabled=false;
 };
 $('nbGo').onclick=offerAccept;
+// ---------- street names on the map ----------
+// Not playing (menus, the briefing, the result): the map shows every street name.
+// While you ride: no names from the map itself - instead all names are drawn by the game, except the streets you are still to guess on.
+let baseLab=false,nmKey='';
+const nml=L.layerGroup().addTo(map);
+function playingRide(){const R=ride;return mode==='ride'&&!!R&&!R.briefing&&!R.done&&!!R.legs}
+function wantLabels(){return $('lab').checked||(mode==='ride'&&!playingRide())}
+function hiddenNames(R){   // streets not yet asked about
+  const h=new Set();
+  for(let li=R.li;li<R.legs.length;li++){
+    const ev=R.legs[li].ev;
+    for(let ei=(li==R.li?R.ei:0);ei<ev.length;ei++){
+      const e=ev[ei];if(e.stop||e.skip||!e.o)continue;
+      if(li==R.li&&ei==R.ei&&R.answered)continue;
+      h.add(e.o);
+    }
+  }
+  for(const a of R.log)h.delete(a.o);
+  return h;
+}
+function updNames(){
+  const R=ride;
+  if(!playingRide()||$('lab').checked){if(nmKey){nml.clearLayers();nmKey=''}return}
+  const b=map.getBounds().pad(.15),z=Math.round(map.getZoom()*2)/2,c=b.getCenter();
+  const key=R.li+':'+R.ei+':'+(R.answered?1:0)+':'+R.log.length+':'+z+':'+c.lat.toFixed(3)+','+c.lng.toFixed(3);
+  if(key===nmKey)return;nmKey=key;
+  nml.clearLayers();
+  const hid=hiddenNames(R),logged=new Set(R.log.map(a=>a.o)),cand=[];
+  const S=b.getSouth(),N=b.getNorth(),W=b.getWest(),E=b.getEast();
+  for(const st of streets){
+    if(hid.has(st)||logged.has(st))continue;
+    if(z<15&&!(st.t==1&&slen(st)>=400))continue;
+    let best=null;
+    for(const l of st.s){
+      if(l.length<2)continue;
+      const inb=[];for(let i=0;i<l.length;i++){const p=l[i];if(p[0]>=S&&p[0]<=N&&p[1]>=W&&p[1]<=E)inb.push(i)}
+      if(inb.length&&(!best||inb.length>best.inb.length))best={l,inb};
+    }
+    if(best)cand.push({st,best});
+  }
+  cand.sort((a,b)=>imp(b.st)-imp(a.st));
+  for(const {st,best} of cand.slice(0,70)){
+    const l=best.l,m=best.inb[Math.floor(best.inb.length/2)],a=l[Math.max(0,m-1)],bb=l[Math.min(l.length-1,m+1)];
+    const deg=rot(X(a),Y(a),X(bb),Y(bb));
+    const html=`<span class="rl nm" data-d="${deg}" style="transform:translate(-50%,-50%) rotate(${labAng(deg)}deg)">${esc(st.n)}</span>`;
+    L.marker(l[m],{interactive:false,keyboard:false,icon:L.divIcon({className:'rlw',html,iconSize:[0,0]})}).addTo(nml);
+  }
+}
+function baseSync(){
+  const w=wantLabels();
+  if(w!==baseLab){baseLab=w;if(w){map.removeLayer(plain);labeled.addTo(map)}else{map.removeLayer(labeled);plain.addTo(map)}}
+  try{updNames()}catch(e){}
+}
+setInterval(baseSync,300);
+for(const el of [$('nbGo'),$('nb')])el.addEventListener('pointerdown',e=>{e.preventDefault();offerAccept()});   // on touch it counts at once, not after the finger is lifted
 function fail(e){$('q').textContent='Kunde inte ladda gator';setFb(e.message+' Kontrollera anslutningen och tryck på "Ladda om data".','bad')}
 
 (async()=>{
