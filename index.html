@@ -398,6 +398,31 @@ button.pri,#mx,.tabs button.on,.bigbtn{background:var(--hi);color:var(--hif)}
 .mi .pi svg{width:32px;height:auto}.trophy{color:#e8a52b}
 .rl.sk{opacity:.85;background:#e9e9e9;color:#333;border-style:dashed}
 .rl.nm{background:#f4f7fcd8;color:#4a5568;border-width:1px;border-color:#b4bccb;font-size:.6rem;padding:0 3px;box-shadow:none;opacity:.95}
+/* ---- v9: compact on mobile ---- */
+#dv.phone{--pw:min(150px,40vw);padding:6px 5px;border-radius:22px!important}
+#dv.phone::before{width:28px;height:4px;margin:0 auto 4px;box-shadow:12px 0 0 -1px #35747f}
+#dv.phone .scr{padding:4px 6px;gap:3px;font-size:.8rem;line-height:1.05;border-radius:14px!important;height:calc(100% - 9px)}
+#dv.phone .sbar{font-size:.5rem}
+#dv.phone .dvt,#dv.phone .stl{font-size:.8rem}
+#dv.phone .tkr b{font-size:.9rem}#dv.phone .tkr{font-size:.75rem}
+#dv.phone .dvd{font-size:.7rem}#dv.phone .dvres{font-size:.8rem}
+#dv.phone .sc{font-size:.7rem;padding:0 3px}
+#dv.phone .pk button{font-size:.8rem;padding:1px 6px;min-width:24px}
+#dv.phone #phbtn button{font-size:.95rem;padding:4px}
+#dv.v75 .scb{max-height:calc(var(--pw)*2.17*.75 - 66px)}
+#dv.v75 #phbtn{left:6px;right:6px;top:calc(var(--pw)*2.17*.75 - 46px)}
+body.rd #lv,body.rd #pn,body.rd #streak,body.rd #mx,body.rd #mus,body.rd #sb .bar,body.rd #fb{display:none}
+body.rd #sb{flex-wrap:nowrap;gap:6px;padding:2px 6px}
+body.rd #sb #cfg{padding:0 8px;font-size:1rem}
+body.rd #score{font-size:.6rem}
+body.rd #hrow{flex:0 0 auto;margin:0 0 0 auto;gap:3px}body.rd #hrow[hidden]{display:none}
+body.rd #hrow .pi svg{width:12px;height:auto}
+body.rd #sb #mute,body.rd #sb #abort{padding:0 4px;font-size:.9rem}
+body.rd #tp{top:calc(46px + env(safe-area-inset-top,0px))}
+body.rd #qcol{padding:2px 6px}
+body.rd #q{font-size:.95rem;line-height:1.1}
+body.rd #qbar{height:5px;margin:0 0 2px}
+body.rd #lastr{font-size:.7rem;line-height:1.1}
 </style>
 </head>
 <body>
@@ -1613,7 +1638,7 @@ function drawResult(){
 // Delivery ticket: what, from where, to where, the clock, and the route (streets still ahead stay hidden during the ride).
 const MAXERR=5,LOSTCR=2.6;
 // The phone sits at the bottom of the screen: 3/4 of it before the start, 2/5 while riding (it slides down when you press Start).
-const phW=()=>Math.min(230,.66*((typeof window!='undefined'&&window.innerWidth)||400));
+const phW=()=>Math.min(150,.4*((typeof window!='undefined'&&window.innerWidth)||400));
 const phVis=f=>Math.round(f*phW()*2.17);
 const hudH=()=>$('sb').offsetHeight||56;
 function setPh(f){const st=$('bot').style;if(st&&st.setProperty)st.setProperty('--phv',(f?phVis(f):0)+'px')}
@@ -1645,11 +1670,11 @@ function renderCard(){
   const brief=R.briefing,done=R.done,dvEl=$('dv'),row=$('brow'),nx=$('nx'),big=brief||done;
   if(!big&&nx.parentNode!==row&&row.appendChild)row.appendChild(nx);   // the button goes back before the screen is rebuilt
   const hhmm=new Date(vnow(R)).toLocaleTimeString('sv-SE',{hour:'2-digit',minute:'2-digit'}),km=n=>(n/1000).toFixed(1).replace('.',',')+' km';
-  const chat=(R.chat||[]).slice(-(big?1:2)).map(m=>`<div class="dmsg ${m.kind}">📻 ${esc(m.text)}</div>`).join('');
+  const chat='';   // no radio chatter on the phone
   const chips=(R.legs?R.stops:R.plan.stops).map(sp=>`<span class="sc">${sp.letter} ${sp.kind=='pickup'?'📦':'🏠'} ${esc(sp.street.n)}${sp.addr?' '+sp.addr.n:''}</span>`).join('');
   let body;
   if(brief){
-    body=`<div class="dvt">${R.job.i} <b>BUDA · nivå ${R.lv}</b>${R.km?' · '+km(R.km):''}</div><div class="chips">${chips}</div>`;
+    body=`<div class="dvt">${R.job.i} nivå ${R.lv}${R.km?' · '+km(R.km):''}</div><div class="chips">${chips}</div>`;
     if(R.opt&&!R.legs){
       body+=`<div class="dvd">Välj ordning:</div><div class="pk">${R.plan.stops.map((sp,i)=>{const used=R.picks.includes(i),blocked=sp.kind=='drop'&&sp.pairP!=null&&!R.picks.includes(sp.pairP);return `<button ${used||blocked?'disabled':''} onclick="budaPick(${i})">${sp.letter}</button>`}).join('')}<button onclick="budaUndo()">↺</button></div><div class="dvd">${esc(R.picks.map(i=>R.plan.stops[i].letter).join(' → ')||'–')}</div>`;
     }else body+=`<div class="tkr"><b id="tk">⏱ ${mmss(R.secs*(R.vs||1))}</b>${R.opt?`<small>bäst ${km(R.plan.opt.len)}</small>`:''}</div>`;
@@ -1657,12 +1682,11 @@ function renderCard(){
   }else if(done)body=`<div class="dvt"><b>${esc(R.res.title)}</b></div><div class="dvres">${esc(R.res.line)}</div>${chat}`;
   else{
     const nx2=R.stops.find(sp=>!(sp.ev&&sp.ev.done));
-    body=`<div class="dvt">${R.job.i} <b>nivå ${R.lv}</b> · stopp ${R.stopsDone}/${R.stops.length}</div>
-      ${nx2?`<div class="stl"><b>${nx2.letter}</b>${nx2.kind=='pickup'?'📦':'🏠'} ${esc(nx2.street.n)}${nx2.addr?' '+nx2.addr.n:''}</div>`:''}
+    body=`${nx2?`<div class="stl"><b>${nx2.letter}</b>${nx2.kind=='pickup'?'📦':'🏠'} ${esc(nx2.street.n)}${nx2.addr?' '+nx2.addr.n:''}</div>`:''}
       <div class="tkr"><b id="tk" class="${R.tkC||''}">${R.tkT||''}</b><span>${R.total}/${R.nEv}</span></div>${chat}`;
   }
   dvEl.className='phone '+(big?'v75':'v40');
-  dvEl.innerHTML=`<div class="scr"><div class="sbar"><span>${hhmm}</span><span>BUDAPPEN</span><span>▂▄▆ ▮</span></div><div class="scb">${body}</div><div id="phbtn"></div></div>`;
+  dvEl.innerHTML=`<div class="scr"><div class="sbar"><span>${hhmm}</span><span>▂▄▆ ▮</span></div><div class="scb">${body}</div><div id="phbtn"></div></div>`;
   const hb=$('phbtn');if(big&&hb&&hb.appendChild)hb.appendChild(nx);
   dvEl.hidden=false;setPh(big?.75:.4);
 }
@@ -2632,6 +2656,7 @@ function updNames(){
   }
 }
 function baseSync(){
+  try{document.body.classList.toggle('rd',mode==='ride'&&!!ride&&!ride.done)}catch(e){}
   const w=wantLabels();
   if(w!==baseLab){baseLab=w;if(w){map.removeLayer(plain);labeled.addTo(map)}else{map.removeLayer(labeled);plain.addTo(map)}}
   try{updNames()}catch(e){}
