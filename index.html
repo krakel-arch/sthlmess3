@@ -1785,7 +1785,8 @@ function stopAnswer(n){   // n = the number the package was dropped on, null = t
 }
 const hidePkg=()=>{};
 const inView=p=>{const s=map.getSize(),c=map.latLngToContainerPoint(p);return c.x>40&&c.x<s.x-40&&c.y>hudH()+80&&c.y<s.y-phVis(.4)-24};
-function focusBoth(a,b,anim){if(FOLLOW.on||(inView(a)&&inView(b)))return;map.fitBounds(L.latLngBounds([a,b]),{paddingTopLeft:[40,hudH()+90],paddingBottomRight:[40,phVis(.4)+30],maxZoom:17,animate:!!anim})}
+function focusBoth(a,b,anim){return;   // the camera (leadFrame) always keeps room ahead of the bike
+  if(FOLLOW.on||(inView(a)&&inView(b)))return;map.fitBounds(L.latLngBounds([a,b]),{paddingTopLeft:[40,hudH()+90],paddingBottomRight:[40,phVis(.4)+30],maxZoom:17,animate:!!anim})}
 // The question: the junction street blinks, and the answers hang right at the junction (typing mode: input at the bottom).
 // A box hung on the map at a point (answers at a junction, the house-number question at the end of the road).
 function anchorBox(pt,fill,interactive){
@@ -1820,12 +1821,11 @@ function follow(p){
 }
 function moveBike(){
   const R=ride,p=ptAt(R.legs[R.li].ch,R.pos);if(R.bike)R.bike.setLatLng(p);
-  if(!FOLLOW.on&&R.vT>VFAST*1.5&&((!R.answered&&!R.qShown)||(R.answered&&R.free)))map.panTo(p,{animate:false});else follow(p);   // a fast transport: keep the bike in the middle
 }
 function rideLoop(R,ts){
   if(ride!==R||mode!='ride'||R.done||!(R.stage=='cross'||R.stage=='tail'))return;
   const dt=R.lt?Math.min(.1,(ts-R.lt)/1000):0;R.lt=ts;
-  if(dt>0&&!paused()){rideStep(R,dt);camZoom(R,dt);followFrame(R,dt)}
+  if(dt>0&&!paused()){rideStep(R,dt);camZoom(R,dt);followFrame(R,dt);leadFrame(R,dt)}
   requestAnimationFrame(t=>rideLoop(R,t));
 }
 function bikeCls(c,on){const el=ride&&ride.bike&&ride.bike.getElement&&ride.bike.getElement();if(el&&el.classList)on?el.classList.add(c):el.classList.remove(c)}
@@ -2504,6 +2504,25 @@ function fixLabels(){
 function aheadPt(R,la){   // the point la metres ahead along the route (across legs)
   let li=R.li,pos=R.pos+la;
   for(;;){const l=R.legs[li];if(!l)return null;if(pos<=l.ch.len||li==R.legs.length-1)return ptAt(l.ch,Math.min(pos,l.ch.len));pos-=l.ch.len;li++}
+}
+// North-up map: the camera puts the bike toward the BACK of the free area (between the top boxes and the phone), so there is always
+// room ahead in the direction of travel - for the next junction, the answer boxes and the house numbers.
+function leadFrame(R,dt){
+  if(FOLLOW.on||!R.legs)return;
+  const leg=R.legs[R.li],p=ptAt(leg.ch,R.pos);
+  const v=(R.answered&&!R.free)?BOOST:((!R.qShown||R.free)?transV(R):R.vq);
+  const q=aheadPt(R,Math.max(60,Math.min(300,v*.35)))||p;
+  const cp=map.latLngToContainerPoint(p),cq=map.latLngToContainerPoint(q);
+  let dx=cq.x-cp.x,dy=cq.y-cp.y;const len=Math.hypot(dx,dy),k=Math.min(1,dt*3);
+  if(len>3){dx/=len;dy/=len;const a=R.ld||{x:dx,y:dy};let nx=a.x+(dx-a.x)*k,ny=a.y+(dy-a.y)*k;const n=Math.hypot(nx,ny)||1;R.ld={x:nx/n,y:ny/n}}   // the heading is smoothed so the view doesn't jerk at a corner
+  const d=R.ld;if(!d)return;
+  const sz=map.getSize();
+  let T=hudH()+8;try{T=Math.max(T,$('tp').getBoundingClientRect().bottom+8)}catch(e){}
+  const B=sz.y-phVis(.4)-14,cx=sz.x/2,cy=(T+B)/2;
+  const ex=Math.abs(d.x)*(sz.x/2-24)+Math.abs(d.y)*(B-T)/2;     // half the free area along the direction of travel
+  const tx=cx-d.x*ex*.6,ty=cy-d.y*ex*.6,k2=Math.min(1,dt*8);   // where the bike should be on the screen
+  const px=(cp.x-tx)*k2,py=(cp.y-ty)*k2;
+  if(Math.abs(px)+Math.abs(py)>.5)map.panBy([px,py],{animate:false});
 }
 function followFrame(R,dt){
   if(!FOLLOW.on||!R.legs)return;
